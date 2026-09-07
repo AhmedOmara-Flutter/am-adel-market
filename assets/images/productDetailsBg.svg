@@ -1,0 +1,92 @@
+<svg width="375" height="376" viewBox="0 0 375 376" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+
+        <!-- الخلفية -->
+        <radialGradient id="bg" cx="50%" cy="18%" r="90%">
+            <stop offset="0%" stop-color="#4A4A4A"/>
+            <stop offset="35%" stop-color="#373737"/>
+            <stop offset="70%" stop-color="#242424"/>
+            <stop offset="100%" stop-color="#181818"/>
+        </radialGradient>
+
+        <!-- Orange Glow -->
+        <radialGradient id="orangeGlow">
+            <stop offset="0%" stop-color="#E67E22" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#E67E22" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- White Glow -->
+        <radialGradient id="whiteGlow">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".10"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </radialGradient>
+
+    </defs>
+
+    <!-- Main Circle -->
+    <circle
+        cx="195"
+        cy="-77"
+        r="453"
+        fill="url(#bg)"
+    />
+
+    <!-- Orange Glow -->
+    <circle
+        cx="70"
+        cy="120"
+        r="120"
+        fill="url(#orangeGlow)"
+    />
+
+    <!-- White Glow -->
+    <circle
+        cx="330"
+        cy="60"
+        r="90"
+        fill="url(#whiteGlow)"
+    />
+
+    <!-- Center Glow -->
+    <circle
+        cx="190"
+        cy="170"
+        r="150"
+        fill="url(#orangeGlow)"
+        opacity=".5"
+    />
+
+    <!-- Decorative Circles -->
+    <circle cx="45" cy="55" r="3" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="85" cy="95" r="2" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="125" cy="70" r="2" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="285" cy="105" r="3" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="320" cy="150" r="2" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="250" cy="55" r="2" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="150" cy="120" r="2" fill="#FFFFFF" opacity=".08"/>
+
+    <!-- Decorative Lines -->
+    <rect
+        x="15"
+        y="190"
+        width="90"
+        height="2"
+        rx="2"
+        fill="#E67E22"
+        opacity=".18"
+        transform="rotate(-20 15 190)"
+    />
+
+    <rect
+        x="285"
+        y="210"
+        width="70"
+        height="2"
+        rx="2"
+        fill="#FFFFFF"
+        opacity=".08"
+        transform="rotate(20 285 210)"
+    />
+
+</svg>
