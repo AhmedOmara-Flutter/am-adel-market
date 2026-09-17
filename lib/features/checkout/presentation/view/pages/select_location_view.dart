@@ -142,10 +142,8 @@ class SelectLocationView extends StatelessWidget {
             },
             child: Text(
               'التالي',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .labelSmall,
+              style: StyleManager.font15Weight800.copyWith(
+                  color: AppColor.white),
             ),
           ),
 

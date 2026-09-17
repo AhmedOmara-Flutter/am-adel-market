@@ -16,40 +16,6 @@ class ProductButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return SliverFillRemaining(
-    //   hasScrollBody: false,
-    //   child: BlocBuilder<RestaurantStatusCubit, RestaurantStatusState>(
-    //     builder: (context, state) {
-    //       if (state is RestaurantStatusLoaded &&
-    //           !state.restaurantStatus.isOpen) {
-    //         return const SizedBox.shrink();
-    //       }
-    //       return Column(
-    //         children: [
-    //           const Spacer(),
-    //           Container(
-    //             margin: EdgeInsets.only(
-    //               bottom: 20.h,
-    //             ),
-    //             child: CustomButton(
-    //               child: Text(
-    //                 'أضف الي السله',
-    //                 style: Theme.of(context).textTheme.labelSmall,
-    //               ),
-    //               onPressed: () {
-    //                 context.read<CartCubit>().addProduct(
-    //                   product,
-    //                   offer,
-    //                   getUser().uId,
-    //                 );
-    //               },
-    //             ),
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   ),
-    // );
    return SliverFillRemaining(
      hasScrollBody: false,
      child: Column(
@@ -63,10 +29,7 @@ class ProductButtonSection extends StatelessWidget {
            child: CustomButton(
              child: Text(
                'أضف الي السله',
-               style: Theme
-                   .of(context)
-                   .textTheme
-                   .labelSmall,
+               style:StyleManager.font15Weight800.copyWith(color: AppColor.white),
              ),
              onPressed: () {
 

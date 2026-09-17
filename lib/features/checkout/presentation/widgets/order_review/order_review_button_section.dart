@@ -37,7 +37,7 @@ class OrderReviewButtonSection extends StatelessWidget {
           },
           child: Text(
             'تاكيد الطلب',
-            style: Theme.of(context).textTheme.labelSmall,
+            style:StyleManager.font15Weight800.copyWith(color: AppColor.white),
           ),
         );
       },

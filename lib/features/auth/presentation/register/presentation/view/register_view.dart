@@ -35,7 +35,7 @@ class RegisterView extends StatelessWidget {
             },
             builder: (context, state) {
               return AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.light,
+                  value: SystemUiOverlayStyle.dark,
                   child: PopScope(
                     canPop: false,
                     onPopInvokedWithResult: (didPop, result) {
@@ -46,7 +46,7 @@ class RegisterView extends StatelessWidget {
                       height: double.infinity,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(Assets.assets.images.splashBg.path),
+                          image: AssetImage(Assets.assets.images.loginRegisterBg.path),
                           fit: BoxFit.cover,
                         ),
                       ),

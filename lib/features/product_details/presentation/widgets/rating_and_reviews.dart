@@ -3,10 +3,7 @@ import '../../../../core/utils/app_imports.dart';
 import '../../../reviews/presentation/view_model/get_review_cubit/get_review_cubit.dart';
 
 class RatingAndReviews extends StatefulWidget {
-  const RatingAndReviews({
-    super.key,
-    required this.product,
-  });
+  const RatingAndReviews({super.key, required this.product});
 
   final ProductEntity product;
 
@@ -18,6 +15,7 @@ class _RatingAndReviewsState extends State<RatingAndReviews> {
   @override
   void initState() {
     super.initState();
+
     context.read<GetReviewCubit>().getReviews(widget.product.id);
   }
 
@@ -27,54 +25,120 @@ class _RatingAndReviewsState extends State<RatingAndReviews> {
 
     return Row(
       children: [
-        Icon(
-          Icons.star,
-          color: const Color(0xffFFC529),
-          size: 18.sp,
-        ),
-
-        SizedBox(width: 6.w),
-
-        Text(
-          "${cubit.averageRating}",
-          style: StyleManager.font16Weight600.copyWith(
-            color: AppColor.textPrimary,
-          ),
-        ),
-
-        SizedBox(width: 6.w),
-
-        Text(
-          "(+${cubit.reviews.length})",
-          style: StyleManager.font13Weight400,
-        ),
-
-        SizedBox(width: 12.w),
-
+        /// ─────────────────────────────
+        /// Rating
+        /// ─────────────────────────────
         Container(
-          width: 4.w,
-          height: 4.w,
+          padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.h),
           decoration: BoxDecoration(
-            color: AppColor.textSecondary,
-            shape: BoxShape.circle,
+            color: const Color(0xFFFFF8E8),
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 24.w,
+                height: 24.w,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFC529),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFFFC529).withOpacity(0.25),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  Icons.star_rounded,
+                  color: Colors.white,
+                  size: 15.sp,
+                ),
+              ),
+
+              SizedBox(width: 6.w),
+
+              Text(
+                cubit.averageRating.toStringAsFixed(1),
+                style: StyleManager.font16Weight700.copyWith(
+                  color: AppColor.textPrimary,
+                ),
+              ),
+            ],
           ),
         ),
 
-        SizedBox(width: 12.w),
+        SizedBox(width: 10.w),
 
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteManager.reviews,
-              arguments: widget.product.id,
-            );
-          },
-          child: Text(
-            "المراجعات",
-            style: StyleManager.font14Weight600.copyWith(
-              decoration: TextDecoration.underline,
-              decorationColor: AppColor.mainColor,
+        /// ─────────────────────────────
+        /// Reviews Count
+        /// ─────────────────────────────
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "التقييمات",
+              style: StyleManager.font11Weight400.copyWith(
+                color: AppColor.textSecondary,
+              ),
+            ),
+            SizedBox(height: 1.h),
+            Text(
+              "${cubit.reviews.length} مراجعة",
+              style: StyleManager.font13Weight600.copyWith(
+                color: AppColor.textPrimary,
+              ),
+            ),
+          ],
+        ),
+
+        const Spacer(),
+
+        /// ─────────────────────────────
+        /// Reviews CTA
+        /// ─────────────────────────────
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10.r),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteManager.reviews,
+                arguments: widget.product.id,
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(
+                  color: AppColor.mainColor.withOpacity(0.25),
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "المراجعات",
+                    style: StyleManager.font13Weight600.copyWith(
+                      color: AppColor.mainColor,
+                    ),
+                  ),
+
+                  SizedBox(width: 4.w),
+
+                  Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 11.sp,
+                    color: AppColor.mainColor,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

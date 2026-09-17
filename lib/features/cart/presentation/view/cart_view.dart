@@ -1,4 +1,5 @@
 import 'package:am_adel_market/core/helper_function/get_user.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../../../core/utils/app_imports.dart';
 import '../view_model/cart_cubit.dart';
@@ -23,6 +24,8 @@ class _CartViewState extends State<CartView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: CartViewBody());
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+    child: const Scaffold(body: CartViewBody()));
   }
 }

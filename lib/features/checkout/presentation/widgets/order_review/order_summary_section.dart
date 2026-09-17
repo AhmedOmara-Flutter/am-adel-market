@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:am_adel_market/core/entities/order_entity.dart';
 
 import '../../../../../core/utils/app_imports.dart';
@@ -17,150 +16,281 @@ class OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final grandTotal = totalPrice + delivery;
+
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
       decoration: BoxDecoration(
-        color: AppColor.card,
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: AppColor.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...order.cartEntity.cartItems.map(
-                (item) => Container(
-              margin: EdgeInsets.only(bottom: 7.h),
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-                vertical: 8.h,
-              ),
-              decoration: BoxDecoration(
-                color: AppColor.background,
-                borderRadius: BorderRadius.circular(10.r),
-                border: Border.all(
-                  color: AppColor.border,
-                  width: 0.7,
-                ),
-              ),
-              child: Row(
-                children: [
-                  // Product Name
-                  Expanded(
-                    child: Text(
-                      item.product.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: StyleManager.font12Weight500.copyWith(
-                        color: AppColor.white,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(width: 8.w),
-
-                  // Price
-                  Text(
-                    '${item.unitPrice.toStringAsFixed(2)} ج.م',
-                    style: StyleManager.font11Weight400.copyWith(
-                      color: AppColor.textSecondary,
-                    ),
-                  ),
-
-                  SizedBox(width: 10.w),
-
-                  // Quantity
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 7.w,
-                      vertical: 4.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColor.mainColor.withOpacity(.12),
-                      borderRadius: BorderRadius.circular(7.r),
-                    ),
-                    child: Text(
-                      '×${item.quantity}',
-                      style: StyleManager.font11Weight400.copyWith(
-                        color: AppColor.mainColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'المجموع الفرعي :',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: AppColor.textSecondary,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    'التوصيل :',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: AppColor.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '$totalPrice جنيه',
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: AppColor.textPrimary,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    '$delivery جنيه',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: AppColor.mainColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: 8.h,
-              bottom: 12.h,
-              left: 20.w,
-              right: 20.w,
-            ),
-            child: Divider(color: AppColor.border),
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'الكلي',
-                style: Theme.of(
-                  context,
-                ).textTheme.displaySmall!.copyWith(color: AppColor.textPrimary),
-              ),
-              Text(
-                '${(totalPrice + delivery).toStringAsFixed(2)} جنيه',
-                style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                  color: AppColor.mainColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(24.r),
+        border: Border.all(color: AppColor.border.withOpacity(.22)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.black.withOpacity(.055),
+            blurRadius: 24.r,
+            offset: Offset(0, 10.h),
           ),
         ],
       ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24.r),
+        child: Column(
+          children: [
+            // ─────────────────────────────────────────────
+            // Header
+            // ─────────────────────────────────────────────
+            Padding(
+              padding: EdgeInsets.fromLTRB(18.w, 18.h, 18.w, 14.h),
+              child: Row(
+                children: [
+                  Container(
+                    width: 42.w,
+                    height: 42.w,
+                    decoration: BoxDecoration(
+                      color: AppColor.mainColor,
+                      borderRadius: BorderRadius.circular(13.r),
+                    ),
+                    child: Icon(
+                      Icons.receipt_long_rounded,
+                      color: AppColor.textOnDark,
+                      size: 21.sp,
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'ملخص الطلب',
+                          style: StyleManager.font16Weight700.copyWith(
+                            color: AppColor.textPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 2.h),
+                        Text(
+                          '${order.cartEntity.cartItems.length} منتجات',
+                          style: StyleManager.font11Weight400.copyWith(
+                            color: AppColor.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              child: Divider(
+                height: 1,
+                color: AppColor.divider.withOpacity(.45),
+              ),
+            ),
+
+            // ─────────────────────────────────────────────
+            // Products
+            // ─────────────────────────────────────────────
+            Padding(
+              padding: EdgeInsets.fromLTRB(18.w, 14.h, 18.w, 4.h),
+              child: Column(
+                children: [
+                  ...order.cartEntity.cartItems.map(
+                    (item) => Padding(
+                      padding: EdgeInsets.only(bottom: 10.h),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 42.w,
+                            height: 42.w,
+                            decoration: BoxDecoration(
+                              color: AppColor.background,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Icon(
+                              Icons.restaurant_rounded,
+                              color: AppColor.secondaryColor,
+                              size: 19.sp,
+                            ),
+                          ),
+
+                          SizedBox(width: 10.w),
+
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.product.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: StyleManager.font13Weight700.copyWith(
+                                    color: AppColor.textPrimary,
+                                  ),
+                                ),
+                                SizedBox(height: 3.h),
+                                Text(
+                                  '${item.unitPrice.toStringAsFixed(2)} ج.م × ${item.quantity}',
+                                  style: StyleManager.font11Weight400.copyWith(
+                                    color: AppColor.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(width: 8.w),
+
+                          Text(
+                            '${item.totalPrice.toStringAsFixed(2)} ج.م',
+                            style: StyleManager.font13Weight700.copyWith(
+                              color: AppColor.mainColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // ─────────────────────────────────────────────
+            // Price Breakdown
+            // ─────────────────────────────────────────────
+            Container(
+              margin: EdgeInsets.only(
+                top: 6.h,
+                left: 12.w,
+                right: 12.w,
+                bottom: 12.h,
+              ),
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
+                color: AppColor.background.withOpacity(.55),
+                borderRadius: BorderRadius.circular(17.r),
+                border: Border.all(color: AppColor.border.withOpacity(.15)),
+              ),
+              child: Column(
+                children: [
+                  _PriceRow(
+                    title: 'المجموع الفرعي',
+                    value: '${totalPrice.toStringAsFixed(2)} ج.م',
+                  ),
+
+                  SizedBox(height: 11.h),
+
+                  _PriceRow(
+                    title: 'رسوم التوصيل',
+                    value: '${delivery.toStringAsFixed(2)} ج.م',
+                    valueColor: AppColor.secondaryColor,
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 13.h),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: AppColor.divider.withOpacity(.55),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          child: Icon(
+                            Icons.more_horiz_rounded,
+                            color: AppColor.border,
+                            size: 16.sp,
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: AppColor.divider.withOpacity(.55),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Total
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'الإجمالي',
+                              style: StyleManager.font15Weight700.copyWith(
+                                color: AppColor.textPrimary,
+                              ),
+                            ),
+                            SizedBox(height: 2.h),
+                            Text(
+                              'شامل رسوم التوصيل',
+                              style: StyleManager.font11Weight400.copyWith(
+                                color: AppColor.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Text(
+                        '${grandTotal.toStringAsFixed(2)}',
+                        style: StyleManager.font23Weight700.copyWith(
+                          color: AppColor.mainColor,
+                        ),
+                      ),
+
+                      SizedBox(width: 4.w),
+
+                      Text(
+                        'ج.م',
+                        style: StyleManager.font12Weight500.copyWith(
+                          color: AppColor.accentColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PriceRow extends StatelessWidget {
+  final String title;
+  final String value;
+  final Color? valueColor;
+
+  const _PriceRow({required this.title, required this.value, this.valueColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: StyleManager.font12Weight500.copyWith(
+            color: AppColor.textSecondary,
+          ),
+        ),
+        Text(
+          value,
+          style: StyleManager.font13Weight700.copyWith(
+            color: valueColor ?? AppColor.textPrimary,
+          ),
+        ),
+      ],
     );
   }
 }

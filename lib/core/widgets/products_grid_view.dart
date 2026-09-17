@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/core/widgets/product_item.dart';
 

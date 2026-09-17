@@ -41,7 +41,7 @@ class LoginView extends StatelessWidget {
           },
           builder: (context, state) {
             return AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle.light,
+              value: SystemUiOverlayStyle.dark,
               child: PopScope(
                 canPop: false,
                 onPopInvokedWithResult: (didPop, result) {

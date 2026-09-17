@@ -31,7 +31,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   border: Border.all(color: AppColor.border, width: 2.w),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(.35),
+                      color: AppColor.black.withOpacity(.18),
                       blurRadius: 15.r,
                       offset: Offset(0, 6.h),
                     ),
@@ -48,6 +48,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               ),
 
               SizedBox(width: 16.w),
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +79,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColor.textSecondary,
+                          color: AppColor.textOnDark,
                           fontSize: 13.sp,
                         ),
                       ),
@@ -88,35 +89,31 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               ),
             ],
           ),
+
           BlocBuilder<RestaurantStatusCubit, RestaurantStatusState>(
             builder: (context, state) {
               if (state is RestaurantStatusLoaded &&
                   !state.restaurantStatus.isOpen) {
                 return Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
-                    vertical: 4.h,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(.10),
+                    color: AppColor.red.withOpacity(.10),
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(
-                      color: Colors.red.withOpacity(.20),
-                    ),
+                    border: Border.all(color: AppColor.red.withOpacity(.20)),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.lock_outline_rounded,
-                        color: Colors.red,
+                        color: AppColor.red,
                         size: 13.sp,
                       ),
                       SizedBox(width: 4.w),
                       Text(
                         'مغلق',
                         style: StyleManager.font13Weight600.copyWith(
-                          color: Colors.red,
+                          color: AppColor.red,
                         ),
                       ),
                     ],

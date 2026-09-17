@@ -11,13 +11,16 @@ class OrderItemImage extends StatelessWidget {
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColor.mainColor.withOpacity(.12),
+        color: AppColor.mainColor.withOpacity(.08),
+        border: Border.all(
+          color: AppColor.border.withOpacity(.20),
+        ),
       ),
       child: SvgPicture.asset(
         Assets.assets.images.package.path,
         width: 30.w,
         height: 30.w,
-        colorFilter: const ColorFilter.mode(
+        colorFilter: ColorFilter.mode(
           AppColor.mainColor,
           BlendMode.srcIn,
         ),

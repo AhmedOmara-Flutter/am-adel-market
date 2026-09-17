@@ -7,7 +7,7 @@ class BundleOfferSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          left: 20.w, right: 20.w, bottom: 20.h, top: 10.h),
+          left: 20.w, right: 20.w, top: 10.h),
       child: Row(
         children: [
           Container(

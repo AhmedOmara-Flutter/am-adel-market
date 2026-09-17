@@ -3,10 +3,7 @@ import '../../../../core/utils/app_imports.dart';
 class ActiveStepItem extends StatelessWidget {
   final String text;
 
-  const ActiveStepItem({
-    super.key,
-    required this.text,
-  });
+  const ActiveStepItem({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class ActiveStepItem extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: AppColor.mainColor.withOpacity(0.25),
+                color: AppColor.mainColor.withOpacity(.20),
                 blurRadius: 8.r,
                 offset: Offset(0, 3.h),
               ),
@@ -29,18 +26,15 @@ class ActiveStepItem extends StatelessWidget {
           ),
           child: Icon(
             Icons.done_rounded,
-            color: Colors.white,
-            size: 18.sp,
+            color: AppColor.textOnDark,
+            size: 17.sp,
           ),
         ),
-
-        SizedBox(width: 6.w),
-
+        SizedBox(width: 7.w),
         Text(
           text,
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+          style: StyleManager.font13Weight700.copyWith(
             color: AppColor.mainColor,
-            fontWeight: FontWeight.w700,
           ),
         ),
       ],

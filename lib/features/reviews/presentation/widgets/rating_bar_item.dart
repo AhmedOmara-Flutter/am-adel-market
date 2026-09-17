@@ -21,16 +21,20 @@ class RatingBarItem extends StatelessWidget {
             width: 30.w,
             height: 30.w,
             decoration: BoxDecoration(
-              color: AppColor.mainColor.withOpacity(0.08),
+              color: AppColor.accentColor.withOpacity(0.12),
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColor.mainColor.withOpacity(0.15),
+                color: AppColor.accentColor.withOpacity(0.25),
               ),
             ),
             child: Center(
               child: Text(
                 "$star",
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -48,9 +52,9 @@ class RatingBarItem extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: value,
                   minHeight: 10.h,
-                  backgroundColor: AppColor.mainColor.withOpacity(0.12),
+                  backgroundColor: AppColor.border.withOpacity(0.18),
                   valueColor: const AlwaysStoppedAnimation<Color>(
-                    AppColor.mainColor,
+                    AppColor.accentColor,
                   ),
                 ),
               ),

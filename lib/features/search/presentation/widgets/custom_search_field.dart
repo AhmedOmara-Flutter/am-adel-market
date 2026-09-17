@@ -12,7 +12,8 @@ class CustomSearchField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.onChanged,
-    this.onFilterTap, required this.borderSide,
+    this.onFilterTap,
+    required this.borderSide,
   });
 
   @override
@@ -24,7 +25,7 @@ class CustomSearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(18.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: AppColor.black.withOpacity(0.05),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -34,18 +35,24 @@ class CustomSearchField extends StatelessWidget {
           readOnly: readOnly,
           onTap: onTap,
           onChanged: onChanged,
-          style:StyleManager.font13Weight600,
-          cursorColor:AppColor.mainColor ,
+          cursorColor: AppColor.mainColor,
+          style: StyleManager.font13Weight600.copyWith(
+            color: AppColor.textPrimary,
+          ),
           decoration: InputDecoration(
             hintText: 'ابحث عن وجبتك المفضلة...',
-            hintStyle:StyleManager.font13Weight600,
+            hintStyle: StyleManager.font13Weight600.copyWith(
+              color: AppColor.textSecondary,
+            ),
             filled: true,
-            fillColor: AppColor.card,
+            fillColor: AppColor.cardLight,
+
             prefixIcon: Icon(
               Icons.search_rounded,
-              color: AppColor.mainColor,
+              color: AppColor.secondaryColor,
               size: 22.sp,
             ),
+
             suffixIcon: GestureDetector(
               onTap: onFilterTap,
               child: Container(
@@ -56,26 +63,30 @@ class CustomSearchField extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.tune_rounded,
-                  color: Colors.white,
+                  color: AppColor.textOnDark,
                   size: 20.sp,
                 ),
               ),
             ),
+
             contentPadding: EdgeInsets.symmetric(
               vertical: 16.h,
               horizontal: 16.w,
             ),
+
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18.r),
               borderSide: BorderSide.none,
             ),
+
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18.r),
               borderSide: BorderSide.none,
             ),
+
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18.r),
-              borderSide:borderSide
+              borderSide: borderSide,
             ),
           ),
         ),

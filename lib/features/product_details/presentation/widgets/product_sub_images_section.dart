@@ -6,10 +6,7 @@ import '../../../../core/utils/app_imports.dart';
 class ProductSubImagesSection extends StatelessWidget {
   final ProductEntity product;
 
-  const ProductSubImagesSection({
-    super.key,
-    required this.product,
-  });
+  const ProductSubImagesSection({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -26,36 +23,28 @@ class ProductSubImagesSection extends StatelessWidget {
         child: Row(
           children: List.generate(
             images.length,
-                (index) => GestureDetector(
+            (index) => GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => _FullScreenGallery(
-                      images: images,
-                      initialIndex: index,
-                    ),
+                    builder: (_) =>
+                        _FullScreenGallery(images: images, initialIndex: index),
                   ),
                 );
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                margin: EdgeInsets.only(
-                  top: 15.h,
-                  right: 12.w,
-                ),
+                margin: EdgeInsets.only(top: 15.h, right: 12.w),
                 height: 108.h,
                 width: 108.w,
                 decoration: BoxDecoration(
-                  color: AppColor.card,
+                  color: AppColor.cardLight,
                   borderRadius: BorderRadius.circular(18.r),
-                  border: Border.all(
-                    color: AppColor.mainColor,
-                    width: 1.2,
-                  ),
+                  border: Border.all(color: AppColor.border, width: 1.2),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColor.black.withOpacity(.25),
+                      color: AppColor.black.withOpacity(.12),
                       blurRadius: 12,
                       offset: const Offset(0, 6),
                     ),
@@ -70,7 +59,7 @@ class ProductSubImagesSection extends StatelessWidget {
                           imageUrl: images[index],
                           fit: BoxFit.cover,
                           placeholder: (context, url) => Container(
-                            color: AppColor.card,
+                            color: AppColor.backgroundDark,
                             child: Center(
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -97,7 +86,7 @@ class ProductSubImagesSection extends StatelessWidget {
                               colors: [
                                 AppColor.white.withOpacity(.05),
                                 AppColor.transparent,
-                                AppColor.black.withOpacity(.18),
+                                AppColor.black.withOpacity(.12),
                               ],
                             ),
                           ),
@@ -110,12 +99,12 @@ class ProductSubImagesSection extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.all(5.r),
                           decoration: BoxDecoration(
-                            color: AppColor.background.withOpacity(.85),
+                            color: AppColor.cardLight.withOpacity(.90),
                             borderRadius: BorderRadius.circular(30.r),
                           ),
                           child: Icon(
                             Icons.zoom_in_rounded,
-                            color: AppColor.textPrimary,
+                            color: AppColor.mainColor,
                             size: 17.sp,
                           ),
                         ),
@@ -136,10 +125,7 @@ class _FullScreenGallery extends StatefulWidget {
   final List<String> images;
   final int initialIndex;
 
-  const _FullScreenGallery({
-    required this.images,
-    required this.initialIndex,
-  });
+  const _FullScreenGallery({required this.images, required this.initialIndex});
 
   @override
   State<_FullScreenGallery> createState() => _FullScreenGalleryState();
@@ -161,6 +147,7 @@ class _FullScreenGalleryState extends State<_FullScreenGallery> {
     controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,17 +192,15 @@ class _FullScreenGalleryState extends State<_FullScreenGallery> {
             left: 15.w,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColor.card.withOpacity(.9),
+                color: AppColor.cardLight.withOpacity(.95),
                 borderRadius: BorderRadius.circular(50.r),
-                border: Border.all(
-                  color: AppColor.border,
-                ),
+                border: Border.all(color: AppColor.border),
               ),
               child: IconButton(
                 onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.close_rounded,
-                  color: AppColor.textPrimary,
+                  color: AppColor.mainColor,
                   size: 24.sp,
                 ),
               ),
@@ -229,10 +214,7 @@ class _FullScreenGalleryState extends State<_FullScreenGallery> {
             right: 0,
             child: Center(
               child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 22.w,
-                  vertical: 10.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
                 decoration: BoxDecoration(
                   color: AppColor.mainColor,
                   borderRadius: BorderRadius.circular(30.r),
@@ -240,7 +222,7 @@ class _FullScreenGalleryState extends State<_FullScreenGallery> {
                 child: Text(
                   "${currentIndex + 1} / ${widget.images.length}",
                   style: TextStyle(
-                    color: AppColor.textPrimary,
+                    color: AppColor.textOnDark,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),

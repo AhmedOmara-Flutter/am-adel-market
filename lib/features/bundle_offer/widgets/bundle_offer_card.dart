@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:am_adel_market/core/entities/bundle_offer_entity.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
-
 import '../../../core/helper_function/get_user.dart';
 import '../../cart/presentation/view_model/cart_cubit.dart';
 import '../../restaurant_status/presentation/view_model/restaurant_status_cubit.dart';
@@ -9,20 +8,12 @@ import '../../restaurant_status/presentation/view_model/restaurant_status_cubit.
 class BundleOfferCard extends StatelessWidget {
   final BundleOfferEntity bundleOffer;
 
-  const BundleOfferCard({
-    super.key,
-    required this.bundleOffer,
-  });
+  const BundleOfferCard({super.key, required this.bundleOffer});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: 35.h,
-        left: 6.w,
-        right: 6.w,
-        bottom: 8.h,
-      ),
+      padding: EdgeInsets.only(top: 35.h, left: 6.w, right: 6.w, bottom: 8.h),
       child: SizedBox(
         width: 220.w,
         height: 245.h,
@@ -43,21 +34,21 @@ class BundleOfferCard extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColor.card,
+                    color: AppColor.cardLight,
                     borderRadius: BorderRadius.circular(19.r),
+                    border: Border.all(color: AppColor.border.withOpacity(.22)),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColor.black.withOpacity(.30),
-                        blurRadius: 10.r,
-                        offset: Offset(0, 5.h),
+                        color: AppColor.black.withOpacity(.08),
+                        blurRadius: 14.r,
+                        offset: Offset(0, 6.h),
                       ),
                     ],
                   ),
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
                             decoration: BoxDecoration(
@@ -70,27 +61,22 @@ class BundleOfferCard extends StatelessWidget {
                             child: Tooltip(
                               triggerMode: TooltipTriggerMode.tap,
                               message: bundleOffer.description,
-                              waitDuration:
-                              const Duration(milliseconds: 100),
-                              showDuration:
-                              const Duration(seconds: 4),
+                              waitDuration: const Duration(milliseconds: 100),
+                              showDuration: const Duration(seconds: 4),
                               preferBelow: false,
                               verticalOffset: 10.h,
                               padding: EdgeInsets.symmetric(
                                 horizontal: 12.w,
                                 vertical: 8.h,
                               ),
-                              textStyle:
-                              StyleManager.font13Weight400.copyWith(
-                                color: AppColor.white,
+                              textStyle: StyleManager.font13Weight400.copyWith(
+                                color: AppColor.textOnDark,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColor.card,
-                                borderRadius:
-                                BorderRadius.circular(10.r),
+                                color: AppColor.mainColor,
+                                borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
-                                  color: AppColor.mainColor
-                                      .withOpacity(.2),
+                                  color: AppColor.accentColor.withOpacity(.35),
                                   width: 1.w,
                                 ),
                               ),
@@ -99,7 +85,7 @@ class BundleOfferCard extends StatelessWidget {
                                 height: 34.h,
                                 child: Icon(
                                   Icons.info_outline,
-                                  color: AppColor.white,
+                                  color: AppColor.textOnDark,
                                   size: 21.sp,
                                 ),
                               ),
@@ -107,7 +93,9 @@ class BundleOfferCard extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       SizedBox(height: 10.h),
+
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.r),
                         child: CachedNetworkImage(
@@ -120,8 +108,7 @@ class BundleOfferCard extends StatelessWidget {
                               child: SizedBox(
                                 width: 20.w,
                                 height: 20.w,
-                                child:
-                                const CircularProgressIndicator(
+                                child: const CircularProgressIndicator(
                                   color: AppColor.mainColor,
                                   strokeWidth: 2,
                                 ),
@@ -141,11 +128,11 @@ class BundleOfferCard extends StatelessWidget {
                           },
                         ),
                       ),
+
                       SizedBox(height: 15.h),
+
                       Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 10.w),
                         width: double.infinity,
                         height: 46.h,
                         child: Material(
@@ -167,7 +154,7 @@ class BundleOfferCard extends StatelessWidget {
                                 bottom: 3.h,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColor.card,
+                                color: AppColor.background,
                                 borderRadius: BorderRadius.circular(30.r),
                                 border: Border.all(
                                   color: AppColor.border,
@@ -175,20 +162,24 @@ class BundleOfferCard extends StatelessWidget {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Text(
                                       bundleOffer.title,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: StyleManager.font14Weight600.copyWith(
-                                        color: AppColor.textPrimary,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                      style: StyleManager.font14Weight600
+                                          .copyWith(
+                                            color: AppColor.textPrimary,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                     ),
                                   ),
+
                                   SizedBox(width: 6.w),
+
                                   Container(
                                     width: 35.w,
                                     height: 35.w,
@@ -197,7 +188,9 @@ class BundleOfferCard extends StatelessWidget {
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColor.mainColor.withOpacity(.20),
+                                          color: AppColor.mainColor.withOpacity(
+                                            .18,
+                                          ),
                                           blurRadius: 6.r,
                                           offset: Offset(0, 2.h),
                                         ),
@@ -205,7 +198,7 @@ class BundleOfferCard extends StatelessWidget {
                                     ),
                                     child: Icon(
                                       Icons.add_shopping_cart,
-                                      color: AppColor.white,
+                                      color: AppColor.textOnDark,
                                       size: 18.sp,
                                     ),
                                   ),
@@ -214,18 +207,17 @@ class BundleOfferCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
+
             Positioned(
               top: -25.h,
               left: -10.w,
-              child: BundleOfferPriceBadge(
-                price: bundleOffer.price,
-              ),
+              child: BundleOfferPriceBadge(price: bundleOffer.price),
             ),
           ],
         ),
@@ -237,10 +229,7 @@ class BundleOfferCard extends StatelessWidget {
 class BundleOfferPriceBadge extends StatelessWidget {
   final double price;
 
-  const BundleOfferPriceBadge({
-    super.key,
-    required this.price,
-  });
+  const BundleOfferPriceBadge({super.key, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -252,23 +241,21 @@ class BundleOfferPriceBadge extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              Assets.assets.images.bedgeImage.path,
+              Assets.assets.images.bedge.path,
               fit: BoxFit.contain,
             ),
           ),
+
           Padding(
-            padding: EdgeInsets.only(
-              top: 3.h,
-              bottom: 2.h,
-            ),
+            padding: EdgeInsets.only(top: 3.h, bottom: 2.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'سعر خاص',
                   style: StyleManager.font12Weight500.copyWith(
-                    color: AppColor.black,
-                    fontSize: 12.sp,
+                    color: AppColor.white,
+                    fontSize: 11.sp,
                   ),
                 ),
 
@@ -278,7 +265,7 @@ class BundleOfferPriceBadge extends StatelessWidget {
                   price.toStringAsFixed(0),
                   style: StyleManager.font23Weight700.copyWith(
                     color: AppColor.white,
-                    fontSize: 23.sp,
+                    fontSize: 21.sp,
                     height: .9,
                   ),
                 ),
@@ -287,7 +274,7 @@ class BundleOfferPriceBadge extends StatelessWidget {
                   'ج.م',
                   style: StyleManager.font12Weight500.copyWith(
                     color: AppColor.white,
-                    fontSize: 12.sp,
+                    fontSize: 11.sp,
                     fontWeight: FontWeight.w700,
                     height: .9,
                   ),

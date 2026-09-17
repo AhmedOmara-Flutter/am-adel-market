@@ -1,6 +1,6 @@
 import '../../../../core/utils/app_imports.dart';
 import '../view_model/best_selling_cubit.dart';
-import 'best_selling_more_view_body.dart';
+import '../widgets/best_selling_more_view_body.dart';
 
 class BestSellingMoreView extends StatelessWidget {
   const BestSellingMoreView({super.key});

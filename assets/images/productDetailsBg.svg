@@ -2,24 +2,24 @@
 
     <defs>
 
-        <!-- الخلفية -->
+        <!-- Light Background -->
         <radialGradient id="bg" cx="50%" cy="18%" r="90%">
-            <stop offset="0%" stop-color="#4A4A4A"/>
-            <stop offset="35%" stop-color="#373737"/>
-            <stop offset="70%" stop-color="#242424"/>
-            <stop offset="100%" stop-color="#181818"/>
+            <stop offset="0%" stop-color="#FFF4E2"/>
+            <stop offset="35%" stop-color="#F6E8D0"/>
+            <stop offset="70%" stop-color="#EBD4B5"/>
+            <stop offset="100%" stop-color="#D9B985"/>
         </radialGradient>
 
-        <!-- Orange Glow -->
+        <!-- Gold Glow -->
         <radialGradient id="orangeGlow">
-            <stop offset="0%" stop-color="#E67E22" stop-opacity=".35"/>
-            <stop offset="100%" stop-color="#E67E22" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#D4A04A" stop-opacity=".28"/>
+            <stop offset="100%" stop-color="#D4A04A" stop-opacity="0"/>
         </radialGradient>
 
-        <!-- White Glow -->
+        <!-- Light Glow -->
         <radialGradient id="whiteGlow">
-            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".10"/>
-            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#FFF4E2" stop-opacity=".65"/>
+            <stop offset="100%" stop-color="#FFF4E2" stop-opacity="0"/>
         </radialGradient>
 
     </defs>
@@ -32,7 +32,7 @@
         fill="url(#bg)"
     />
 
-    <!-- Orange Glow -->
+    <!-- Gold Glow -->
     <circle
         cx="70"
         cy="120"
@@ -40,7 +40,7 @@
         fill="url(#orangeGlow)"
     />
 
-    <!-- White Glow -->
+    <!-- Light Glow -->
     <circle
         cx="330"
         cy="60"
@@ -58,13 +58,13 @@
     />
 
     <!-- Decorative Circles -->
-    <circle cx="45" cy="55" r="3" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="85" cy="95" r="2" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="125" cy="70" r="2" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="285" cy="105" r="3" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="320" cy="150" r="2" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="250" cy="55" r="2" fill="#FFFFFF" opacity=".08"/>
-    <circle cx="150" cy="120" r="2" fill="#FFFFFF" opacity=".08"/>
+    <circle cx="45" cy="55" r="3" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="85" cy="95" r="2" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="125" cy="70" r="2" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="285" cy="105" r="3" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="320" cy="150" r="2" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="250" cy="55" r="2" fill="#4A2C1A" opacity=".08"/>
+    <circle cx="150" cy="120" r="2" fill="#4A2C1A" opacity=".08"/>
 
     <!-- Decorative Lines -->
     <rect
@@ -73,8 +73,8 @@
         width="90"
         height="2"
         rx="2"
-        fill="#E67E22"
-        opacity=".18"
+        fill="#D4A04A"
+        opacity=".35"
         transform="rotate(-20 15 190)"
     />
 
@@ -84,8 +84,8 @@
         width="70"
         height="2"
         rx="2"
-        fill="#FFFFFF"
-        opacity=".08"
+        fill="#8B5E34"
+        opacity=".18"
         transform="rotate(20 285 210)"
     />
 

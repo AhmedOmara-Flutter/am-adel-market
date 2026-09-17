@@ -68,12 +68,9 @@ class _ReviewsViewBodyState extends State<ReviewsViewBody> {
                     }
                   },
                   child: state is AddReviewLoading ? CircularProgressIndicator(
-                    color: Colors.white,) : Text(
+                    color: AppColor.white,) : Text(
                     'اضافه تعليق',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .labelSmall,
+                    style:StyleManager.font15Weight800.copyWith(color: AppColor.white),
                   ),
                 ),
               ),

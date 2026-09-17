@@ -10,8 +10,6 @@ class RegisterViewBody extends StatefulWidget {
 class _RegisterViewBodyState extends State<RegisterViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
-  late Animation<double> _headerAnim;
   late Animation<double> _formAnim;
   late Animation<double> _footerAnim;
 
@@ -23,12 +21,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
-
-    _headerAnim = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
-    );
-
     _formAnim = CurvedAnimation(
       parent: _controller,
       curve: const Interval(0.3, 0.7, curve: Curves.easeOut),
@@ -81,31 +73,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildAnimated(
-                      animation: _headerAnim,
-                      child: Column(
-                        children: [
-                          SizedBox(width: double.infinity,),
-                          Hero(
-                            tag: 'appLogo',
-                            child: Image.asset(
-                              Assets.assets.images.amAdelLogo.path,
-                              height: 220.h,
-                            ),
-                          ),
-                          SizedBox(height: 55.h),
-                          Text('إنشاء حساب', style: StyleManager.font19Weight700),
-                          SizedBox(height: 8.h),
-                          Text(
-                            'أنشئ حسابك وابدأ رحلتك مع بيتزا سفيان',
-                            textAlign: TextAlign.center,
-                            style: StyleManager.font13Weight600,
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 32.h),
+                    SizedBox(height: 300.h),
 
                     _buildAnimated(
                       animation: _formAnim,

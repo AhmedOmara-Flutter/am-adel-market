@@ -1,5 +1,3 @@
-import 'package:am_adel_market/features/home/presentation/widgets/app_info_banner.dart';
-
 import '../../../../core/utils/app_imports.dart';
 import '../../../restaurant_status/presentation/view_model/restaurant_status_cubit.dart';
 
@@ -28,18 +26,18 @@ class RestaurantClosedBanner extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                AppColor.mainColor.withOpacity(.14),
-                AppColor.card,
+                AppColor.backgroundDark,
+                AppColor.cardLight,
               ],
             ),
             borderRadius: BorderRadius.circular(24.r),
             border: Border.all(
-              color: AppColor.mainColor.withOpacity(.22),
+              color: AppColor.border.withOpacity(.45),
               width: 1.w,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(.06),
+                color: AppColor.black.withOpacity(.06),
                 blurRadius: 15.r,
                 offset: Offset(0, 6.h),
               ),
@@ -47,9 +45,9 @@ class RestaurantClosedBanner extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // =====================================================
-              // ICON
-              // =====================================================
+// =====================================================
+// ICON
+// =====================================================
               Container(
                 width: 58.w,
                 height: 58.w,
@@ -69,9 +67,9 @@ class RestaurantClosedBanner extends StatelessWidget {
 
               SizedBox(width: 14.w),
 
-              // =====================================================
-              // TEXT
-              // =====================================================
+// =====================================================
+// TEXT
+// =====================================================
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +93,7 @@ class RestaurantClosedBanner extends StatelessWidget {
                             vertical: 3.h,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.red.withOpacity(.09),
+                            color: AppColor.red.withOpacity(.09),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Row(
@@ -104,16 +102,16 @@ class RestaurantClosedBanner extends StatelessWidget {
                               Container(
                                 width: 6.w,
                                 height: 6.w,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.red,
+                                  color: AppColor.red,
                                 ),
                               ),
                               SizedBox(width: 4.w),
                               Text(
                                 'مغلق',
                                 style: StyleManager.font13Weight600.copyWith(
-                                  color: Colors.red,
+                                  color: AppColor.red,
                                 ),
                               ),
                             ],
@@ -154,7 +152,8 @@ class RestaurantClosedBanner extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),],
+              ),
+            ],
           ),
         );
       },

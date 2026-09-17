@@ -68,8 +68,9 @@ class _OrderTimelineState extends State<OrderTimeline>
       padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       decoration: BoxDecoration(
-        color: AppColor.card,
+        color: AppColor.cardLight,
         borderRadius: BorderRadius.circular(18.r),
+        border: Border.all(color: AppColor.divider),
       ),
       child: Column(
         children: List.generate(steps.length, (index) {
@@ -87,7 +88,7 @@ class _OrderTimelineState extends State<OrderTimeline>
                     animation: _controller,
                     builder: (context, child) {
                       final pulse = (isActive && !isDelivered)
-                          ? 1 + (_controller.value * .1)
+                          ? 1 + (_controller.value * .08)
                           : 1.0;
 
                       return Transform.scale(
@@ -97,39 +98,38 @@ class _OrderTimelineState extends State<OrderTimeline>
                           height: 65.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            gradient: isPending
-                                ? null
-                                : LinearGradient(
-                                    colors: isDone
-                                        ? [
-                                            AppColor.mainColor.withOpacity(.22),
-                                            AppColor.mainColor.withOpacity(.14),
-                                          ]
-                                        : isActive
-                                        ? [
-                                            AppColor.mainColor.withOpacity(.18),
-                                            AppColor.mainColor.withOpacity(.10),
-                                          ]
-                                        : [AppColor.card, AppColor.background],
-                                  ),
+                            color: isPending
+                                ? AppColor.background
+                                : isDone
+                                ? AppColor.accentColor.withOpacity(.15)
+                                : AppColor.mainColor.withOpacity(.12),
+                            border: Border.all(
+                              width: 2,
+                              color: isPending
+                                  ? AppColor.border
+                                  : isDone
+                                  ? AppColor.accentColor
+                                  : AppColor.mainColor,
+                            ),
                           ),
                           child: Center(
                             child: Container(
-                              width: 65.w,
-                              height: 65.w,
-                              padding: EdgeInsets.all(14.w),
+                              width: 50.w,
+                              height: 50.w,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: isPending
-                                    ? AppColor.border
-                                    : AppColor.mainColor.withOpacity(.12),
+                                    ? AppColor.backgroundDark
+                                    : isDone
+                                    ? AppColor.accentColor
+                                    : AppColor.mainColor,
                               ),
                               child: Icon(
                                 steps[index].icon,
-                                size: 28.sp,
+                                size: 26.sp,
                                 color: isPending
                                     ? AppColor.textSecondary
-                                    : AppColor.mainColor,
+                                    : AppColor.white,
                               ),
                             ),
                           ),
@@ -145,25 +145,14 @@ class _OrderTimelineState extends State<OrderTimeline>
                       margin: EdgeInsets.symmetric(vertical: 6.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: isDone
-                              ? [
-                                  AppColor.mainColor,
-                                  AppColor.mainColor.withOpacity(.35),
-                                ]
-                              : [
-                                  AppColor.border,
-                                  AppColor.border.withOpacity(.5),
-                                ],
-                        ),
+                        color: isDone ? AppColor.accentColor : AppColor.divider,
                       ),
                     ),
                 ],
               ),
 
               SizedBox(width: 14.w),
+
               Expanded(
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 350),
@@ -173,20 +162,17 @@ class _OrderTimelineState extends State<OrderTimeline>
                     vertical: 12.h,
                   ),
                   decoration: BoxDecoration(
-                    color: isActive
-                        ? AppColor.mainColor.withOpacity(.08)
-                        : AppColor.card,
+                    color: isActive ? AppColor.background : AppColor.white,
                     borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(
-                      color: isActive
-                          ? AppColor.mainColor.withOpacity(.30)
-                          : AppColor.border,
+                      color: isActive ? AppColor.accentColor : AppColor.divider,
+                      width: isActive ? 1.3 : 1,
                     ),
                     boxShadow: isActive
                         ? [
                             BoxShadow(
-                              color: AppColor.mainColor.withOpacity(.12),
-                              blurRadius: 16.r,
+                              color: AppColor.mainColor.withOpacity(.10),
+                              blurRadius: 14.r,
                               offset: const Offset(0, 4),
                             ),
                           ]
@@ -200,9 +186,12 @@ class _OrderTimelineState extends State<OrderTimeline>
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: isCancelled
                               ? AppColor.red
-                              : (isDone || isActive)
+                              : isDone
                               ? AppColor.mainColor
-                              : AppColor.textSecondary,
+                              : isActive
+                              ? AppColor.mainColor
+                              : AppColor.textPrimary,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
 
@@ -216,12 +205,16 @@ class _OrderTimelineState extends State<OrderTimeline>
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
                           color: isActive
-                              ? AppColor.mainColor.withOpacity(.12)
-                              : AppColor.border,
+                              ? AppColor.accentColor.withOpacity(.15)
+                              : isDone
+                              ? AppColor.green.withOpacity(.10)
+                              : AppColor.background,
                           border: Border.all(
                             color: isActive
-                                ? AppColor.mainColor.withOpacity(.20)
-                                : AppColor.border,
+                                ? AppColor.accentColor.withOpacity(.45)
+                                : isDone
+                                ? AppColor.green.withOpacity(.30)
+                                : AppColor.divider,
                           ),
                         ),
                         child: Text(
@@ -230,7 +223,10 @@ class _OrderTimelineState extends State<OrderTimeline>
                               .copyWith(
                                 color: isActive
                                     ? AppColor.mainColor
+                                    : isDone
+                                    ? AppColor.green
                                     : AppColor.textSecondary,
+                                fontWeight: FontWeight.w500,
                               ),
                         ),
                       ),
@@ -246,9 +242,9 @@ class _OrderTimelineState extends State<OrderTimeline>
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25.r),
-                            color: AppColor.mainColor.withOpacity(.12),
+                            color: AppColor.green.withOpacity(.10),
                             border: Border.all(
-                              color: AppColor.mainColor.withOpacity(.25),
+                              color: AppColor.green.withOpacity(.35),
                             ),
                           ),
                           child: Row(
@@ -256,16 +252,17 @@ class _OrderTimelineState extends State<OrderTimeline>
                             children: [
                               Icon(
                                 Icons.check_circle,
-                                color: AppColor.mainColor,
+                                color: AppColor.green,
                                 size: 16.sp,
                               ),
-
                               SizedBox(width: 6.w),
-
                               Text(
                                 "تم انتهاء الطلب بنجاح",
                                 style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(color: AppColor.mainColor),
+                                    .copyWith(
+                                      color: AppColor.green,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                               ),
                             ],
                           ),

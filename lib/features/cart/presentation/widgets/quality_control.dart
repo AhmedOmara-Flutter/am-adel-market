@@ -22,7 +22,7 @@ class QualityControl extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
           decoration: BoxDecoration(
-            color: AppColor.card,
+            color: AppColor.cardLight,
             borderRadius: BorderRadius.circular(30.r),
             border: Border.all(
               color: AppColor.border,
@@ -35,7 +35,7 @@ class QualityControl extends StatelessWidget {
               _buildButton(
                 icon: Icons.add_rounded,
                 background: AppColor.mainColor,
-                iconColor: Colors.white,
+                iconColor: AppColor.textOnDark,
                 onTap: () {
                   cubit.increaseCartItem(
                     cartItemEntity,
@@ -61,8 +61,8 @@ class QualityControl extends StatelessWidget {
 
               _buildButton(
                 icon: Icons.remove_rounded,
-                background: Colors.grey.shade100,
-                iconColor: AppColor.black,
+                background: AppColor.background,
+                iconColor: AppColor.mainColor,
                 onTap: () {
                   cubit.decreaseCartItem(
                     cartItemEntity,

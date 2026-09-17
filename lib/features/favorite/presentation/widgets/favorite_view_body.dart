@@ -13,13 +13,14 @@ class FavoriteViewBody extends StatelessWidget {
         SliverToBoxAdapter(child: InfoActionRow(text: 'المفضلة', showBack: true)),
         BlocBuilder<FavoriteCubit, FavoriteState>(
           builder: (context, state) {
-            if (state is GetFavoriteLoadingState) {
+           if (state is GetFavoriteLoadingState) {
               return Skeletonizer.sliver(
                 effect: ShimmerEffect(
-                  baseColor: const Color(0xff2B2B2B),
-                  highlightColor: const Color(0xff404040),
+                  baseColor: AppColor.backgroundDark,
+                  highlightColor: AppColor.cardLight,
                   duration: const Duration(milliseconds: 1200),
                 ),
+
                 enabled: true,
                 child: ProductsGridView(products: getDummyProducts()),
               );

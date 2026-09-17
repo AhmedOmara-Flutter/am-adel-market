@@ -2,7 +2,7 @@ import 'package:am_adel_market/core/entities/order_entity.dart';
 import 'package:am_adel_market/core/enums/order_enum.dart';
 import 'package:am_adel_market/core/helper_function/get_user.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
-import 'package:am_adel_market/features/home/presentation/widgets/best_selling_more_view.dart';
+import 'package:am_adel_market/features/home/presentation/view/best_selling_more_view.dart';
 import 'package:am_adel_market/features/profile/presentation/view/about_us_view.dart';
 import 'package:am_adel_market/features/profile/presentation/view/edit_profile_view.dart';
 import 'package:page_transition/page_transition.dart';

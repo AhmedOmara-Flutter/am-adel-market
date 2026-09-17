@@ -29,13 +29,6 @@ class _ReviewOrderViewState extends State<ReviewOrderView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'ملخص الطلب :',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: AppColor.textPrimary,
-                        ),
-                      ),
-                      SizedBox(height: 20.h),
                       OrderSummarySection(
                         totalPrice: cubit.orderEntity.cartEntity
                             .getTotalPrice()

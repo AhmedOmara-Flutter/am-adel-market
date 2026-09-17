@@ -1,6 +1,7 @@
 import 'package:am_adel_market/core/entities/order_entity.dart';
 import 'package:am_adel_market/core/helper_function/get_date_formate.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
+
 import '../../../profile/presentation/widgets/order_item_image.dart';
 import 'order_time_line.dart';
 
@@ -36,11 +37,18 @@ class OrderTrackingViewBody extends StatelessWidget {
                 horizontal: 20.w,
               ),
               decoration: BoxDecoration(
-                color: AppColor.card,
+                color: AppColor.cardLight,
                 borderRadius: BorderRadius.circular(14.r),
                 border: Border.all(
-                  color: AppColor.border,
+                  color: AppColor.border.withOpacity(.3),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColor.black.withOpacity(.06),
+                    blurRadius: 12.r,
+                    offset: Offset(0, 5.h),
+                  ),
+                ],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +70,8 @@ class OrderTrackingViewBody extends StatelessWidget {
                             children: [
                               Text(
                                 'طلب رقم : ',
-                                style: Theme.of(context)
+                                style: Theme
+                                    .of(context)
                                     .textTheme
                                     .labelLarge!
                                     .copyWith(
@@ -74,7 +83,8 @@ class OrderTrackingViewBody extends StatelessWidget {
                                 child: Text(
                                   '#${orderEntity.id}',
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
+                                  style: Theme
+                                      .of(context)
                                       .textTheme
                                       .labelLarge!
                                       .copyWith(
@@ -90,8 +100,12 @@ class OrderTrackingViewBody extends StatelessWidget {
                           SizedBox(height: 4.h),
 
                           Text(
-                            'تم الطلب : ${getDateFormate(orderEntity.createdAt.toString())}',
-                            style: Theme.of(context)
+                            'تم الطلب : ${getDateFormate(
+                                orderEntity.createdAt.toString())}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
@@ -104,7 +118,8 @@ class OrderTrackingViewBody extends StatelessWidget {
                           RichText(
                             text: TextSpan(
                               text: 'عدد المنتجات : ',
-                              style: Theme.of(context)
+                              style: Theme
+                                  .of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
@@ -114,22 +129,25 @@ class OrderTrackingViewBody extends StatelessWidget {
                                 TextSpan(
                                   text:
                                   '${orderEntity.cartEntity.getItemsCount()}',
-                                  style: Theme.of(context)
+                                  style: Theme
+                                      .of(context)
                                       .textTheme
                                       .labelLarge!
                                       .copyWith(
                                     color: AppColor.textPrimary,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                                 const TextSpan(text: '    '),
                                 TextSpan(
                                   text:
                                   '${total.toStringAsFixed(2)} ج.م',
-                                  style: Theme.of(context)
+                                  style: Theme
+                                      .of(context)
                                       .textTheme
                                       .labelLarge!
                                       .copyWith(
-                                    color: AppColor.mainColor,
+                                    color: AppColor.accentColor,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

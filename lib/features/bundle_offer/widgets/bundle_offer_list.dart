@@ -85,8 +85,13 @@ class BundleOfferList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final bundleOffer = bundleOffers[index];
 
-                return BundleOfferCard(
-                  bundleOffer: bundleOffer,
+                return Column(
+                  children: [
+                    SizedBox(height: 20.h),
+                    BundleOfferCard(
+                      bundleOffer: bundleOffer,
+                    ),
+                  ],
                 );
               },
             ),

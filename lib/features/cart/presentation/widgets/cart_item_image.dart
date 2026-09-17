@@ -16,39 +16,39 @@ class CartItemImage extends StatelessWidget {
     return Container(
       width: 95.w,
       height: 95.w,
-      padding: EdgeInsets.all(8.w),
+      padding: EdgeInsets.all(7.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(
-          color: AppColor.border.withOpacity(.7),
-          width: 1.2.w,
-        ),
+        color: AppColor.background,
+        borderRadius: BorderRadius.circular(18.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(.04),
+            color: AppColor.mainColor.withOpacity(.06),
             blurRadius: 12.r,
             offset: Offset(0, 5.h),
           ),
         ],
       ),
-      child: CachedNetworkImage(
-        imageUrl: image,
-        fit: BoxFit.contain,
-        fadeInDuration: const Duration(milliseconds: 250),
-        placeholder: (_, __) => Center(
-          child: SizedBox(
-            width: 22.w,
-            height: 22.w,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: AppColor.mainColor,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(13.r),
+        child: CachedNetworkImage(
+          imageUrl: image,
+          fit: BoxFit.contain,
+          fadeInDuration: const Duration(milliseconds: 250),
+          placeholder: (_, __) => Center(
+            child: SizedBox(
+              width: 22.w,
+              height: 22.w,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppColor.accentColor,
+              ),
             ),
           ),
-        ),
-        errorWidget: (_, __, ___) => Icon(
-          Icons.fastfood_rounded,
-          color: AppColor.mainColor,
-          size: 28.sp,
+          errorWidget: (_, __, ___) => Icon(
+            Icons.fastfood_rounded,
+            color: AppColor.mainColor,
+            size: 28.sp,
+          ),
         ),
       ),
     );

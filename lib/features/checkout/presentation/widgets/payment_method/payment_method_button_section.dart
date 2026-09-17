@@ -28,7 +28,9 @@ class PaymentMethodButtonSection extends StatelessWidget {
           );
         }
       },
-      child: Text('التالي', style: Theme.of(context).textTheme.labelSmall),
+      child: Text('التالي',
+        style: StyleManager.font15Weight800.copyWith(color: AppColor.white),
+      ),
     );
   }
 }

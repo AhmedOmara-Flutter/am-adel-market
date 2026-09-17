@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/core/widgets/custom_back_button.dart';
 
@@ -22,6 +21,8 @@ class InfoActionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: EdgeInsets.only(
         left: 20.w,
@@ -31,24 +32,36 @@ class InfoActionRow extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // ==========================================
+          // Back
+          // ==========================================
           SizedBox(
             height: 60.w,
             width: 60.w,
-            child: showBack ? const CustomBackButton() : const SizedBox(),
+            child: showBack
+                ? const CustomBackButton()
+                : const SizedBox(),
           ),
 
+          // ==========================================
+          // Title
+          // ==========================================
           Expanded(
             child: Center(
               child: Text(
                 text,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                style: textTheme.displaySmall?.copyWith(
                   color: AppColor.textPrimary,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
           ),
 
+          // ==========================================
+          // Right Action
+          // ==========================================
           SizedBox(
             height: 60.w,
             width: 60.w,
@@ -60,63 +73,106 @@ class InfoActionRow extends StatelessWidget {
   }
 
   Widget _buildRightAction() {
+    // ==========================================
+    // Notification
+    // ==========================================
     if (showNotification) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(100.r),
+      return Container(
+        width: 60.w,
+        height: 60.w,
+        decoration: BoxDecoration(
+          color: AppColor.cardLight,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: AppColor.border.withOpacity(0.55),
+            width: 1.w,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.mainColor.withOpacity(0.08),
+              blurRadius: 8.r,
+              offset: Offset(0, 3.h),
+            ),
+          ],
+        ),
         child: Material(
-          color: AppColor.card,
+          color: Colors.transparent,
+          shape: const CircleBorder(),
           child: InkWell(
             onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(10.r),
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Icon(
-                    Icons.notifications_none_outlined,
-                    size: 30.sp,
-                    color: AppColor.mainColor,
+            customBorder: const CircleBorder(),
+            splashColor: AppColor.accentColor.withOpacity(0.15),
+            highlightColor: AppColor.accentColor.withOpacity(0.07),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.notifications_none_rounded,
+                  size: 29.sp,
+                  color: AppColor.mainColor,
+                ),
+
+                Positioned(
+                  top: 13.h,
+                  right: 16.w,
+                  child: Container(
+                    width: 8.w,
+                    height: 8.w,
+                    decoration: BoxDecoration(
+                      color: AppColor.accentColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColor.cardLight,
+                        width: 1.5.w,
+                      ),
+                    ),
                   ),
-                  CircleAvatar(
-                    radius: 4.r,
-                    backgroundColor: const Color(0xffF24135),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
       );
     }
 
+    // ==========================================
+    // Search
+    // ==========================================
     if (showSearch) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(100.r),
+      return Container(
+        width: 60.w,
+        height: 60.w,
+        decoration: BoxDecoration(
+          color: AppColor.cardLight,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: AppColor.border.withOpacity(0.55),
+            width: 1.w,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.mainColor.withOpacity(0.08),
+              blurRadius: 8.r,
+              offset: Offset(0, 3.h),
+            ),
+          ],
+        ),
         child: Material(
           color: Colors.transparent,
+          shape: const CircleBorder(),
           child: InkWell(
             borderRadius: BorderRadius.circular(100.r),
             onTap: searchOnPressed,
-            child: Container(
-              width: 60.w,
-              height: 60.w,
-              decoration: BoxDecoration(
-                color: AppColor.card,
-                borderRadius: BorderRadius.circular(100.r),
-                border: Border.all(
-                  color: AppColor.border,
-                  width: 1.w,
-                ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  Assets.assets.images.search.path,
-                  width: 24.w,
-                  height: 24.w,
-                  colorFilter: const ColorFilter.mode(
-                    AppColor.textPrimary,
-                    BlendMode.srcIn,
-                  ),
+            splashColor: AppColor.accentColor.withOpacity(0.15),
+            highlightColor: AppColor.accentColor.withOpacity(0.07),
+            child: Center(
+              child: SvgPicture.asset(
+                Assets.assets.images.search.path,
+                width: 24.w,
+                height: 24.w,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.mainColor,
+                  BlendMode.srcIn,
                 ),
               ),
             ),

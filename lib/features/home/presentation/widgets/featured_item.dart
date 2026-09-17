@@ -61,10 +61,10 @@ class AvailableFeaturedItem extends StatelessWidget {
                 width: 110.w,
                 height: 90.h,
                 decoration: BoxDecoration(
-                  color: AppColor.card,
+                  color: AppColor.cardLight,
                   borderRadius: BorderRadius.circular(22.r),
                   border: Border.all(
-                    color: AppColor.mainColor.withOpacity(.1),
+                    color: AppColor.mainColor.withOpacity(.22),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -161,7 +161,7 @@ class PausedFeaturedItem extends StatelessWidget {
               width: 110.w,
               height: 90.h,
               decoration: BoxDecoration(
-                color: AppColor.card,
+                color: AppColor.cardLight,
                 borderRadius: BorderRadius.circular(22.r),
                 border: Border.all(
                   color: AppColor.border,

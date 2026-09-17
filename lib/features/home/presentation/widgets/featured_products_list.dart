@@ -1,6 +1,4 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:am_adel_market/features/home/presentation/widgets/skeletonizer_featured_item.dart';
-
 import '../../../../core/utils/app_imports.dart';
 import '../view_model/featured_cubit.dart';
 import 'featured_item.dart';
@@ -15,7 +13,7 @@ class FeaturedProductsList extends StatelessWidget {
         if (state is GetFeaturedProductsSuccessState) {
           if (state.featuredProducts.isEmpty) {
             return SizedBox(
-              height: 170.h,
+              height: 80.h,
               child: Container(
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(

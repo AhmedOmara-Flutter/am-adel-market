@@ -1,4 +1,5 @@
 import 'package:am_adel_market/features/product/presentation/widgets/product_size_widget.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../core/cubit/product_cubit/product_cubit.dart';
 import '../../../../core/utils/app_imports.dart';
 import '../../../category/domain/entities/category_entity.dart';
@@ -158,15 +159,10 @@ class _CategoryTabsState extends State<CategoryTabs>
         }
 
         if (categories.isEmpty) {
-          return const Center(
-            child: Text(
-              'لا توجد تصنيفات',
-              style: TextStyle(
-                color: AppColor.textSecondary,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+          return  Center(
+            child:Lottie.asset(
+Assets.assets.json.empty
+            )
           );
         }
 

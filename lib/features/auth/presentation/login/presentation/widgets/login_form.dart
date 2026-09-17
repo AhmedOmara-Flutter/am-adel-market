@@ -20,15 +20,20 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     super.initState();
 
-    
     emailController.addListener(_checkFields);
     passwordController.addListener(_checkFields);
   }
 
   void _checkFields() {
-    final valid =
-        emailController.text.trim().isNotEmpty &&
-            passwordController.text.trim().isNotEmpty;
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    final isEmailValid =
+    RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email);
+
+    final isPasswordValid = password.length >= 6;
+
+    final valid = isEmailValid && isPasswordValid;
 
     if (valid != isValid) {
       setState(() {
@@ -50,6 +55,9 @@ class _LoginFormState extends State<LoginForm> {
       key: _formKey,
       child: Column(
         children: [
+          // ==========================================
+          // Email
+          // ==========================================
           CustomTextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
@@ -57,11 +65,12 @@ class _LoginFormState extends State<LoginForm> {
             prefixIcon: Icons.email_outlined,
             autoValidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null || value.trim().isEmpty) {
                 return 'من فضلك أدخل البريد الإلكتروني';
               }
 
-              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+$')
+                  .hasMatch(value.trim())) {
                 return 'من فضلك أدخل بريد إلكتروني صحيح';
               }
 
@@ -71,6 +80,9 @@ class _LoginFormState extends State<LoginForm> {
 
           const SizedBox(height: 15),
 
+          // ==========================================
+          // Password
+          // ==========================================
           CustomPasswordField(
             controller: passwordController,
             obscureText: isPasswordVisible,
@@ -95,12 +107,16 @@ class _LoginFormState extends State<LoginForm> {
 
           const SizedBox(height: 40),
 
+          // ==========================================
+          // Login Button
+          // ==========================================
           BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
               return CustomButton(
                 onPressed: isValid
                     ? () {
                   FocusManager.instance.primaryFocus?.unfocus();
+
                   if (_formKey.currentState!.validate()) {
                     BlocProvider.of<LoginCubit>(context).login(
                       email: emailController.text.trim(),
@@ -109,9 +125,9 @@ class _LoginFormState extends State<LoginForm> {
                   }
                 }
                     : null,
-                child:Text(
+                child: Text(
                   'تسجيل دخول',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style:StyleManager.font15Weight800.copyWith(color: AppColor.white),
                 ),
               );
             },

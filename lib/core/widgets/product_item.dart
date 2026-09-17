@@ -63,10 +63,10 @@ class ActiveProductItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColor.card,
+          color: AppColor.cardLight,
           borderRadius: BorderRadius.circular(24.r),
           border: Border.all(
-            color: AppColor.mainColor.withOpacity(.1),
+            color: AppColor.mainColor.withOpacity(.22),
             width: 1,
           ),
         ),
@@ -307,10 +307,10 @@ class PausedProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColor.card,
+        color: AppColor.cardLight,
         borderRadius: BorderRadius.circular(24.r),
         border: Border.all(
-          color: AppColor.border,
+          color: AppColor.mainColor.withOpacity(.22),
           width: 1,
         ),
       ),

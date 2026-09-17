@@ -75,18 +75,17 @@ class _LoginViewBodyState extends State<LoginViewBody>
                 animation: _headerAnim,
                 child: Column(
                   children: [
-                    SizedBox(width: double.infinity,),
                     SizedBox(height: 300.h),
-                    Text("أهلاً بيك 👋", style: StyleManager.font19Weight700),
-                    SizedBox(height: 8.h),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text(
-                        "سجل دخولك واستمتع بأفضل الكريبات والبيتزا",
-                        textAlign: TextAlign.center,
-                        style: StyleManager.font13Weight600,
-                      ),
-                    ),
+                    // Text("أهلاً بيك 👋", style: StyleManager.font19Weight700),
+                    // SizedBox(height: 8.h),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    //   child: Text(
+                    //     "سجل دخولك واستمتع بأفضل الكريبات والبيتزا",
+                    //     textAlign: TextAlign.center,
+                    //     style: StyleManager.font13Weight600,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

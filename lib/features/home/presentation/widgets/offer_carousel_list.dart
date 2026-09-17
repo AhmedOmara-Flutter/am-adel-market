@@ -74,7 +74,6 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
       },
     );
   }
-
   Widget _buildLoading() {
     return Column(
       children: [
@@ -92,12 +91,13 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
         ),
 
         SizedBox(height: 5.h),
+
         AnimatedSmoothIndicator(
           activeIndex: currentIndex,
           count: 3,
           effect: SwapEffect(
             activeDotColor: AppColor.mainColor,
-            dotColor: Colors.grey.shade300,
+            dotColor: AppColor.backgroundDark,
             dotHeight: 8.r,
             dotWidth: 8.r,
           ),
@@ -129,4 +129,4 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
       },
     );
   }
-}
+  }

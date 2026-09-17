@@ -38,7 +38,7 @@ class CartCheckoutSection extends StatelessWidget {
                 key: const ValueKey('checkout'),
                 child: Text(
                   'الدفع ${totalPrice.toStringAsFixed(2)} جنيه',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style:StyleManager.font15Weight800.copyWith(color: AppColor.white),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(
@@ -48,70 +48,85 @@ class CartCheckoutSection extends StatelessWidget {
                   );
                 },
               )
-                  : Container(
-                key: const ValueKey('closed'),
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 15.h,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColor.card,
-                  borderRadius: BorderRadius.circular(18.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(.06),
-                      blurRadius: 12.r,
-                      offset: Offset(0, 5.h),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 44.w,
-                      height: 44.w,
-                      decoration: BoxDecoration(
-                        color: AppColor.red.withOpacity(.10),
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        '🏪',
-                        style: TextStyle(
-                          fontSize: 23.sp,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'المطعم مغلق حاليًا',
-                            style: StyleManager.font14Weight600.copyWith(
-                              color: AppColor.textPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 4.h),
-                          Text(
-                            'لا يمكن إتمام الطلب الآن، حاول مرة أخرى لاحقًا',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: StyleManager.font11Weight400.copyWith(
-                              color: AppColor.textSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  : RestaurantClosedBanner(),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class RestaurantClosedBanner extends StatelessWidget {
+  const RestaurantClosedBanner({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: const ValueKey('closed'),
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 15.h,
+      ),
+      decoration: BoxDecoration(
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(18.r),
+        border: Border.all(
+          color: AppColor.border.withOpacity(.45),
+          width: 1.w,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.mainColor.withOpacity(.08),
+            blurRadius: 12.r,
+            offset: Offset(0, 5.h),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 44.w,
+            height: 44.w,
+            decoration: BoxDecoration(
+              color: AppColor.red.withOpacity(.10),
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              '🏪',
+              style: TextStyle(
+                fontSize: 23.sp,
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'المطعم مغلق حاليًا',
+                  style: StyleManager.font14Weight600.copyWith(
+                    color: AppColor.textPrimary,
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  'لا يمكن إتمام الطلب الآن، حاول مرة أخرى لاحقًا',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleManager.font11Weight400.copyWith(
+                    color: AppColor.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

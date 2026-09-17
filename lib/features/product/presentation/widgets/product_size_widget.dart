@@ -67,11 +67,11 @@ class ProductSizeWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppColor.mainColor
-                          : AppColor.card,
+                          : AppColor.cardLight,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: isSelected
-                            ? AppColor.mainColor
+                            ? AppColor.accentColor
                             : AppColor.border,
                         width: 1,
                       ),
@@ -82,8 +82,8 @@ class ProductSizeWidget extends StatelessWidget {
                       textDirection: TextDirection.rtl,
                       style: TextStyle(
                         color: isSelected
-                            ? Colors.white
-                            : AppColor.textSecondary,
+                            ? AppColor.textOnDark
+                            : AppColor.textPrimary,
                         fontWeight: isSelected
                             ? FontWeight.w700
                             : FontWeight.w500,
@@ -94,8 +94,7 @@ class ProductSizeWidget extends StatelessWidget {
                 ),
               );
             }).toList(),
-          ),
-        ],
+          ),        ],
       ),
     );
   }

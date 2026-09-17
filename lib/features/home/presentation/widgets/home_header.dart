@@ -4,6 +4,7 @@ import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/features/offers/presentation/view_model/offer_cubit.dart';
 
 import '../../../../core/helper_function/get_greeting.dart';
+import 'custom_search_button.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -80,39 +81,7 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
           if (offers.isNotEmpty)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100.r),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(100.r),
-                  onTap: () {
-                    Navigator.pushNamed(context, RouteManager.search);
-                  },
-                  child: Container(
-                    width: 60.w,
-                    height: 60.w,
-                    decoration: BoxDecoration(
-                      color: AppColor.card,
-                      borderRadius: BorderRadius.circular(100.r),
-                      border: Border.all(color: AppColor.border, width: 1.w),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        Assets.assets.images.search.path,
-                        width: 24.w,
-                        height: 24.w,
-                        colorFilter: const ColorFilter.mode(
-                          AppColor.textPrimary,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
+            CustomSearchButton()        ],
       ),
     );
   }

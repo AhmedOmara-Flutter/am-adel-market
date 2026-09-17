@@ -1,17 +1,14 @@
 import '../../../../core/utils/app_imports.dart';
 
 class SkeletonizerFeaturedItem extends StatelessWidget {
-
-  const SkeletonizerFeaturedItem({
-    super.key,
-  });
+  const SkeletonizerFeaturedItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
       effect: ShimmerEffect(
-        baseColor: const Color(0xff2B2B2B),
-        highlightColor: const Color(0xff404040),
+        baseColor: AppColor.backgroundDark,
+        highlightColor: AppColor.cardLight,
         duration: const Duration(milliseconds: 1200),
       ),
       child: GestureDetector(
@@ -31,12 +28,12 @@ class SkeletonizerFeaturedItem extends StatelessWidget {
                     color: AppColor.card,
                     borderRadius: BorderRadius.circular(22.r),
                     border: Border.all(
-                      color: Colors.white.withOpacity(.05),
+                      color: AppColor.border.withOpacity(.18),
                       width: 1,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(.35),
+                        color: AppColor.black.withOpacity(.18),
                         blurRadius: 22.r,
                         offset: Offset(0, 10.h),
                       ),
@@ -58,7 +55,7 @@ class SkeletonizerFeaturedItem extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: StyleManager.font14Weight600.copyWith(
-                            color: AppColor.textPrimary,
+                            color: AppColor.textOnDark,
                             height: 1.2,
                           ),
                         ),

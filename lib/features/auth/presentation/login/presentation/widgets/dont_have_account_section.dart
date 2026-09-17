@@ -5,23 +5,25 @@ class DontHaveAccountSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 9,
+      padding: EdgeInsets.symmetric(
+        horizontal: 18.w,
+        vertical: 10.h,
       ),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.20),
-        borderRadius: BorderRadius.circular(30),
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.12),
-          width: 1,
+          color: AppColor.border.withOpacity(0.5),
+          width: 1.w,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.6),
-            blurRadius: 15,
-            spreadRadius: 2,
+            color: AppColor.mainColor.withOpacity(0.06),
+            blurRadius: 10.r,
+            offset: Offset(0, 3.h),
           ),
         ],
       ),
@@ -29,18 +31,16 @@ class DontHaveAccountSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "لا تمتلك حساب؟ ",
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              shadows: const [
-                Shadow(
-                  color: Colors.black,
-                  blurRadius: 6,
-                ),
-              ],
+            'لا تمتلك حساب؟',
+            style: textTheme.bodyMedium?.copyWith(
+              color: AppColor.textPrimary,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
             ),
           ),
+
+          SizedBox(width: 8.w),
+
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(
@@ -48,17 +48,22 @@ class DontHaveAccountSection extends StatelessWidget {
                 RouteManager.register,
               );
             },
-            child: Text(
-              "قم بإنشاء حساب",
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+                vertical: 5.h,
+              ),
+              decoration: BoxDecoration(
                 color: AppColor.mainColor,
-                fontWeight: FontWeight.bold,
-                shadows: const [
-                  Shadow(
-                    color: Colors.black,
-                    blurRadius: 6,
-                  ),
-                ],
+                borderRadius: BorderRadius.circular(9.r),
+              ),
+              child: Text(
+                'إنشاء حساب',
+                style: textTheme.bodyMedium?.copyWith(
+                  color: AppColor.textOnDark,
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ),
           ),
@@ -67,3 +72,5 @@ class DontHaveAccountSection extends StatelessWidget {
     );
   }
 }
+
+

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/style_manager.dart';
 
 class CustomImagePicker extends StatefulWidget {
   final ValueChanged<File?> onImagePicked;
@@ -30,73 +31,142 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
     networkImage = widget.initialImage;
   }
 
+  Future<void> _pickImage() async {
+    try {
+      final ImagePicker picker = ImagePicker();
+
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 85,
+      );
+
+      if (image == null) return;
+
+      final file = File(image.path);
+
+      setState(() {
+        imagePath = file;
+        networkImage = null;
+      });
+
+      widget.onImagePicked(file);
+    } on Exception catch (e) {
+      debugPrint('Image Picker Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        try {
-          final ImagePicker picker = ImagePicker();
-          final XFile? image = await picker.pickImage(
-            source: ImageSource.gallery,
-          );
+    final bool hasImage = imagePath != null || networkImage != null;
 
-          if (image != null) {
-            setState(() {
-              imagePath = File(image.path);
-              widget.onImagePicked(imagePath!);
-            });
-          }
-        } on Exception catch (e) {
-          debugPrint(e.toString());
-        }
-      },
-      child: Stack(
-        alignment: Alignment.topRight,
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              top: 30.h,
-              right: imagePath != null ? 5.w : 15.w,
+    return GestureDetector(
+      onTap: _pickImage,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOutCubic,
+        width: 100.w,
+        height: 115.h,
+        padding: EdgeInsets.all(7.w),
+        decoration: BoxDecoration(
+          color: AppColor.background,
+          borderRadius: BorderRadius.circular(17.r),
+          border: Border.all(
+            color: hasImage
+                ? AppColor.mainColor.withOpacity(.55)
+                : AppColor.border.withOpacity(.35),
+            width: hasImage ? 1.3 : 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.black.withOpacity(.04),
+              blurRadius: 10.r,
+              offset: Offset(0, 4.h),
             ),
-            child: imagePath != null
-                ? ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: SizedBox(
-                height: 80.h,
-                width: 80.w,
-                child: Image.file(
-                  imagePath!,
-                  fit: BoxFit.cover,
+          ],
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: _buildImage(),
+              ),
+            ),
+            SizedBox(height: 6.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  hasImage
+                      ? Icons.refresh_rounded
+                      : Icons.add_photo_alternate_outlined,
+                  color: AppColor.mainColor,
+                  size: 14.sp,
                 ),
-              ),
-            )
-                : networkImage != null
-                ? ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: SizedBox(
-                height: 80.h,
-                width: 80.w,
-                child: Image.network(
-                  networkImage!,
-                  fit: BoxFit.cover,
+                SizedBox(width: 4.w),
+                Text(
+                  hasImage ? 'تغيير الصورة' : 'إضافة صورة',
+                  style: StyleManager.font11Weight400.copyWith(
+                    color: AppColor.mainColor,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            )
-                : Container(
-              height: 80.h,
-              width: 80.w,
-              decoration: BoxDecoration(
-                color: AppColor.card,
-                borderRadius: BorderRadius.circular(10.r),
-                border: Border.all(
-                  color: AppColor.border,
-                ),
-              ),
-              child: Icon(
-                Icons.photo_outlined,
-                color: AppColor.mainColor,
-                size: 38.sp,
-              ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    if (imagePath != null) {
+      return Image.file(
+        imagePath!,
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.cover,
+      );
+    }
+
+    if (networkImage != null) {
+      return Image.network(
+        networkImage!,
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) {
+          return _emptyImage();
+        },
+      );
+    }
+
+    return _emptyImage();
+  }
+
+  Widget _emptyImage() {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.cloud_upload_outlined,
+            color: AppColor.mainColor,
+            size: 28.sp,
+          ),
+          SizedBox(height: 3.h),
+          Text(
+            'إثبات الدفع',
+            style: StyleManager.font11Weight400.copyWith(
+              color: AppColor.textSecondary,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

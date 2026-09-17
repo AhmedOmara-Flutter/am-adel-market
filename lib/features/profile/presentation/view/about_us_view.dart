@@ -43,59 +43,6 @@ class _AboutUsViewState extends State<AboutUsView> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Stack(
-                  alignment: Alignment.centerLeft,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.w),
-                      child: Row(
-                        children: [
-                          Expanded(child: SizedBox(width: 5.w)),
-                          Column(
-                            children: [
-                              Text(
-                                'مرحبا بك في',
-                                style: Theme.of(context).textTheme.displaySmall!
-                                    .copyWith(color: AppColor.mainColor),
-                              ),
-                              SizedBox(height: 5,),
-                              Text(
-                                'بيتزا سفيان',
-                                style: Theme.of(context).textTheme.titleLarge!
-                                    .copyWith(
-                                      color: AppColor.mainColor.withOpacity(
-                                        0.6,
-                                      ),
-                                    ),
-                              ),
-                              SizedBox(height: 10.h),
-                              Text(
-                                'استمتع بأشهى الكريبات والبيتزا\nوالوجبات السريعة المحضرة\nبأفضل المكونات الطازجة.',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(color: AppColor.mainColor),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SizedBox(
-                            height: 130.h,
-                            child: Image.asset(
-                              Assets.assets.images.aboutusLogo.path,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
                 SizedBox(height: 15.h),
                 AboutCard(
                   title: "رؤيتنا",
@@ -153,7 +100,7 @@ class _AboutUsViewState extends State<AboutUsView> {
                       _item(
                         Icons.place_outlined,
                         "العنوان",
-                        "سفاجا - شارع الاستاد - جانبي اخر شارع عطاره العالمي ",
+                        "كفر الزيات - شارع الجيش - أمام مستشفى العام ",
                       ),
 
                       SizedBox(height: 14.h),
@@ -161,7 +108,7 @@ class _AboutUsViewState extends State<AboutUsView> {
                       _item(
                         Icons.phone,
                         "اتصل بنا",
-                        "01150279072\n01141319363\n01014214972\n0653265570",
+                        "0100000000000\n0100000000000",
                       ),
 
                       SizedBox(height: 14.h),
@@ -264,7 +211,7 @@ class _AboutUsViewState extends State<AboutUsView> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  '© 2026 بيتزا سفيان - جميع الحقوق محفوظة',
+                  '© 2026 عم عادل - جميع الحقوق محفوظة',
                   style: TextStyle(color: AppColor.textSecondary),
                 ),
                 SizedBox(height: 20.h),

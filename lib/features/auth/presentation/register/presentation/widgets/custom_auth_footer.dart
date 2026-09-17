@@ -5,23 +5,25 @@ class CustomAuthFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 9,
+      padding: EdgeInsets.symmetric(
+        horizontal: 18.w,
+        vertical: 10.h,
       ),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.20),
-        borderRadius: BorderRadius.circular(30),
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.12),
-          width: 1,
+          color: AppColor.border.withOpacity(0.5),
+          width: 1.w,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.6),
-            blurRadius: 15,
-            spreadRadius: 2,
+            color: AppColor.mainColor.withOpacity(0.06),
+            blurRadius: 10.r,
+            offset: Offset(0, 3.h),
           ),
         ],
       ),
@@ -29,18 +31,16 @@ class CustomAuthFooter extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "تمتلك حساب بالفعل؟ ",
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              shadows: const [
-                Shadow(
-                  color: Colors.black,
-                  blurRadius: 6,
-                ),
-              ],
+            'تمتلك حساب بالفعل؟',
+            style: textTheme.bodyMedium?.copyWith(
+              color: AppColor.textSecondary,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
             ),
           ),
+
+          SizedBox(width: 8.w),
+
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(
@@ -48,17 +48,22 @@ class CustomAuthFooter extends StatelessWidget {
                 RouteManager.login,
               );
             },
-            child: Text(
-              "تسجيل دخول",
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 11.w,
+                vertical: 6.h,
+              ),
+              decoration: BoxDecoration(
                 color: AppColor.mainColor,
-                fontWeight: FontWeight.bold,
-                shadows: const [
-                  Shadow(
-                    color: Colors.black,
-                    blurRadius: 6,
-                  ),
-                ],
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Text(
+                'تسجيل دخول',
+                style: textTheme.bodyMedium?.copyWith(
+                  color: AppColor.textOnDark,
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ),
           ),

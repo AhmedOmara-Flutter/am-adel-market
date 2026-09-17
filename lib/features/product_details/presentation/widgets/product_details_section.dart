@@ -32,7 +32,7 @@ class ProductDetailsSection extends StatelessWidget {
                       Text(
                         product.name,
                         style: StyleManager.font16Weight700.copyWith(
-                          color: AppColor.white,
+                          color: AppColor.card,
                         ),
                       ),
                       SizedBox(height: 5.h),
@@ -53,15 +53,15 @@ class ProductDetailsSection extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             RatingAndReviews(product: product),
-            SizedBox(height: 15.h),
+            SizedBox(height: 16.h),
             Text(
               product.description,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: const Color(0xff979899),
+                color: AppColor.textSecondary,
                 fontSize: 13.sp,
-                height: 1.4,
+                height: 1.5,
               ),
             ),
           ],
@@ -76,12 +76,19 @@ class ProductDetailsSection extends StatelessWidget {
     required ProductEntity product,
   }) {
     final hasOffer = offer != null && offer.isActive;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
-        borderRadius: BorderRadius.circular(10.r),
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AppColor.border.withOpacity(0.45), width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -92,45 +99,52 @@ class ProductDetailsSection extends StatelessWidget {
                 Text(
                   '${offer.priceBeforeDiscount} جنيه',
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: Colors.grey,
+                    color: AppColor.textSecondary,
                     decoration: TextDecoration.lineThrough,
+                    decorationColor: AppColor.textSecondary,
                     fontSize: 12.sp,
                   ),
                 ),
+
               Text(
                 hasOffer
                     ? '${offer.priceAfterDiscount} جنيه'
                     : '${product.price} جنيه',
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                  color: const Color(0xffF4A91F),
-                  fontSize: 13.sp,
+                  color: AppColor.mainColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
+
               if (hasOffer)
                 Text(
                   offer.remainingDays > 0
                       ? 'باقي ${offer.remainingDays} أيام'
                       : 'ينتهي اليوم',
                   style: StyleManager.font11Weight400.copyWith(
-                    color: Colors.red.shade400,
+                    color: AppColor.red,
                     fontSize: 11.sp,
                   ),
                 ),
             ],
           ),
+
           SizedBox(width: 15.w),
+
           if (hasOffer)
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
               decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(6.r),
+                color: AppColor.red,
+                borderRadius: BorderRadius.circular(7.r),
               ),
               child: Text(
                 '-${offer.discountPercentage.toInt()}%',
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Colors.white,
+                  color: AppColor.white,
                   fontSize: 12.sp,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),

@@ -1,7 +1,7 @@
+import '../../../../core/entities/order_entity.dart';
 import '../../../../core/enums/order_enum.dart';
 import '../../../../core/helper_function/get_date_formate.dart';
 import '../../../../core/utils/app_imports.dart';
-import '../../../../core/entities/order_entity.dart';
 import 'order_item_content.dart';
 import 'order_item_image.dart';
 import 'order_status_badge.dart';
@@ -9,7 +9,10 @@ import 'order_status_badge.dart';
 class OrderItem extends StatelessWidget {
   final OrderEntity orderEntity;
 
-  const OrderItem({super.key, required this.orderEntity});
+  const OrderItem({
+    super.key,
+    required this.orderEntity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +33,21 @@ class OrderItem extends StatelessWidget {
         margin: EdgeInsets.only(
           left: 20.w,
           right: 20.w,
-          bottom: 15.h,
+          bottom: 10.h,
         ),
         decoration: BoxDecoration(
-          color: AppColor.card,
+          color: AppColor.cardLight,
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
-            color: AppColor.border,
+            color: AppColor.border.withOpacity(.22),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.black.withOpacity(.035),
+              blurRadius: 14.r,
+              offset: Offset(0, 5.h),
+            ),
+          ],
         ),
         child: Stack(
           children: [
@@ -61,11 +71,15 @@ class OrderItem extends StatelessWidget {
                           .getTotalPrice()
                           .toStringAsFixed(2),
                       products: orderEntity.cartEntity.cartItems
-                          .map((item) =>
-                      '${item.product.name} × ${item.quantity}')
+                          .map(
+                            (item) =>
+                        '${item.product.name} × ${item.quantity}',
+                      )
                           .join('\n'),
                       price: orderEntity.cartEntity.cartItems
-                          .map((item) => '${item.unitPrice} ج.م')
+                          .map(
+                            (item) => '${item.unitPrice} ج.م',
+                      )
                           .join('\n'),
                       deliveryCost:
                       orderEntity.selectedLocationEntity!.cost,
@@ -85,4 +99,3 @@ class OrderItem extends StatelessWidget {
     );
   }
 }
-

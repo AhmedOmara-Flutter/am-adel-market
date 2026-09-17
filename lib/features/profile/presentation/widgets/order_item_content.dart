@@ -34,22 +34,33 @@ class OrderItemContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Order ID
           Row(
             children: [
               Text(
                 'طلب رقم : ',
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .labelLarge!
+                    .copyWith(
                   color: primaryColor,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
-                '#$orderId',
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: AppColor.textPrimary,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  '#$orderId',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(
+                    color: AppColor.textPrimary,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -57,10 +68,15 @@ class OrderItemContent extends StatelessWidget {
 
           SizedBox(height: 6.h),
 
-          /// Order Date
           Text(
             'تم الطلب : $orderDate',
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme
+                .of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(
               color: AppColor.textSecondary,
             ),
           ),
@@ -68,12 +84,18 @@ class OrderItemContent extends StatelessWidget {
           SizedBox(height: 8.h),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Text(
                   products,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(
                     color: AppColor.textPrimary,
                   ),
                 ),
@@ -81,10 +103,19 @@ class OrderItemContent extends StatelessWidget {
 
               SizedBox(width: 10.w),
 
-              Text(
-                price,
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: primaryColor,
+              Flexible(
+                child: Text(
+                  price,
+                  maxLines: 2,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(
+                    color: primaryColor,
+                  ),
                 ),
               ),
             ],
@@ -92,7 +123,6 @@ class OrderItemContent extends StatelessWidget {
 
           SizedBox(height: 12.h),
 
-          /// Bottom Info
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 12.w,
@@ -115,14 +145,22 @@ class OrderItemContent extends StatelessWidget {
 
                 SizedBox(width: 6.w),
 
-                Text(
-                  '$numberOfOrders منتجات',
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: primaryColor,
+                Flexible(
+                  child: Text(
+                    '$numberOfOrders منتجات',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(
+                      color: primaryColor,
+                    ),
                   ),
                 ),
 
-                const Spacer(),
+                SizedBox(width: 8.w),
 
                 Tooltip(
                   triggerMode: TooltipTriggerMode.tap,
@@ -140,14 +178,20 @@ class OrderItemContent extends StatelessWidget {
                       SizedBox(width: 4.w),
                       Text(
                         '${total.toStringAsFixed(2)} ج.م',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        maxLines: 1,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(
                           color: AppColor.mainColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                )              ],
+                ),
+              ],
             ),
           ),
         ],

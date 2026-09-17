@@ -25,9 +25,6 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   final SvgGenImage camera = const SvgGenImage('assets/images/Camera.svg');
-  final AssetGenImage aboutusLogo = const AssetGenImage(
-    'assets/images/aboutus_logo.png',
-  );
   final AssetGenImage amAdelLogo = const AssetGenImage(
     'assets/images/am_adel_logo.png',
   );
@@ -38,6 +35,7 @@ class $AssetsImagesGen {
   final SvgGenImage arrowDown = const SvgGenImage(
     'assets/images/arrow-down.svg',
   );
+  final AssetGenImage bedge = const AssetGenImage('assets/images/bedge.png');
   final AssetGenImage bedgeImage = const AssetGenImage(
     'assets/images/bedge_image.png',
   );
@@ -71,6 +69,9 @@ class $AssetsImagesGen {
   final SvgGenImage location = const SvgGenImage('assets/images/location.svg');
   final AssetGenImage loginRegisterBg = const AssetGenImage(
     'assets/images/login&register_bg.png',
+  );
+  final AssetGenImage loginRegisterBg2 = const AssetGenImage(
+    'assets/images/login_register_bg2.png',
   );
   final AssetGenImage me = const AssetGenImage('assets/images/me.png');
   final AssetGenImage message = const AssetGenImage(
@@ -116,6 +117,7 @@ class $AssetsImagesGen {
 class $AssetsJsonGen {
   const $AssetsJsonGen();
 
+  final LottieGenImage done = const LottieGenImage('assets/json/done.json');
   final String empty = 'assets/json/empty.json';
   final String hekayaLoading = 'assets/json/hekaya_loading.json';
   final LottieGenImage shoppingCart = const LottieGenImage(
