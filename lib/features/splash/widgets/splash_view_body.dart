@@ -20,18 +20,17 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   Future<void> _startApp() async {
     _initializeNotifications();
     await Future.delayed(const Duration(milliseconds: 1500));
-    Navigator.pushReplacementNamed(context, RouteManager.onBoarding);
-
-    // if (!mounted) return;
-    // if (!Constants.onBoarding) {
-    //   Navigator.pushReplacementNamed(context, RouteManager.onBoarding);
-    // } else {
-    //   final isLogged = isLoggedIn();
-    //   Navigator.pushReplacementNamed(
-    //     context,
-    //     isLogged ? RouteManager.home : RouteManager.login,
-    //   );
-    // }
+    // Navigator.pushReplacementNamed(context, RouteManager.onBoarding);
+    if (!mounted) return;
+    if (!Constants.onBoarding) {
+      Navigator.pushReplacementNamed(context, RouteManager.onBoarding);
+    } else {
+      final isLogged = isLoggedIn();
+      Navigator.pushReplacementNamed(
+        context,
+        isLogged ? RouteManager.home : RouteManager.login,
+      );
+    }
   }
 
   Future<void> _initializeNotifications() async {

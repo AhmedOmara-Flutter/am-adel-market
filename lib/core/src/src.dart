@@ -16,6 +16,7 @@ import '../../features/reviews/presentation/view_model/get_review_cubit/get_revi
 import '../cubit/network_cubit/network_cubit.dart';
 import '../cubit/product_cubit/product_cubit.dart';
 import '../cubit/selected_coupon_cubit/selected_coupon_cubit.dart';
+import '../utils/navigation_key.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,18 +31,27 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => FeaturedCubit(instance())),
         BlocProvider(create: (context) => ProductCubit(instance())),
         BlocProvider(create: (context) => CartCubit(instance())),
-        BlocProvider(create: (context) => FavoriteCubit(instance())..getFavorites(),),
-        BlocProvider(create: (context) => ProfileCubit(instance(), instance())..getOrders(),),
+        BlocProvider(
+          create: (context) => FavoriteCubit(instance())..getFavorites(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProfileCubit(instance(), instance())..getOrders(),
+        ),
         BlocProvider(create: (context) => AddReviewCubit(instance())),
         BlocProvider(create: (context) => GetReviewCubit(instance())),
         BlocProvider(create: (context) => OfferCubit(instance(), instance())),
         BlocProvider(create: (context) => GetBundleOfferCubit(instance())),
         BlocProvider(create: (context) => CategoryCubit(instance())),
-        BlocProvider(create: (context) => RestaurantStatusCubit(instance())..startListening(),),
-        BlocProvider(create: (context) => CouponsCubit(instance())..getCoupons(getUser().uId),),
         BlocProvider(
-          create: (_) => SelectedCouponCubit(),
+          create: (context) =>
+              RestaurantStatusCubit(instance())..startListening(),
         ),
+        BlocProvider(
+          create: (context) =>
+              CouponsCubit(instance())..getCoupons(getUser().uId),
+        ),
+        BlocProvider(create: (_) => SelectedCouponCubit()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(393, 852),
@@ -49,6 +59,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             locale: const Locale('ar'),
             supportedLocales: S.delegate.supportedLocales,

@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:am_adel_market/core/services/database_services.dart';
 import 'package:am_adel_market/core/services/service_locator.dart';
+import 'package:am_adel_market/core/utils/navigation_key.dart';
+import 'package:am_adel_market/core/utils/route_manager.dart';
 
 class NotificationServices {
   static final FirebaseMessaging _firebaseMessaging =
@@ -20,6 +25,10 @@ class NotificationServices {
     playSound: true,
   );
 
+  // =========================================================
+  // Local Notification
+  // =========================================================
+
   static Future<void> initLocal() async {
     const AndroidInitializationSettings androidSettings =
     AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -31,8 +40,22 @@ class NotificationServices {
     await _local.initialize(
       settings,
       onDidReceiveNotificationResponse: (response) {
-        print('🔔 Notification clicked');
-        print('Payload: ${response.payload}');
+        print('🔔 Local notification clicked');
+        print('📦 Payload: ${response.payload}');
+
+        if (response.payload == null ||
+            response.payload!.isEmpty) {
+          return;
+        }
+
+        try {
+          final Map<String, dynamic> data =
+          jsonDecode(response.payload!);
+
+          _handleNotificationNavigation(data);
+        } catch (e) {
+          print('❌ Notification payload error: $e');
+        }
       },
     );
 
@@ -45,8 +68,15 @@ class NotificationServices {
     await android?.requestNotificationsPermission();
   }
 
-  static Future<void> showNotification(RemoteMessage message) async {
-    final RemoteNotification? notification = message.notification;
+  // =========================================================
+  // Show Notification - Foreground
+  // =========================================================
+
+  static Future<void> showNotification(
+      RemoteMessage message,
+      ) async {
+    final RemoteNotification? notification =
+        message.notification;
 
     final AndroidNotificationDetails androidDetails =
     AndroidNotificationDetails(
@@ -65,23 +95,91 @@ class NotificationServices {
 
     await _local.show(
       DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      notification?.title ?? 'Pizza Sofian',
+      notification?.title ?? 'إشعار جديد',
       notification?.body ?? '',
       details,
-      payload: message.data.toString(),
+
+      // مهم جدًا
+      payload: jsonEncode(message.data),
     );
   }
 
+  // =========================================================
+  // Notification Navigation
+  // =========================================================
+
+  static void _handleNotificationNavigation(
+      Map<String, dynamic> data,
+      ) {
+    print('🚀 Notification navigation');
+    print('📦 Data: $data');
+
+    final String? screen = data['screen']?.toString();
+
+    if (screen == null || screen.isEmpty) {
+      print('⚠️ No screen found');
+      return;
+    }
+
+    switch (screen) {
+      case 'product':
+        final String? productId =
+        data['productId']?.toString();
+
+        if (productId == null || productId.isEmpty) {
+          print('⚠️ productId is missing');
+          return;
+        }
+
+        navigatorKey.currentState?.pushNamed(
+          RouteManager.productDetails,
+          arguments: productId,
+        );
+
+        break;
+
+      case 'orders':
+        navigatorKey.currentState?.pushNamed(
+          RouteManager.orders,
+        );
+
+        break;
+
+      case 'coupon':
+        navigatorKey.currentState?.pushNamed(
+          RouteManager.coupon,
+        );
+
+        break;
+
+      case 'home':
+        navigatorKey.currentState?.pushNamed(
+          RouteManager.home,
+        );
+
+        break;
+
+      default:
+        print('⚠️ Unknown notification screen: $screen');
+    }
+  }
+
+  // =========================================================
+  // Save FCM Token
+  // =========================================================
+
   static Future<void> saveFcmToken() async {
     try {
-      final User? user = FirebaseAuth.instance.currentUser;
+      final User? user =
+          FirebaseAuth.instance.currentUser;
 
       if (user == null) {
         print('⚠️ No logged in user');
         return;
       }
 
-      final String? token = await _firebaseMessaging.getToken();
+      final String? token =
+      await _firebaseMessaging.getToken();
 
       if (token == null || token.isEmpty) {
         print('⚠️ FCM Token is null');
@@ -98,12 +196,15 @@ class NotificationServices {
 
       print('======================================');
       print('✅ FCM TOKEN SAVED');
-      print(token);
       print('======================================');
     } catch (e) {
       print('❌ Error saving FCM Token: $e');
     }
   }
+
+  // =========================================================
+  // Firebase
+  // =========================================================
 
   static Future<void> initFirebase() async {
     await _firebaseMessaging.requestPermission(
@@ -112,17 +213,18 @@ class NotificationServices {
       sound: true,
     );
 
-    // الإشعارات العامة تفضل شغالة
-    await _firebaseMessaging.subscribeToTopic('all_users');
+    await _firebaseMessaging.subscribeToTopic(
+      'all_users',
+    );
 
-    // حفظ Token الخاص بالعميل
     await saveFcmToken();
 
-    // لو Firebase غير الـToken
+    // Token Refresh
     _firebaseMessaging.onTokenRefresh.listen(
           (String token) async {
         try {
-          final User? user = FirebaseAuth.instance.currentUser;
+          final User? user =
+              FirebaseAuth.instance.currentUser;
 
           if (user == null) {
             print('⚠️ No logged in user');
@@ -138,13 +240,13 @@ class NotificationServices {
           );
 
           print('🔄 FCM Token updated');
-          print(token);
         } catch (e) {
           print('❌ Error updating FCM Token: $e');
         }
       },
     );
 
+    // Foreground
     FirebaseMessaging.onMessage.listen(
           (RemoteMessage message) async {
         print('📩 FOREGROUND MESSAGE');
@@ -158,19 +260,29 @@ class NotificationServices {
       },
     );
 
+    // Background
     FirebaseMessaging.onMessageOpenedApp.listen(
           (RemoteMessage message) {
         print('🔔 Notification opened from background');
         print('Data: ${message.data}');
+
+        _handleNotificationNavigation(
+          message.data,
+        );
       },
     );
 
+    // Terminated
     final RemoteMessage? initialMessage =
     await _firebaseMessaging.getInitialMessage();
 
     if (initialMessage != null) {
       print('🔔 App opened from terminated state');
       print('Data: ${initialMessage.data}');
+
+      _handleNotificationNavigation(
+        initialMessage.data,
+      );
     }
   }
 }
