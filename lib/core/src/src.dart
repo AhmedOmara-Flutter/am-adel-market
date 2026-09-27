@@ -1,3 +1,4 @@
+import 'package:am_adel_market/core/helper_function/get_user.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/core/widgets/no_internet_view.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/best_selling_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:am_adel_market/features/profile/presentation/view_model/profile_
 import '../../features/bundle_offer/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
 import '../../features/cart/presentation/view_model/cart_cubit.dart';
 import '../../features/category/presentation/view_model/category_cubit.dart';
+import '../../features/coupon/presentation/view_model/coupons_cubit.dart';
 import '../../features/favorite/presentation/view_model/favorite_cubit.dart';
 import '../../features/offers/presentation/view_model/offer_cubit.dart';
 import '../../features/restaurant_status/presentation/view_model/restaurant_status_cubit.dart';
@@ -13,6 +15,7 @@ import '../../features/reviews/presentation/view_model/add_review_cubit/add_revi
 import '../../features/reviews/presentation/view_model/get_review_cubit/get_review_cubit.dart';
 import '../cubit/network_cubit/network_cubit.dart';
 import '../cubit/product_cubit/product_cubit.dart';
+import '../cubit/selected_coupon_cubit/selected_coupon_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -34,8 +37,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OfferCubit(instance(), instance())),
         BlocProvider(create: (context) => GetBundleOfferCubit(instance())),
         BlocProvider(create: (context) => CategoryCubit(instance())),
-        BlocProvider(create: (context) => RestaurantStatusCubit(instance())..startListening(),)
-
+        BlocProvider(create: (context) => RestaurantStatusCubit(instance())..startListening(),),
+        BlocProvider(create: (context) => CouponsCubit(instance())..getCoupons(getUser().uId),),
+        BlocProvider(
+          create: (_) => SelectedCouponCubit(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(393, 852),

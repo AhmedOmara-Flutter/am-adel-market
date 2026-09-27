@@ -16,21 +16,17 @@ class PageViewItem extends StatelessWidget {
     return Column(
       children: [
       Stack(
-      alignment: Alignment.topCenter,
       children: [
-        OnBoardingBackground(
-          background: pageViewModel.background,
-        ),
+        if (currentIndex != pageCount - 1)
+          const OnBoardingSkipButton(),
 
         OnBoardingImage(
           image: pageViewModel.image,
         ),
 
-        if (currentIndex != pageCount - 1)
-          const OnBoardingSkipButton(),
       ],
     ),
-        SizedBox(height: 50),
+        SizedBox(height: 200),
         OnBoardingContent(pageViewModel: pageViewModel,),
       ],
     );

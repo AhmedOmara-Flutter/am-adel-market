@@ -6,29 +6,25 @@ class StringManager {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('مرحبًا بك في ', style: Theme
-            .of(context)
-            .textTheme
-            .titleLarge,),
-        Text('بيتزا ', style: Theme
-            .of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(
-            color: Color(0xffF4A91F)
-        )
+        Text(
+          'طعم البيت.. ',
+          style:StyleManager.font28Weight700.copyWith(
+            color: AppColor.textPrimary,
+            fontWeight: FontWeight.w800,
+
+          )
         ),
-        Text('سفيان', style: Theme
-            .of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(
-            color: AppColor.mainColor
-        )),
+        Text(
+          'على أصوله',
+            style:StyleManager.font28Weight700.copyWith(
+              color: AppColor.accentColor,
+              fontWeight: FontWeight.w800,
+
+            )
+        ),
       ],
     );
   }
-
   static Widget onBoardingTitle2(BuildContext context) {
     return Text('ابحث وتسوق', style: Theme
         .of(context)
@@ -38,9 +34,9 @@ class StringManager {
 
 
   static const onBoardingDescription1 =
-      'استمتع بأشهى أنواع البيتزا المحضرة بمكونات\n'
-      'طازجة وجودة عالية، مع نكهات مميزة وعروض\n'
-      'تناسب جميع الأذواق.';
+      'من أول حبة فول لحد آخر قرمشة في الطعمية، '
+      '\nكل حاجة بتحضر بعناية وبطعم مصري أصيل، '
+      '\nعشان كل وجبة تبدأ معاها يومك بمزاج';
 
   static const onBoardingDescription2 =
       'اكتشف تشكيلة متنوعة من الكريب الحلو والحادق،\n'

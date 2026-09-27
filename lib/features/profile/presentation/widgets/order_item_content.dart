@@ -8,6 +8,7 @@ class OrderItemContent extends StatelessWidget {
   final String ordersTotalPrice;
   final String price;
   final double deliveryCost;
+  final double couponDiscount;
 
   const OrderItemContent({
     super.key,
@@ -18,12 +19,14 @@ class OrderItemContent extends StatelessWidget {
     required this.products,
     required this.price,
     required this.deliveryCost,
+    required this.couponDiscount,
   });
 
   @override
   Widget build(BuildContext context) {
     const primaryColor = AppColor.mainColor;
-    final total = double.parse(ordersTotalPrice) + deliveryCost;
+    final total = double.parse(ordersTotalPrice);
+    final hasCoupon = couponDiscount > 0;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -165,8 +168,9 @@ class OrderItemContent extends StatelessWidget {
                 Tooltip(
                   triggerMode: TooltipTriggerMode.tap,
                   message:
-                  'الطلبات: ${ordersTotalPrice} ج.م\n'
-                      'التوصيل: ${deliveryCost.toStringAsFixed(0)} ج.م',
+                  'الإجمالي النهائي: ${total.toStringAsFixed(2)} ج.م\n'
+                      'التوصيل: ${deliveryCost.toStringAsFixed(2)} ج.م'
+                      '${hasCoupon ? '\nخصم الكوبون: ${couponDiscount.toStringAsFixed(2)} ج.م' : ''}',
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

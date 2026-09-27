@@ -67,9 +67,7 @@ class OrderItem extends StatelessWidget {
                       ),
                       numberOfOrders:
                       orderEntity.cartEntity.getItemsCount(),
-                      ordersTotalPrice: orderEntity.cartEntity
-                          .getTotalPrice()
-                          .toStringAsFixed(2),
+                      ordersTotalPrice: orderEntity.totalPrice.toStringAsFixed(2),
                       products: orderEntity.cartEntity.cartItems
                           .map(
                             (item) =>
@@ -83,6 +81,8 @@ class OrderItem extends StatelessWidget {
                           .join('\n'),
                       deliveryCost:
                       orderEntity.selectedLocationEntity!.cost,
+                      couponDiscount: orderEntity.couponDiscount,
+
                     ),
                   ),
                 ],

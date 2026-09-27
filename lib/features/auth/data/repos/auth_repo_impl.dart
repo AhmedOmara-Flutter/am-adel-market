@@ -12,7 +12,7 @@ class AuthRepoImpl implements AuthRepo {
 
   AuthRepoImpl(this._authServices, this._databaseServices);
 
-
+  
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       RegisterRequest registerRequest,

@@ -30,3 +30,13 @@ final class CheckoutLocationsError extends CheckoutState {
 
 class CheckoutLocationsLoading extends CheckoutState {}
 
+final class CheckoutCouponLoading extends CheckoutState {}
+
+final class CheckoutCouponError extends CheckoutState {
+  final String error;
+
+  CheckoutCouponError(this.error);
+}
+
+final class CheckoutCouponSuccess extends CheckoutState {}
+class CheckoutCouponRemoved extends CheckoutState {}

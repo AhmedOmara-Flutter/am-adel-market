@@ -53,6 +53,7 @@ class SkeletonizerOrderItem extends StatelessWidget {
                       products: 'jniniunin jinin',
                       price: 'rgji rnr',
                       deliveryCost: 78888,
+                      couponDiscount: 0.0,
                     ),
                   ),
                 ],

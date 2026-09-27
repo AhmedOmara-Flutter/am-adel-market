@@ -36,13 +36,11 @@ class $AssetsImagesGen {
     'assets/images/arrow-down.svg',
   );
   final AssetGenImage bedge = const AssetGenImage('assets/images/bedge.png');
-  final AssetGenImage bedgeImage = const AssetGenImage(
-    'assets/images/bedge_image.png',
-  );
   final SvgGenImage box = const SvgGenImage('assets/images/box.svg');
   final SvgGenImage checkCircle = const SvgGenImage(
     'assets/images/checkCircle.svg',
   );
+  final SvgGenImage coupon = const SvgGenImage('assets/images/coupon.svg');
   final AssetGenImage crepe = const AssetGenImage('assets/images/crepe.png');
   final AssetGenImage customer = const AssetGenImage(
     'assets/images/customer.png',
@@ -78,16 +76,16 @@ class $AssetsImagesGen {
     'assets/images/message.png',
   );
   final AssetGenImage onboarding1 = const AssetGenImage(
-    'assets/images/onboarding_1.png',
-  );
-  final AssetGenImage onboarding2 = const AssetGenImage(
-    'assets/images/onboarding_2.png',
+    'assets/images/onboarding1.png',
   );
   final SvgGenImage onboardingBackground1 = const SvgGenImage(
     'assets/images/onboarding_background_1.svg',
   );
   final SvgGenImage onboardingBackground2 = const SvgGenImage(
     'assets/images/onboarding_background_2.svg',
+  );
+  final AssetGenImage onboardingLogo = const AssetGenImage(
+    'assets/images/onboarding_logo.png',
   );
   final SvgGenImage openPackage = const SvgGenImage(
     'assets/images/openPackage.svg',
@@ -99,6 +97,9 @@ class $AssetsImagesGen {
   final AssetGenImage pizza = const AssetGenImage('assets/images/pizza.png');
   final SvgGenImage productDetailsBg = const SvgGenImage(
     'assets/images/productDetailsBg.svg',
+  );
+  final AssetGenImage promoCode = const AssetGenImage(
+    'assets/images/promo-code.png',
   );
   final SvgGenImage search = const SvgGenImage('assets/images/search.svg');
   final SvgGenImage searchImage = const SvgGenImage(

@@ -106,10 +106,6 @@ class _LoginFormState extends State<LoginForm> {
           ),
 
           const SizedBox(height: 40),
-
-          // ==========================================
-          // Login Button
-          // ==========================================
           BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
               return CustomButton(

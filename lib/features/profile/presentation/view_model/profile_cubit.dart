@@ -52,6 +52,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  void clear() {
+    _orderSubscription?.cancel();
+    _orderSubscription = null;
+
+    emit(ProfileInitial());
+  }
+
   @override
   Future<void> close() {
     _orderSubscription?.cancel();

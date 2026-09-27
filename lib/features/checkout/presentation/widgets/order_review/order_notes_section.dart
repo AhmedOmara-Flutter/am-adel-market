@@ -1,7 +1,10 @@
 import '../../../../../core/utils/app_imports.dart';
 
 class OrderNotesSection extends StatelessWidget {
-  const OrderNotesSection({super.key, required this.controller});
+  const OrderNotesSection({
+    super.key,
+    required this.controller,
+  });
 
   final TextEditingController controller;
 
@@ -10,18 +13,13 @@ class OrderNotesSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: 10.h),
-      padding: EdgeInsets.all(17.w),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColor.cardLight,
-        borderRadius: BorderRadius.circular(22.r),
-        border: Border.all(color: AppColor.border.withOpacity(.22)),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.black.withOpacity(.045),
-            blurRadius: 22.r,
-            offset: Offset(0, 8.h),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: AppColor.border.withOpacity(.18),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,32 +27,32 @@ class OrderNotesSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 44.w,
-                height: 44.w,
+                width: 36.w,
+                height: 36.w,
                 decoration: BoxDecoration(
-                  color: AppColor.mainColor,
-                  borderRadius: BorderRadius.circular(14.r),
+                  color: AppColor.mainColor.withOpacity(.08),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(
                   Icons.edit_note_rounded,
-                  color: AppColor.textOnDark,
-                  size: 22.sp,
+                  color: AppColor.mainColor,
+                  size: 19.sp,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 9.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'ملاحظات الطلب',
-                      style: StyleManager.font16Weight700.copyWith(
+                      style: StyleManager.font14Weight600.copyWith(
                         color: AppColor.textPrimary,
                       ),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Text(
-                      'أضف أي تعليمات خاصة بالطاهي (اختياري)',
+                      'اختياري',
                       style: StyleManager.font11Weight400.copyWith(
                         color: AppColor.textSecondary,
                       ),
@@ -65,52 +63,44 @@ class OrderNotesSection extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: 10.h),
 
           Container(
-            padding: EdgeInsets.all(13.w),
             decoration: BoxDecoration(
-              color: AppColor.background.withOpacity(.55),
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: AppColor.border.withOpacity(.16)),
+              color: AppColor.background,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: AppColor.accentColor.withValues(alpha: 0.12),
+              ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 32.w,
-                  height: 32.w,
-                  decoration: BoxDecoration(
-                    color: AppColor.accentColor.withOpacity(.13),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.lightbulb_outline_rounded,
-                    color: AppColor.accentColor,
-                    size: 17.sp,
-                  ),
+            child: TextField(
+              controller: controller,
+              keyboardType: TextInputType.multiline,
+              minLines: 1,
+              maxLines: 5,
+              style: StyleManager.font14Weight600.copyWith(
+                color: AppColor.textPrimary,
+              ),
+              decoration: InputDecoration(
+                hintText: 'مثال: بدون بصل، زيادة جبنة، حار...',
+                hintStyle: StyleManager.font11Weight400.copyWith(
+                  color: AppColor.textSecondary,
                 ),
-                SizedBox(width: 9.w),
-                Expanded(
-                  child: Text(
-                    'اكتب أي تفاصيل تساعدنا في تجهيز طلبك بالشكل الذي تفضله.',
-                    style: StyleManager.font12Weight500.copyWith(
-                      color: AppColor.textSecondary,
-                    ),
-                  ),
+                prefixIcon: Icon(
+                  Icons.notes_rounded,
+                  color: AppColor.secondaryColor,
+                  size: 20.sp,
                 ),
-              ],
+                alignLabelWithHint: true,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 13.w,
+                  vertical: 12.h,
+                ),
+                border: InputBorder.none,
+              ),
             ),
           ),
 
-          SizedBox(height: 13.h),
-
-          CustomTextFormField(
-            controller: controller,
-            hintText: 'مثال: بدون سلطة، بدون بصل، زيادة جبنة، حار...',
-            prefixIcon: Icons.notes_rounded,
-            keyboardType: TextInputType.multiline,
-          ),
         ],
       ),
     );

@@ -182,7 +182,17 @@ class CartCubit extends Cubit<CartState> {
 
     _scheduleSave(userId);
   }
+  void clear() {
+    _saveTimer?.cancel();
+    _saveTimer = null;
 
+    _cartSubscription?.cancel();
+    _cartSubscription = null;
+
+    cart = CartEntity(cartItems: []);
+
+    emit(CartInitial());
+  }
   @override
   Future<void> close() async {
     _saveTimer?.cancel();

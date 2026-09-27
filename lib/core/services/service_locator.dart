@@ -3,8 +3,10 @@ import 'package:am_adel_market/core/repos/product_repo/product_repo.dart';
 import 'package:am_adel_market/core/repos/product_repo/product_repo_impl.dart';
 import 'package:am_adel_market/core/services/storage_services.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
+import 'package:am_adel_market/features/coupon/data/repos/coupon_repo.dart';
 import '../../features/category/data/repos/category_repo.dart';
 import '../../features/category/domain/repos/category_repo_impl.dart';
+import '../../features/coupon/domain/repos/coupon_repo_impl.dart';
 import '../../features/favorite/app/repos/favorite_repo_impl.dart';
 import '../../features/favorite/domain/repos/favorite_repo.dart';
 import '../../features/restaurant_status/data/repos/restaurant_status_repo.dart';
@@ -69,5 +71,8 @@ void initAppModule() {
   );
   instance.registerLazySingleton<RestaurantStatusRepo>(
         () => RestaurantStatusRepoImpl(instance()),
+  );
+  instance.registerLazySingleton<CouponRepo>(
+        () => CouponRepoImpl(instance()),
   );
 }

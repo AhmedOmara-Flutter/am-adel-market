@@ -36,8 +36,10 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   }
 
   void getFavorites() {
+    _favoriteStreamSubscription?.cancel();
 
     emit(GetFavoriteLoadingState());
+
     try {
       _favoriteStreamSubscription =
           _favoriteRepo.getFavoriteProducts().listen((data) {
@@ -48,6 +50,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
               },
                   (favoritesProducts) {
                 favorites.clear();
+
                 for (var product in favoritesProducts) {
                   favorites[product.id] = true;
                 }
@@ -56,20 +59,29 @@ class FavoriteCubit extends Cubit<FavoriteState> {
                   emit(GetFavoriteEmptyState());
                   return;
                 }
+
                 emit(GetFavoriteSuccessState(favoritesProducts));
               },
             );
           });
-
     } catch (e) {
       log(e.toString());
       emit(GetFavoriteErrorState(error: e.toString()));
     }
   }
 
+  void clear() {
+    _favoriteStreamSubscription?.cancel();
+    _favoriteStreamSubscription = null;
+
+    favorites.clear();
+
+    emit(FavoriteInitial());
+  }
+
   @override
   Future<void> close() {
-    _favoriteStreamSubscription!.cancel();
+    _favoriteStreamSubscription?.cancel();
     return super.close();
   }
 }

@@ -65,23 +65,23 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOutCubic,
-        width: 100.w,
+        width: 105.w,
         height: 115.h,
         padding: EdgeInsets.all(7.w),
         decoration: BoxDecoration(
           color: AppColor.background,
-          borderRadius: BorderRadius.circular(17.r),
+          borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
             color: hasImage
                 ? AppColor.mainColor.withOpacity(.55)
-                : AppColor.border.withOpacity(.35),
+                : AppColor.border.withOpacity(.3),
             width: hasImage ? 1.3 : 1,
           ),
           boxShadow: [
             BoxShadow(
               color: AppColor.black.withOpacity(.04),
-              blurRadius: 10.r,
-              offset: Offset(0, 4.h),
+              blurRadius: 8.r,
+              offset: Offset(0, 3.h),
             ),
           ],
         ),
@@ -89,7 +89,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(11.r),
                 child: _buildImage(),
               ),
             ),
@@ -105,11 +105,15 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
                   size: 14.sp,
                 ),
                 SizedBox(width: 4.w),
-                Text(
-                  hasImage ? 'تغيير الصورة' : 'إضافة صورة',
-                  style: StyleManager.font11Weight400.copyWith(
-                    color: AppColor.mainColor,
-                    fontWeight: FontWeight.w700,
+                Flexible(
+                  child: Text(
+                    hasImage ? 'تغيير الصورة' : 'إضافة صورة',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: StyleManager.font11Weight400.copyWith(
+                      color: AppColor.mainColor,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ],
@@ -151,17 +155,25 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.cardLight,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(11.r),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.cloud_upload_outlined,
-            color: AppColor.mainColor,
-            size: 28.sp,
+          Container(
+            width: 38.w,
+            height: 38.w,
+            decoration: BoxDecoration(
+              color: AppColor.mainColor.withOpacity(.08),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.cloud_upload_outlined,
+              color: AppColor.mainColor,
+              size: 21.sp,
+            ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: 5.h),
           Text(
             'إثبات الدفع',
             style: StyleManager.font11Weight400.copyWith(

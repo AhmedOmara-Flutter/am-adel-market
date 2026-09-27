@@ -4,14 +4,14 @@ import '../../../../core/utils/app_imports.dart';
 class ProfileOptionsList extends StatelessWidget {
   final bool isButton;
   final String text;
-  final String image;
+  final IconData icon;
   final VoidCallback? onTap;
 
   const ProfileOptionsList({
     super.key,
     this.isButton = false,
     required this.text,
-    required this.image,
+    required this.icon,
     this.onTap,
   });
 
@@ -44,15 +44,7 @@ class ProfileOptionsList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Center(
-                  child: SvgPicture.asset(
-                    image,
-                    width: 20.w,
-                    height: 20.w,
-                    colorFilter: const ColorFilter.mode(
-                      AppColor.mainColor,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  child: Icon(icon, size: 20.sp, color: AppColor.mainColor),
                 ),
               ),
 

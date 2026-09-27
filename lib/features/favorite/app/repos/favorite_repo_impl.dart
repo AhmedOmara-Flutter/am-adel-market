@@ -11,18 +11,26 @@ class FavoriteRepoImpl implements FavoriteRepo {
 
   FavoriteRepoImpl(this._databaseServices);
 
-  final path = 'users/${getUser().uId}/favorites';
+  String get path => 'users/${getUser().uId}/favorites';
 
   @override
-  Future<Either<String, bool>> toggleFavorite(ProductEntity product) async {
+  Future<Either<String, bool>> toggleFavorite(
+      ProductEntity product,
+      ) async {
     try {
       final productId = product.id;
+
       final exists = await _databaseServices.checkExists(
         path: path,
         uId: productId,
       );
+
       if (exists) {
-        await _databaseServices.deleteData(path: path, uId: productId);
+        await _databaseServices.deleteData(
+          path: path,
+          uId: productId,
+        );
+
         return const Right(false);
       } else {
         await _databaseServices.addData(
@@ -34,8 +42,6 @@ class FavoriteRepoImpl implements FavoriteRepo {
         return const Right(true);
       }
     } catch (e) {
-      //todo show this
-       //return Left(ServerFailure(errMessage: e.toString()));
       return Left(e.toString());
     }
   }
@@ -52,8 +58,6 @@ class FavoriteRepoImpl implements FavoriteRepo {
 
         yield Right(result);
       }
-
-
     } catch (e) {
       yield Left(e.toString());
     }

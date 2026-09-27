@@ -8,18 +8,14 @@ class PaymentProofSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(17.w),
+      margin: EdgeInsets.only(top: 10.h),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColor.cardLight,
-        borderRadius: BorderRadius.circular(22.r),
-        border: Border.all(color: AppColor.border.withOpacity(.22)),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.black.withOpacity(.045),
-            blurRadius: 22.r,
-            offset: Offset(0, 8.h),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: AppColor.border.withOpacity(.18),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,32 +23,32 @@ class PaymentProofSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 44.w,
-                height: 44.w,
+                width: 36.w,
+                height: 36.w,
                 decoration: BoxDecoration(
-                  color: AppColor.mainColor,
-                  borderRadius: BorderRadius.circular(14.r),
+                  color: AppColor.mainColor.withOpacity(.08),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(
                   Icons.account_balance_wallet_rounded,
-                  color: AppColor.textOnDark,
-                  size: 21.sp,
+                  color: AppColor.mainColor,
+                  size: 19.sp,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 9.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'إضافة بيانات الدفع',
-                      style: StyleManager.font16Weight700.copyWith(
+                      'بيانات الدفع',
+                      style: StyleManager.font15Weight700.copyWith(
                         color: AppColor.textPrimary,
                       ),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Text(
-                      'أرفق إثبات الدفع لإتمام طلبك',
+                      'أرفق إثبات الدفع لإتمام الطلب',
                       style: StyleManager.font11Weight400.copyWith(
                         color: AppColor.textSecondary,
                       ),
@@ -63,93 +59,61 @@ class PaymentProofSection extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: 12.h),
 
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(13.w),
-                    decoration: BoxDecoration(
-                      color: AppColor.background.withOpacity(.55),
-                      borderRadius: BorderRadius.circular(16.r),
-                      border: Border.all(
-                        color: AppColor.border.withOpacity(.16),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 30.w,
-                              height: 30.w,
-                              decoration: BoxDecoration(
-                                color: AppColor.accentColor.withOpacity(.13),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.info_outline_rounded,
-                                color: AppColor.accentColor,
-                                size: 17.sp,
-                              ),
-                            ),
-                            SizedBox(width: 9.w),
-                            Expanded(
-                              child: Text(
-                                'يرجى إرفاق صورة واضحة لإثبات الدفع',
-                                style: StyleManager.font12Weight500.copyWith(
-                                  color: AppColor.textPrimary,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 12.h),
-
-                        _PaymentMethodRow(
-                          icon: Icons.camera_alt_outlined,
-                          title: 'إنستا باي',
-                          value: '01150279072',
-                        ),
-
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: Divider(
-                            height: 1,
-                            color: AppColor.divider.withOpacity(.4),
-                          ),
-                        ),
-
-                        _PaymentMethodRow(
-                          icon: Icons.payments_outlined,
-                          title: 'كاش',
-                          value: '01014214972',
-                        ),
-                      ],
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 115.h,
+                  padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 15.h),
+                  decoration: BoxDecoration(
+                    color: AppColor.background,
+                    borderRadius: BorderRadius.circular(13.r),
+                    border: Border.all(
+                      color: AppColor.border.withOpacity(.12),
                     ),
                   ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _PaymentMethodRow(
+                        icon: Icons.camera_alt_outlined,
+                        title: 'إنستا باي',
+                        value: '01150279072',
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 7.h),
+                        child: Divider(
+                          height: 1,
+                          color: AppColor.divider.withOpacity(.35),
+                        ),
+                      ),
+
+                      _PaymentMethodRow(
+                        icon: Icons.payments_outlined,
+                        title: 'كاش',
+                        value: '01014214972',
+                      ),
+                    ],
+                  ),
                 ),
+              ),
 
-                SizedBox(width: 12.w),
+              SizedBox(width: 10.w),
 
-                CustomImagePicker(
-                  onImagePicked: (image) {
-                    context
-                        .read<CheckoutCubit>()
-                        .orderEntity
-                        .paymentFileImage = image;
-                  },
-                ),
-              ],
-            ),
-          )
-
+              CustomImagePicker(
+                onImagePicked: (image) {
+                  context
+                      .read<CheckoutCubit>()
+                      .orderEntity
+                      .paymentFileImage = image;
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -178,7 +142,11 @@ class _PaymentMethodRow extends StatelessWidget {
             color: AppColor.mainColor.withOpacity(.08),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, color: AppColor.mainColor, size: 16.sp),
+          child: Icon(
+            icon,
+            color: AppColor.mainColor,
+            size: 16.sp,
+          ),
         ),
         SizedBox(width: 9.w),
         Text(
@@ -190,9 +158,8 @@ class _PaymentMethodRow extends StatelessWidget {
         const Spacer(),
         Text(
           value,
-          style: StyleManager.font12Weight500.copyWith(
+          style: StyleManager.font11Weight400.copyWith(
             color: AppColor.textPrimary,
-            fontWeight: FontWeight.w700,
             letterSpacing: .2,
           ),
         ),
