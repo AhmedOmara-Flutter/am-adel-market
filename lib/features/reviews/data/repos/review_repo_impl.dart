@@ -14,14 +14,12 @@ class ReviewRepoImpl implements ReviewRepo {
   Future<Either<Failure, void>> addReview(ReviewEntity review,
       String productId,) async {
     try {
-      // 1. add review
       await _databaseServices.addData(
         path: 'products/$productId/reviews',
         data: ReviewModel.fromEntity(review).toJson(),
         uId: null,
       );
 
-      // 2. get product safely
       final product =
           await _databaseServices.getData(path: 'products', uId: productId)
               as Map<String, dynamic>;
@@ -33,7 +31,6 @@ class ReviewRepoImpl implements ReviewRepo {
       final newSum = currentSum + review.rating;
       final newAvg = newSum / newCount;
 
-      // 3. update product
       await _databaseServices.updateData(
         path: 'products',
         docId: productId,

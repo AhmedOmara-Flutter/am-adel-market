@@ -75,9 +75,6 @@ class $AssetsImagesGen {
   final AssetGenImage message = const AssetGenImage(
     'assets/images/message.png',
   );
-  final AssetGenImage onboarding1 = const AssetGenImage(
-    'assets/images/onboarding1.png',
-  );
   final SvgGenImage onboardingBackground1 = const SvgGenImage(
     'assets/images/onboarding_background_1.svg',
   );
@@ -86,6 +83,9 @@ class $AssetsImagesGen {
   );
   final AssetGenImage onboardingLogo = const AssetGenImage(
     'assets/images/onboarding_logo.png',
+  );
+  final AssetGenImage onboardingLogo2 = const AssetGenImage(
+    'assets/images/onboarding_logo2.png',
   );
   final SvgGenImage openPackage = const SvgGenImage(
     'assets/images/openPackage.svg',

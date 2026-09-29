@@ -25,21 +25,39 @@ class StringManager {
       ],
     );
   }
-  static Widget onBoardingTitle2(BuildContext context) {
-    return Text('ابحث وتسوق', style: Theme
-        .of(context)
-        .textTheme
-        .titleLarge);
-  }
-
 
   static const onBoardingDescription1 =
       'من أول حبة فول لحد آخر قرمشة في الطعمية، '
       '\nكل حاجة بتحضر بعناية وبطعم مصري أصيل، '
       '\nعشان كل وجبة تبدأ معاها يومك بمزاج';
 
+
+
+  static Widget onBoardingTitle2(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'أشهى الأكلات.. ',
+          style: StyleManager.font28Weight700.copyWith(
+            color: AppColor.textPrimary,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        Text(
+          'بين إيديك',
+          style: StyleManager.font28Weight700.copyWith(
+            color: AppColor.accentColor,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ],
+    );
+  }
+
   static const onBoardingDescription2 =
-      'اكتشف تشكيلة متنوعة من الكريب الحلو والحادق،\n'
-      'واختر مكوناتك المفضلة بكل سهولة مع تجربة\n'
-      'طلب سريعة وممتعة.';
+      'استمتع بأشهى الوجبات والمكونات الطازجة،\n'
+      'واختار طلبك المفضل بكل سهولة،\n'
+      'وخلي طعم البيت يوصل لحد عندك.';
+
 }

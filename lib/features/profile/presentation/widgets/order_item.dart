@@ -90,8 +90,12 @@ class OrderItem extends StatelessWidget {
             ),
 
             OrderStatusBadge(
-              color: orderEntity.status.color,
-              title: orderEntity.status.ar,
+              color: orderEntity.status == OrderStatus.paid
+                  ? OrderStatus.delivered.color
+                  : orderEntity.status.color,
+              title: orderEntity.status == OrderStatus.paid
+                  ? 'تم الانتهاء'
+                  : orderEntity.status.ar,
             ),
           ],
         ),

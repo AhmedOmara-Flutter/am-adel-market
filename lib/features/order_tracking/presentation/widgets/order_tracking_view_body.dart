@@ -26,6 +26,8 @@ class OrderTrackingViewBody extends StatelessWidget {
             const InfoActionRow(
               text: 'تتبع الطلب',
               showBack: true,
+              topPadding: 10.0,
+
             ),
 
             Container(

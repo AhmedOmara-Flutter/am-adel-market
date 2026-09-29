@@ -7,6 +7,7 @@ class InfoActionRow extends StatelessWidget {
   final bool showNotification;
   final bool showSearch;
   final double bottomPadding;
+  final double topPadding;
   final VoidCallback? searchOnPressed;
 
   const InfoActionRow({
@@ -16,6 +17,7 @@ class InfoActionRow extends StatelessWidget {
     this.showNotification = false,
     this.showSearch = false,
     this.bottomPadding = 20,
+    this.topPadding = 40,
     this.searchOnPressed,
   });
 
@@ -27,7 +29,7 @@ class InfoActionRow extends StatelessWidget {
       padding: EdgeInsets.only(
         left: 20.w,
         right: 20.w,
-        top: 40.h,
+        top: topPadding.h,
         bottom: bottomPadding.h,
       ),
       child: Row(

@@ -8,6 +8,4 @@ abstract class ProductRepo {
   Future<Either<Failure, List<ProductEntity>>> searchProducts(String query);
   Future<Either<Failure,void>>increaseSellingCount(String productId);
   Future<void> deleteCollection(String collectionName);
-
-
 }

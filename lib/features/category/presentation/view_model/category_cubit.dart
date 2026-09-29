@@ -18,6 +18,8 @@ class CategoryCubit extends Cubit<CategoryState> {
   List<CategoryEntity> categories = [];
 
   void getCategories() {
+    print('🚀 CategoryCubit.getCategories() تم استدعاؤها');
+
     if (isClosed) return;
     emit(CategoryGetLoading());
     _categoriesSubscription?.cancel();

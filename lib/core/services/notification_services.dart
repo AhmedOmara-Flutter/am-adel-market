@@ -14,10 +14,9 @@ class NotificationServices {
       FirebaseMessaging.instance;
 
   static final FlutterLocalNotificationsPlugin _local =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
-  static const AndroidNotificationChannel _channel =
-  AndroidNotificationChannel(
+  static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'pizza_sofian_channel',
     'Pizza Sofian Notifications',
     description: 'Notifications for Pizza Sofian',
@@ -31,7 +30,7 @@ class NotificationServices {
 
   static Future<void> initLocal() async {
     const AndroidInitializationSettings androidSettings =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const InitializationSettings settings = InitializationSettings(
       android: androidSettings,
@@ -43,14 +42,12 @@ class NotificationServices {
         print('🔔 Local notification clicked');
         print('📦 Payload: ${response.payload}');
 
-        if (response.payload == null ||
-            response.payload!.isEmpty) {
+        if (response.payload == null || response.payload!.isEmpty) {
           return;
         }
 
         try {
-          final Map<String, dynamic> data =
-          jsonDecode(response.payload!);
+          final Map<String, dynamic> data = jsonDecode(response.payload!);
 
           _handleNotificationNavigation(data);
         } catch (e) {
@@ -59,9 +56,10 @@ class NotificationServices {
       },
     );
 
-    final AndroidFlutterLocalNotificationsPlugin? android =
-    _local.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
+    final AndroidFlutterLocalNotificationsPlugin? android = _local
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
 
     await android?.createNotificationChannel(_channel);
 
@@ -72,22 +70,19 @@ class NotificationServices {
   // Show Notification - Foreground
   // =========================================================
 
-  static Future<void> showNotification(
-      RemoteMessage message,
-      ) async {
-    final RemoteNotification? notification =
-        message.notification;
+  static Future<void> showNotification(RemoteMessage message) async {
+    final RemoteNotification? notification = message.notification;
 
     final AndroidNotificationDetails androidDetails =
-    AndroidNotificationDetails(
-      _channel.id,
-      _channel.name,
-      channelDescription: _channel.description,
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      icon: '@mipmap/ic_launcher',
-    );
+        AndroidNotificationDetails(
+          _channel.id,
+          _channel.name,
+          channelDescription: _channel.description,
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          icon: '@mipmap/ic_launcher',
+        );
 
     final NotificationDetails details = NotificationDetails(
       android: androidDetails,
@@ -108,9 +103,7 @@ class NotificationServices {
   // Notification Navigation
   // =========================================================
 
-  static void _handleNotificationNavigation(
-      Map<String, dynamic> data,
-      ) {
+  static void _handleNotificationNavigation(Map<String, dynamic> data) {
     print('🚀 Notification navigation');
     print('📦 Data: $data');
 
@@ -123,8 +116,7 @@ class NotificationServices {
 
     switch (screen) {
       case 'product':
-        final String? productId =
-        data['productId']?.toString();
+        final String? productId = data['productId']?.toString();
 
         if (productId == null || productId.isEmpty) {
           print('⚠️ productId is missing');
@@ -139,23 +131,17 @@ class NotificationServices {
         break;
 
       case 'orders':
-        navigatorKey.currentState?.pushNamed(
-          RouteManager.orders,
-        );
+        navigatorKey.currentState?.pushNamed(RouteManager.orders);
 
         break;
 
       case 'coupon':
-        navigatorKey.currentState?.pushNamed(
-          RouteManager.coupon,
-        );
+        navigatorKey.currentState?.pushNamed(RouteManager.coupon);
 
         break;
 
       case 'home':
-        navigatorKey.currentState?.pushNamed(
-          RouteManager.home,
-        );
+        navigatorKey.currentState?.pushNamed(RouteManager.home);
 
         break;
 
@@ -170,16 +156,14 @@ class NotificationServices {
 
   static Future<void> saveFcmToken() async {
     try {
-      final User? user =
-          FirebaseAuth.instance.currentUser;
+      final User? user = FirebaseAuth.instance.currentUser;
 
       if (user == null) {
         print('⚠️ No logged in user');
         return;
       }
 
-      final String? token =
-      await _firebaseMessaging.getToken();
+      final String? token = await _firebaseMessaging.getToken();
 
       if (token == null || token.isEmpty) {
         print('⚠️ FCM Token is null');
@@ -189,9 +173,7 @@ class NotificationServices {
       await instance<DatabaseServices>().updateData(
         path: 'users',
         docId: user.uid,
-        data: {
-          'fcmToken': token,
-        },
+        data: {'fcmToken': token},
       );
 
       print('======================================');
@@ -213,76 +195,61 @@ class NotificationServices {
       sound: true,
     );
 
-    await _firebaseMessaging.subscribeToTopic(
-      'all_users',
-    );
+    await _firebaseMessaging.subscribeToTopic('all_users');
 
     await saveFcmToken();
 
     // Token Refresh
-    _firebaseMessaging.onTokenRefresh.listen(
-          (String token) async {
-        try {
-          final User? user =
-              FirebaseAuth.instance.currentUser;
+    _firebaseMessaging.onTokenRefresh.listen((String token) async {
+      try {
+        final User? user = FirebaseAuth.instance.currentUser;
 
-          if (user == null) {
-            print('⚠️ No logged in user');
-            return;
-          }
-
-          await instance<DatabaseServices>().updateData(
-            path: 'users',
-            docId: user.uid,
-            data: {
-              'fcmToken': token,
-            },
-          );
-
-          print('🔄 FCM Token updated');
-        } catch (e) {
-          print('❌ Error updating FCM Token: $e');
+        if (user == null) {
+          print('⚠️ No logged in user');
+          return;
         }
-      },
-    );
+
+        await instance<DatabaseServices>().updateData(
+          path: 'users',
+          docId: user.uid,
+          data: {'fcmToken': token},
+        );
+
+        print('🔄 FCM Token updated');
+      } catch (e) {
+        print('❌ Error updating FCM Token: $e');
+      }
+    });
 
     // Foreground
-    FirebaseMessaging.onMessage.listen(
-          (RemoteMessage message) async {
-        print('📩 FOREGROUND MESSAGE');
-        print('Title: ${message.notification?.title}');
-        print('Body: ${message.notification?.body}');
-        print('Data: ${message.data}');
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print('📩 FOREGROUND MESSAGE');
+      print('Title: ${message.notification?.title}');
+      print('Body: ${message.notification?.body}');
+      print('Data: ${message.data}');
 
-        if (message.notification != null) {
-          await showNotification(message);
-        }
-      },
-    );
+      if (message.notification != null) {
+        await showNotification(message);
+      }
+    });
 
     // Background
-    FirebaseMessaging.onMessageOpenedApp.listen(
-          (RemoteMessage message) {
-        print('🔔 Notification opened from background');
-        print('Data: ${message.data}');
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('🔔 Notification opened from background');
+      print('Data: ${message.data}');
 
-        _handleNotificationNavigation(
-          message.data,
-        );
-      },
-    );
+      _handleNotificationNavigation(message.data);
+    });
 
     // Terminated
-    final RemoteMessage? initialMessage =
-    await _firebaseMessaging.getInitialMessage();
+    final RemoteMessage? initialMessage = await _firebaseMessaging
+        .getInitialMessage();
 
     if (initialMessage != null) {
       print('🔔 App opened from terminated state');
       print('Data: ${initialMessage.data}');
 
-      _handleNotificationNavigation(
-        initialMessage.data,
-      );
+      _handleNotificationNavigation(initialMessage.data);
     }
   }
 }

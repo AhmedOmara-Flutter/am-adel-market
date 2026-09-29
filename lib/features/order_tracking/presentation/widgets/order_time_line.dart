@@ -19,10 +19,14 @@ class _OrderTimelineState extends State<OrderTimeline>
     switch (widget.status) {
       case OrderStatus.pending:
         return 0;
+
       case OrderStatus.confirmed:
         return 1;
+
       case OrderStatus.delivered:
+      case OrderStatus.paid:
         return 2;
+
       case OrderStatus.cancelled:
         return -1;
     }
@@ -44,8 +48,9 @@ class _OrderTimelineState extends State<OrderTimeline>
 
   bool get isCancelled => widget.status == OrderStatus.cancelled;
 
-  bool get isDelivered => widget.status == OrderStatus.delivered;
-
+  bool get isDelivered =>
+      widget.status == OrderStatus.delivered ||
+          widget.status == OrderStatus.paid;
   @override
   void initState() {
     super.initState();
@@ -69,8 +74,17 @@ class _OrderTimelineState extends State<OrderTimeline>
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       decoration: BoxDecoration(
         color: AppColor.cardLight,
-        borderRadius: BorderRadius.circular(18.r),
-        border: Border.all(color: AppColor.divider),
+        borderRadius: BorderRadius.circular(14.r),
+        border: Border.all(
+          color: AppColor.border.withOpacity(.3),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.black.withOpacity(.06),
+            blurRadius: 12.r,
+            offset: Offset(0, 5.h),
+          ),
+        ],
       ),
       child: Column(
         children: List.generate(steps.length, (index) {
@@ -90,7 +104,6 @@ class _OrderTimelineState extends State<OrderTimeline>
                       final pulse = (isActive && !isDelivered)
                           ? 1 + (_controller.value * .08)
                           : 1.0;
-
                       return Transform.scale(
                         scale: pulse,
                         child: Container(
@@ -137,7 +150,6 @@ class _OrderTimelineState extends State<OrderTimeline>
                       );
                     },
                   ),
-
                   if (!isLast)
                     Container(
                       width: 2.5.w,
@@ -150,9 +162,7 @@ class _OrderTimelineState extends State<OrderTimeline>
                     ),
                 ],
               ),
-
               SizedBox(width: 14.w),
-
               Expanded(
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 350),
@@ -165,7 +175,7 @@ class _OrderTimelineState extends State<OrderTimeline>
                     color: isActive ? AppColor.background : AppColor.white,
                     borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(
-                      color: isActive ? AppColor.accentColor : AppColor.divider,
+                      color:AppColor.border.withOpacity(.3),
                       width: isActive ? 1.3 : 1,
                     ),
                     boxShadow: isActive

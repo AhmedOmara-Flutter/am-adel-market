@@ -15,6 +15,8 @@ class ProductCubit extends Cubit<ProductState> {
   StreamSubscription? _productsSubscription;
 
   void getProducts() {
+    print('🚀 ProductCubit.getProducts() تم استدعاؤها');
+
     _productsSubscription?.cancel();
 
     emit(GetProductsLoadingState());
@@ -50,20 +52,6 @@ class ProductCubit extends Cubit<ProductState> {
     }, (_) {});
   }
 
-
-  // void filterByCategory(String category) {
-  //   final result = allProducts.where((product) {
-  //     return product.category == category;
-  //   }).toList();
-  //
-  //   filteredProducts = result;
-  //
-  //   if (result.isEmpty) {
-  //     emit(GetFilteredProductsEmpty());
-  //   } else {
-  //     emit(GetFilteredProductsSuccess(filterProducts: result));
-  //   }
-  // }
   void filterProducts(
       String category, {
         String? size,
