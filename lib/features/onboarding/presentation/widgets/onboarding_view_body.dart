@@ -14,13 +14,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
         image: Assets.assets.images.onboardingLogo.path,
         title: StringManager.onBoardingTitle1(context),
         description: StringManager.onBoardingDescription1,
-        background: Assets.assets.images.onboardingBackground1.path
     ),
 
     PageViewModel(image: Assets.assets.images.onboardingLogo2.path,
         title: StringManager.onBoardingTitle2(context),
         description: StringManager.onBoardingDescription2,
-        background: Assets.assets.images.onboardingBackground2.path
     ),
   ];
 

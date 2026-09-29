@@ -28,7 +28,6 @@ class $AssetsImagesGen {
   final AssetGenImage amAdelLogo = const AssetGenImage(
     'assets/images/am_adel_logo.png',
   );
-  final SvgGenImage apple = const SvgGenImage('assets/images/apple.svg');
   final SvgGenImage arrowBack = const SvgGenImage(
     'assets/images/arrow back.svg',
   );
@@ -40,8 +39,6 @@ class $AssetsImagesGen {
   final SvgGenImage checkCircle = const SvgGenImage(
     'assets/images/checkCircle.svg',
   );
-  final SvgGenImage coupon = const SvgGenImage('assets/images/coupon.svg');
-  final AssetGenImage crepe = const AssetGenImage('assets/images/crepe.png');
   final AssetGenImage customer = const AssetGenImage(
     'assets/images/customer.png',
   );
@@ -55,11 +52,9 @@ class $AssetsImagesGen {
   final SvgGenImage emptyWallet = const SvgGenImage(
     'assets/images/empty-wallet.svg',
   );
-  final SvgGenImage facebook = const SvgGenImage('assets/images/facebook.svg');
   final SvgGenImage filter = const SvgGenImage('assets/images/filter.svg');
   final SvgGenImage filter2 = const SvgGenImage('assets/images/filter2.svg');
   final SvgGenImage global = const SvgGenImage('assets/images/global.svg');
-  final SvgGenImage google = const SvgGenImage('assets/images/google.svg');
   final SvgGenImage heart = const SvgGenImage('assets/images/heart.svg');
   final SvgGenImage infoCircle = const SvgGenImage(
     'assets/images/info-circle.svg',
@@ -68,18 +63,9 @@ class $AssetsImagesGen {
   final AssetGenImage loginRegisterBg = const AssetGenImage(
     'assets/images/login&register_bg.png',
   );
-  final AssetGenImage loginRegisterBg2 = const AssetGenImage(
-    'assets/images/login_register_bg2.png',
-  );
   final AssetGenImage me = const AssetGenImage('assets/images/me.png');
   final AssetGenImage message = const AssetGenImage(
     'assets/images/message.png',
-  );
-  final SvgGenImage onboardingBackground1 = const SvgGenImage(
-    'assets/images/onboarding_background_1.svg',
-  );
-  final SvgGenImage onboardingBackground2 = const SvgGenImage(
-    'assets/images/onboarding_background_2.svg',
   );
   final AssetGenImage onboardingLogo = const AssetGenImage(
     'assets/images/onboarding_logo.png',
@@ -94,7 +80,6 @@ class $AssetsImagesGen {
   final SvgGenImage paymentSuccess = const SvgGenImage(
     'assets/images/paymentSuccess.svg',
   );
-  final AssetGenImage pizza = const AssetGenImage('assets/images/pizza.png');
   final SvgGenImage productDetailsBg = const SvgGenImage(
     'assets/images/productDetailsBg.svg',
   );

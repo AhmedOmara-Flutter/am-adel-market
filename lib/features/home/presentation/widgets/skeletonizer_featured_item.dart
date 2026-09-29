@@ -71,7 +71,7 @@ class SkeletonizerFeaturedItem extends StatelessWidget {
                   child: SizedBox(
                     width: 90.w,
                     height: 90.w,
-                    child: Image.asset(Assets.assets.images.pizza.path),
+                    child: Image.asset(Assets.assets.images.amAdelLogo.path),
                   ),
                 ),
               ),

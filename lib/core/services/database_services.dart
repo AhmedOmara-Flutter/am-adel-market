@@ -6,7 +6,15 @@ abstract class DatabaseServices {
     required Map<String, dynamic> data,
     String? uId,
   });
+  String generateId({
+    required String path,
+  });
 
+  Future<String> createDataIfNotExists({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+  });
   Future<dynamic> getData({
     required String path,
     String? uId,
@@ -224,5 +232,38 @@ class FirestoreDatabase implements DatabaseServices {
     }
 
     await batch.commit();
+  }
+
+  @override
+  String generateId({
+    required String path,
+  }) {
+    return FirebaseFirestore.instance
+        .collection(path)
+        .doc()
+        .id;
+  }
+
+  @override
+  Future<String> createDataIfNotExists({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+  }) async {
+    final docRef = FirebaseFirestore.instance
+        .collection(path)
+        .doc(docId);
+
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      final snapshot = await transaction.get(docRef);
+
+      if (snapshot.exists) {
+        return;
+      }
+
+      transaction.set(docRef, data);
+    });
+
+    return docId;
   }
 }

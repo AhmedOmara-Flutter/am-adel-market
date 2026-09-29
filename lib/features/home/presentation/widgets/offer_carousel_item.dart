@@ -35,7 +35,7 @@ class OfferCarouselItem extends StatelessWidget {
               Positioned.fill(
                 child: CachedNetworkImage(
                   imageUrl: offer.image,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   placeholder: (context, url) => Shimmer.fromColors(
                     baseColor: AppColor.card,
                     highlightColor: AppColor.cardLight,
