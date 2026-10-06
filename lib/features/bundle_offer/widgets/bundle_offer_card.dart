@@ -3,7 +3,6 @@ import 'package:am_adel_market/core/entities/bundle_offer_entity.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import '../../../core/helper_function/get_user.dart';
 import '../../cart/presentation/view_model/cart_cubit.dart';
-import '../../restaurant_status/presentation/view_model/restaurant_status_cubit.dart';
 
 class BundleOfferCard extends StatelessWidget {
   final BundleOfferEntity bundleOffer;

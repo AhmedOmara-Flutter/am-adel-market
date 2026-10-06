@@ -4,11 +4,13 @@ import 'package:am_adel_market/core/widgets/no_internet_view.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/best_selling_cubit.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/featured_cubit.dart';
 import 'package:am_adel_market/features/profile/presentation/view_model/profile_cubit.dart';
+
 import '../../features/bundle_offer/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
 import '../../features/cart/presentation/view_model/cart_cubit.dart';
 import '../../features/category/presentation/view_model/category_cubit.dart';
 import '../../features/coupon/presentation/view_model/coupons_cubit.dart';
 import '../../features/favorite/presentation/view_model/favorite_cubit.dart';
+import '../../features/flash_offers/presentation/view_model/get_flash_offer_cubit/get_flash_offer_cubit.dart';
 import '../../features/offers/presentation/view_model/offer_cubit.dart';
 import '../../features/restaurant_status/presentation/view_model/restaurant_status_cubit.dart';
 import '../../features/reviews/presentation/view_model/add_review_cubit/add_review_cubit.dart';
@@ -31,9 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => FeaturedCubit(instance())),
         BlocProvider(create: (context) => ProductCubit(instance())),
         BlocProvider(create: (context) => CartCubit(instance())),
-        BlocProvider(
-          create: (context) => FavoriteCubit(instance())..getFavorites(),
-        ),
+        BlocProvider(create: (context) => FavoriteCubit(instance())..getFavorites(),),
         BlocProvider(
           create: (context) =>
               ProfileCubit(instance(), instance())..getOrders(),
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
               CouponsCubit(instance())..getCoupons(getUser().uId),
         ),
         BlocProvider(create: (_) => SelectedCouponCubit()),
+        BlocProvider(create: (_) => GetFlashOfferCubit(instance()),)
       ],
       child: ScreenUtilInit(
         designSize: const Size(393, 852),

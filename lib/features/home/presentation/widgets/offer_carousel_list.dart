@@ -1,9 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:am_adel_market/features/home/presentation/widgets/offer_carousel_item.dart';
 import 'package:am_adel_market/features/home/presentation/widgets/skeletonizer_offer_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../core/utils/app_imports.dart';
 import '../../../offers/presentation/view_model/offer_cubit.dart';
 
@@ -74,6 +72,7 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
       },
     );
   }
+
   Widget _buildLoading() {
     return Column(
       children: [
@@ -129,4 +128,4 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
       },
     );
   }
-  }
+}

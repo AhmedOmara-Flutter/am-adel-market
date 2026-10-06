@@ -1,4 +1,7 @@
 import 'package:am_adel_market/core/helper_function/get_user.dart';
+import 'package:am_adel_market/features/flash_offers/presentation/view/flash_offer_section.dart';
+import 'package:am_adel_market/features/flash_offers/presentation/view_model/get_flash_offer_cubit/get_flash_offer_cubit.dart';
+import 'package:am_adel_market/features/flash_offers/presentation/widgets/flash_offer_list.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/best_selling_cubit.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/featured_cubit.dart';
 import 'package:am_adel_market/features/home/presentation/widgets/best_selling_section.dart';
@@ -32,6 +35,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       context.read<FeaturedCubit>().getFeaturedProducts();
       context.read<OfferCubit>().getOffers();
       context.read<GetBundleOfferCubit>().getBundleOffers();
+      context.read<GetFlashOfferCubit>().getFlashOffers();
     });
   }
 
@@ -49,10 +53,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         final featuredCubit = context.read<FeaturedCubit>();
         final offerCubit = context.read<OfferCubit>();
         final bundleOfferCubit = context.read<GetBundleOfferCubit>();
+        final flashOfferCubit = context.read<GetFlashOfferCubit>();
         bundleOfferCubit.getBundleOffers();
         bestSellingCubit.getSellingProducts();
         featuredCubit.getFeaturedProducts();
         offerCubit.getOffers();
+        flashOfferCubit.getFlashOffers();
         getUser();
       },
       child: CustomScrollView(
@@ -87,6 +93,16 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       BundleOfferList(),
                     ],
                   ),
+                if(context.watch<GetFlashOfferCubit>().flashOffers.isNotEmpty)
+                  Column(
+                    children: [
+                      FlashOfferSection(),
+                      SizedBox(height: 20,),
+                      FlashOfferList(),
+                      SizedBox(height: 20,)
+                    ],
+                  ),
+
                 BestSellingSection(),
               ],
             ),
