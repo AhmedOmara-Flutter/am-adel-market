@@ -7,11 +7,14 @@ import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/features/coupon/data/repos/coupon_repo.dart';
 import 'package:am_adel_market/features/flash_offers/data/repos/flash_offer_repo.dart';
 import 'package:am_adel_market/features/flash_offers/domain/repos/flash_offer_repo_impl.dart';
+import 'package:am_adel_market/features/order_review/data/repos/order_review_repo.dart';
+import 'package:am_adel_market/features/order_review/domain/repos/order_review_repo_impl.dart';
 import '../../features/category/data/repos/category_repo.dart';
 import '../../features/category/domain/repos/category_repo_impl.dart';
 import '../../features/coupon/domain/repos/coupon_repo_impl.dart';
 import '../../features/favorite/app/repos/favorite_repo_impl.dart';
 import '../../features/favorite/domain/repos/favorite_repo.dart';
+import '../../features/order_review/presentation/view_model/order_review_cubit.dart';
 import '../../features/restaurant_status/data/repos/restaurant_status_repo.dart';
 import '../../features/restaurant_status/domain/repos/restaurant_status_repo_impl.dart';
 import '../../features/reviews/data/repos/review_repo_impl.dart';
@@ -46,14 +49,10 @@ void initAppModule() {
   instance.registerLazySingleton<CategoryCache>(() => CategoryCache());
   instance.registerLazySingleton<BundleOfferCache>(() => BundleOfferCache());
   instance.registerLazySingleton<SelectedLocationCache>(
-        () => SelectedLocationCache(),
+    () => SelectedLocationCache(),
   );
-  instance.registerLazySingleton<OfferCache>(
-        () => OfferCache(),
-  );
-  instance.registerLazySingleton<FlashOfferCache>(
-        () => FlashOfferCache(),
-  );
+  instance.registerLazySingleton<OfferCache>(() => OfferCache());
+  instance.registerLazySingleton<FlashOfferCache>(() => FlashOfferCache());
   instance.registerLazySingleton<ProductRepo>(
     () => ProductRepoImpl(instance(), instance()),
   );
@@ -62,7 +61,9 @@ void initAppModule() {
   );
   instance.registerLazySingleton<OrderRepo>(() => OrderRepoImpl(instance()));
   instance.registerLazySingleton<ReviewRepo>(() => ReviewRepoImpl(instance()));
-  instance.registerLazySingleton<OfferRepo>(() => OfferRepoImpl(instance(),instance()));
+  instance.registerLazySingleton<OfferRepo>(
+    () => OfferRepoImpl(instance(), instance()),
+  );
   instance.registerLazySingleton<UploadImageRepo>(
     () => UploadImageRepoImpl(instance()),
   );
@@ -79,6 +80,16 @@ void initAppModule() {
   instance.registerLazySingleton<RestaurantStatusRepo>(
     () => RestaurantStatusRepoImpl(instance()),
   );
+  instance.registerLazySingleton<OrderReviewRepo>(
+    () => OrderReviewRepoImpl(instance()),
+  );
+
+  instance.registerFactory<OrderReviewCubit>(
+    () => OrderReviewCubit(instance()),
+  );
+
   instance.registerLazySingleton<CouponRepo>(() => CouponRepoImpl(instance()));
-  instance.registerLazySingleton<FlashOfferRepo>(() => FlashOfferRepoImpl(instance(),instance()));
+  instance.registerLazySingleton<FlashOfferRepo>(
+    () => FlashOfferRepoImpl(instance(), instance()),
+  );
 }

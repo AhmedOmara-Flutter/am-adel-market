@@ -12,6 +12,7 @@ import '../../features/cart/domain/entities/cart_entity.dart';
 import '../../features/checkout/presentation/view/checkout_view.dart';
 import '../../features/checkout/presentation/view/payment_success_view.dart';
 import '../../features/favorite/presentation/view/favorite_view.dart';
+import '../../features/order_review/presentation/view/order_review_view.dart';
 import '../../features/order_tracking/presentation/view/order_tracking_view.dart';
 import '../../features/product_details/presentation/view/product_details_view.dart';
 import '../../features/profile/presentation/view/orders_view.dart';
@@ -39,6 +40,7 @@ class RouteManager {
   static const String aboutUs = '/aboutUs';
   static const String loading = '/loading';
   static const String coupon = '/coupon';
+  static const String orderReview = '/orderReview';
 }
 
 class GenerateRoute {
@@ -83,6 +85,14 @@ class GenerateRoute {
       case RouteManager.editProfile:
         return _route(EditProfileView());
 
+      case RouteManager.orderReview:
+        final orderEntity = settings.arguments as OrderEntity;
+
+        return _route(
+          OrderReviewView(
+            orderEntity: orderEntity,
+          ),
+        );
       case RouteManager.bestSellingMore:
         return _route(BestSellingMoreView());
 

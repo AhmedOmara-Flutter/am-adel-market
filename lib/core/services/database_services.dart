@@ -1,5 +1,7 @@
 import 'package:am_adel_market/core/utils/app_imports.dart';
 
+import 'database_transaction.dart';
+
 abstract class DatabaseServices {
   Future<String> addData({
     required String path,
@@ -43,6 +45,16 @@ abstract class DatabaseServices {
   });
 
   Future<void> deleteCollection(String collectionName);
+
+  Future<bool> createDataIfAbsent({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+  });
+
+  Future<T> runTransaction<T>(
+      Future<T> Function(DatabaseTransaction transaction) action,
+      );
 }
 
 class FirestoreDatabase implements DatabaseServices {
@@ -265,5 +277,77 @@ class FirestoreDatabase implements DatabaseServices {
     });
 
     return docId;
+  }
+
+  @override
+  Future<bool> createDataIfAbsent({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+  }) async {
+    final docRef = FirebaseFirestore.instance.collection(path).doc(docId);
+
+    return FirebaseFirestore.instance.runTransaction<bool>(
+          (transaction) async {
+        final snapshot = await transaction.get(docRef);
+
+        if (snapshot.exists) {
+          return false;
+        }
+
+        transaction.set(docRef, data);
+        return true;
+      },
+    );
+  }
+
+  //خاص عشان بس نحفظ حاله الاوردرات
+  @override
+  Future<T> runTransaction<T>(
+      Future<T> Function(DatabaseTransaction transaction) action,
+      ) {
+    return FirebaseFirestore.instance.runTransaction<T>(
+          (transaction) async {
+        return action(
+          FirestoreDatabaseTransaction(transaction),
+        );
+      },
+    );
+  }
+}
+
+//خاص عشان بس نحفظ حاله الاوردرات
+class FirestoreDatabaseTransaction implements DatabaseTransaction {
+  final Transaction _transaction;
+
+  FirestoreDatabaseTransaction(this._transaction);
+
+  @override
+  Future<Map<String, dynamic>?> get({
+    required String path,
+    required String docId,
+  }) async {
+    final snapshot = await _transaction.get(
+      FirebaseFirestore.instance.collection(path).doc(docId),
+    );
+
+    return snapshot.data();
+  }
+
+  @override
+  void set({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+    bool merge = false,
+  }) {
+    final reference =
+    FirebaseFirestore.instance.collection(path).doc(docId);
+
+    _transaction.set(
+      reference,
+      data,
+      merge ? SetOptions(merge: true) : null,
+    );
   }
 }

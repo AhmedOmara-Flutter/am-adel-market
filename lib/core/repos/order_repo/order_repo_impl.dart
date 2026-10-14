@@ -14,29 +14,67 @@ class OrderRepoImpl implements OrderRepo {
   OrderRepoImpl(this._databaseServices);
 
   @override
-  Future<Either<Failure, String>> addOrder(OrderEntity orderEntity) async {
+  Future<Either<Failure, String>> addOrder(
+      OrderEntity orderEntity,
+      ) async {
     try {
       orderEntity.id ??= _databaseServices.generateId(
         path: 'orders',
       );
-      debugPrint('🔥 ORDER ID: ${orderEntity.id}');
-      final docId = await _databaseServices.createDataIfNotExists(
-        path: 'orders',
-        docId: orderEntity.id!,
-        data: OrderModel.fromEntity(orderEntity).toJson(),
+
+      final orderId = orderEntity.id!;
+      final userId = orderEntity.uId;
+
+      final docId = await _databaseServices.runTransaction<String>(
+            (transaction) async {
+          final existingOrder = await transaction.get(
+            path: 'orders',
+            docId: orderId,
+          );
+
+          if (existingOrder != null) {
+            return orderId;
+          }
+
+          final stats = await transaction.get(
+            path: 'customer_stats',
+            docId: userId,
+          );
+
+          final currentCount =
+              (stats?['totalOrders'] as num?)?.toInt() ?? 0;
+
+          transaction.set(
+            path: 'orders',
+            docId: orderId,
+            data: OrderModel.fromEntity(orderEntity).toJson(),
+          );
+
+          transaction.set(
+            path: 'customer_stats',
+            docId: userId,
+            data: {
+              'uId': userId,
+              'totalOrders': currentCount + 1,
+              'updatedAt': DateTime.now().toUtc().toIso8601String(),
+            },
+            merge: true,
+          );
+
+          return orderId;
+        },
       );
 
       return Right(docId);
     } catch (e) {
-      print('error in addOrder method in profile repos impl : $e');
+      debugPrint('Error adding order: $e');
 
       return Left(
-        ServerFailure(
-          errMessage: e.toString(),
-        ),
+        ServerFailure(errMessage: e.toString()),
       );
     }
   }
+
   @override
   Stream<Either<Failure, List<OrderEntity>>> getOrder(String uId) async* {
     try {

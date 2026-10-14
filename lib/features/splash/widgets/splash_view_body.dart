@@ -1,5 +1,6 @@
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:flutter/services.dart';
+
 import '../../../../core/services/notification_services.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -59,6 +60,22 @@ class _SplashViewBodyState extends State<SplashViewBody> {
             fit: BoxFit.cover,
           ),
         ),
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //
+        //     Padding(
+        //       padding: const EdgeInsets.only(bottom: 55),
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           CircularProgressIndicator(color: AppColor.mainColor,),
+        //         ],
+        //
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
