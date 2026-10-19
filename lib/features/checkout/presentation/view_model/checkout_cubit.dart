@@ -131,7 +131,8 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   double _calculateCouponDiscount({
     required CouponEntity coupon,
     required double orderTotal,
-  }) {
+  })
+  {
     double discount;
 
     if (coupon.discountType == 'percentage') {

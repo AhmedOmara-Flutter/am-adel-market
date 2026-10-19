@@ -86,6 +86,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 OfferCarouselList(),
                 FeaturedProductsSection(),
                 FeaturedProductsList(),
+                SizedBox(height:20.h,),
                 if(context.watch<GetBundleOfferCubit>().bundleOffers.isNotEmpty)
                   Column(
                     children: [

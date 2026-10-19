@@ -39,7 +39,6 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
           return Column(
             children: [
               SizedBox(height: 20.h),
-
               CarouselSlider.builder(
                 itemCount: offers.length,
                 itemBuilder: (context, index, realIndex) {
@@ -50,7 +49,6 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
                 },
                 options: _carouselOptions(),
               ),
-
               SizedBox(height: 5.h),
               AnimatedSmoothIndicator(
                 activeIndex: currentIndex,
@@ -62,7 +60,6 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
                   dotWidth: 8.r,
                 ),
               ),
-
               SizedBox(height: 12.h),
             ],
           );

@@ -24,8 +24,8 @@ class ProductsGridView extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: .70,
-          mainAxisSpacing: 14.h,
-          crossAxisSpacing: 14.w,
+          mainAxisSpacing: 10.h,
+          crossAxisSpacing: 10.w,
         ),
         itemBuilder: (context, index) {
           return ProductItem(

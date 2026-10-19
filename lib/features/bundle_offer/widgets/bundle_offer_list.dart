@@ -87,7 +87,6 @@ class BundleOfferList extends StatelessWidget {
 
                 return Column(
                   children: [
-                    SizedBox(height: 20.h),
                     BundleOfferCard(
                       bundleOffer: bundleOffer,
                     ),
