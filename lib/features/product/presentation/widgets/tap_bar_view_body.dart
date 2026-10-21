@@ -1,9 +1,8 @@
 import 'package:am_adel_market/core/widgets/empty_widget.dart';
-import 'package:am_adel_market/features/product/presentation/widgets/skeletonizer_product_item.dart';
-
 import '../../../../core/cubit/product_cubit/product_cubit.dart';
 import '../../../../core/utils/app_imports.dart';
 import '../../../../core/widgets/product_item.dart';
+import '../../../../core/widgets/skeletonizer_product_item.dart';
 
 class TapBarViewBody extends StatelessWidget {
   final String category;
@@ -25,9 +24,9 @@ class TapBarViewBody extends StatelessWidget {
           products = products.where((product) => product.size == size).toList();
         }
 
-        if (state is GetProductsLoadingState) {
+        if (state is GetProductsLoadingState)
           return GridView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.only(left: 20.w, top: 10.h,right: 20.w, bottom: 20.h),
             itemCount: 6,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -39,7 +38,7 @@ class TapBarViewBody extends StatelessWidget {
               return SkeletonizerProductItem();
             },
           );
-        }
+
 
         if (state is GetFilteredProductsError) {
           return Center(child: Text(state.errMessage));

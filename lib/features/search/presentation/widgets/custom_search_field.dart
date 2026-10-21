@@ -53,22 +53,6 @@ class CustomSearchField extends StatelessWidget {
               size: 22.sp,
             ),
 
-            suffixIcon: GestureDetector(
-              onTap: onFilterTap,
-              child: Container(
-                margin: EdgeInsets.all(8.r),
-                decoration: BoxDecoration(
-                  color: AppColor.mainColor,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Icon(
-                  Icons.tune_rounded,
-                  color: AppColor.textOnDark,
-                  size: 20.sp,
-                ),
-              ),
-            ),
-
             contentPadding: EdgeInsets.symmetric(
               vertical: 16.h,
               horizontal: 16.w,

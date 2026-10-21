@@ -1,328 +1,260 @@
-import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:am_adel_market/core/entities/bundle_offer_entity.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import '../../../core/helper_function/get_user.dart';
 import '../../cart/presentation/view_model/cart_cubit.dart';
 
-/// كارت عرض الكومبو بطابع المطاعم:
-/// طبق كبير طالع من فوق الكارت + هالة وحلقة ذهبية + ختم مموّج "سعر خاص"
-/// + عنوان بفاصل زخرفي + زرار ذهبي "أضف إلى السلة".
+/// كارت كومبو بطابع "واجهة عرض" فاخرة:
+/// صورة بشكل قوس بإطار ذهبي مزدوج طالعة من فوق الكارت
+/// + سعر خاص على حرف الصورة + الاسم والوصف جوا الكارت + زرار بني بحدود ذهبية.
+
 class BundleOfferCard extends StatelessWidget {
   final BundleOfferEntity bundleOffer;
 
-  const BundleOfferCard({super.key, required this.bundleOffer});
+  const BundleOfferCard({
+    super.key,
+    required this.bundleOffer,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final double plateSize = 136.r;
-    final double plateTop = -24.h;
-
-    // نكتبهم كـ String? عشان يشتغلوا سواء الحقل nullable أو لأ
     final String? description = bundleOffer.description;
     final bool hasDescription =
         description != null && description.trim().isNotEmpty;
 
-    return Padding(
-      padding: EdgeInsets.only(top: 35.h, left: 6.w, right: 6.w, bottom: 8.h),
-      child: SizedBox(
-        width: 220.w,
-        height: 245.h,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topCenter,
-          children: [
-            // ===== جسم الكارت =====
-            Positioned(
-              top: 55.h,
-              left: 0,
-              right: 0,
-              height: 190.h,
-              child: Container(
+    return Container(
+      width: 310.w,
+      padding: EdgeInsets.all(12.r),
+      decoration: BoxDecoration(
+        color: AppColor.cardLight,
+        borderRadius: BorderRadius.circular(24.r),
+        border: Border.all(
+          color: AppColor.divider.withOpacity(.25),
+          width: 1.2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.mainColor.withValues(alpha: 0.10),
+            blurRadius: 14.r,
+            offset: Offset(0, 5.h),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // صورة العرض
+              Container(
+                width: 112.w,
+                height: 122.h,
+                padding: EdgeInsets.all(3.r),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(28.r),
+                  borderRadius: BorderRadius.circular(19.r),
                   gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                     colors: [
-                      AppColor.white,
-                      AppColor.cardLight,
-                      AppColor.background,
+                      AppColor.goldLight,
+                      AppColor.accentColor,
+                      AppColor.border,
                     ],
-                  ),
-                  border: Border.all(
-                    color: AppColor.divider.withValues(alpha: .85),
-                    width: 1,
                   ),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(28.r),
-                  child: Stack(
-                    children: [
-                      // زخرفة خلفية باهتة
-                      Positioned(
-                        right: -30.r,
-                        bottom: -30.r,
-                        child: Container(
-                          width: 110.r,
-                          height: 110.r,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.accentColor.withValues(alpha: .09),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: -26.r,
-                        bottom: 40.r,
-                        child: Container(
-                          width: 70.r,
-                          height: 70.r,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color:
-                              AppColor.accentColor.withValues(alpha: .18),
-                              width: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: _ArchImage(
+                    imageUrl: bundleOffer.image,
+                    width: 112.w,
+                  ),
+                ),
+              ),
 
-                      // لمعة خفيفة أعلى الكارت
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: 60.h,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppColor.white.withValues(alpha: .9),
-                                AppColor.white.withValues(alpha: 0),
-                              ],
-                            ),
-                          ),
+              SizedBox(width: 12.w),
+
+              // تفاصيل العرض
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 9.w,
+                        vertical: 5.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColor.accentColor.withValues(
+                          alpha: 0.16,
+                        ),
+                        borderRadius: BorderRadius.circular(9.r),
+                      ),
+                      child: Text(
+                        'عرض كومبو',
+                        style: StyleManager.font12Weight500.copyWith(
+                          color: AppColor.secondaryColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 10.sp,
                         ),
                       ),
+                    ),
 
-                      // إطار ذهبي داخلي (شكل المنيو)
-                      Positioned.fill(
-                        child: Container(
-                          margin: EdgeInsets.all(5.r),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(23.r),
-                            border: Border.all(
-                              color:
-                              AppColor.accentColor.withValues(alpha: .38),
-                              width: 1,
-                            ),
-                          ),
-                        ),
+                    SizedBox(height: 8.h),
+
+                    Text(
+                      bundleOffer.title,
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: StyleManager.font14Weight600.copyWith(
+                        color: AppColor.textPrimary,
+                        fontWeight: FontWeight.w800,
+                        height: 1.35,
                       ),
+                    ),
 
-                      // المحتوى: العنوان + الفاصل + الزرار
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 68.h, 16.w, 14.h),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      bundleOffer.title,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style:
-                                      StyleManager.font14Weight600.copyWith(
-                                        color: AppColor.textPrimary,
-                                        fontWeight: FontWeight.w800,
-                                        height: 1.25,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 6.h),
-                                  const _OrnamentDivider(),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 8.h),
-                            _AddToCartButton(
-                              onTap: () {
-                                context.read<CartCubit>().addBundleOffer(
-                                  bundleOffer,
-                                  getUser().uId,
-                                );
-                              },
-                            ),
-                          ],
+                    if (hasDescription) ...[
+                      SizedBox(height: 6.h),
+                      Text(
+                        description.trim(),
+                        textAlign: TextAlign.start,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: StyleManager.font12Weight500.copyWith(
+                          color: AppColor.textSecondary,
+                          fontSize: 11.sp,
+                          height: 1.5,
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-            ),
-
-            // ===== هالة ذهبية خلف الطبق =====
-            Positioned(
-              top: plateTop - 16.r,
-              child: IgnorePointer(
-                child: Container(
-                  width: plateSize + 32.r,
-                  height: plateSize + 32.r,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: RadialGradient(
-                      colors: [
-                        AppColor.goldLight.withValues(alpha: .55),
-                        AppColor.goldLight.withValues(alpha: 0),
-                      ],
-                      stops: const [0.6, 1.0],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // ===== حلقة ذهبية رفيعة حوالين الطبق =====
-            Positioned(
-              top: plateTop - 7.r,
-              child: IgnorePointer(
-                child: Container(
-                  width: plateSize + 14.r,
-                  height: plateSize + 14.r,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColor.accentColor.withValues(alpha: .4),
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // ===== الطبق (صورة الكومبو) =====
-            Positioned(
-              top: plateTop,
-              child: Container(
-                width: plateSize,
-                height: plateSize,
-                padding: EdgeInsets.all(4.r),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColor.white,
-                  border: Border.all(color: AppColor.accentColor, width: 1.6),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColor.mainColor.withValues(alpha: .25),
-                      blurRadius: 18.r,
-                      offset: Offset(0, 8.h),
-                    ),
                   ],
                 ),
-                child: ClipOval(
-                  child: _PlateImage(
-                    imageUrl: bundleOffer.image,
-                    size: plateSize,
-                  ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 12.h),
+
+          // فاصل ذهبي
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 1,
+                  color: AppColor.divider.withValues(alpha: 0.7),
                 ),
               ),
-            ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Icon(
+                  Icons.auto_awesome_rounded,
+                  size: 15.sp,
+                  color: AppColor.accentColor,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  height: 1,
+                  color: AppColor.divider.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+          ),
 
-            // ===== زرار المعلومات (التولتيب) - بيظهر بس لو في وصف =====
-            if (hasDescription)
-              Positioned(
-                top: 55.h + 12.h,
-                right: 12.w,
-                child: Tooltip(
-                  triggerMode: TooltipTriggerMode.tap,
-                  message: description,
-                  showDuration: const Duration(seconds: 4),
-                  preferBelow: false,
-                  verticalOffset: 10.h,
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                  textStyle: StyleManager.font13Weight400.copyWith(
-                    color: AppColor.textOnDark,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColor.mainColor,
-                    borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(
-                      color: AppColor.accentColor.withValues(alpha: .35),
-                      width: 1.w,
-                    ),
-                  ),
-                  child: Container(
-                    width: 30.r,
-                    height: 30.r,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.white,
-                      border: Border.all(
-                        color: AppColor.accentColor.withValues(alpha: .6),
+          SizedBox(height: 10.h),
+
+          // السعر والزرار
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'سعر العرض',
+                      style: StyleManager.font12Weight500.copyWith(
+                        color: AppColor.textSecondary,
+                        fontSize: 11.sp,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColor.mainColor.withValues(alpha: .12),
-                          blurRadius: 8.r,
-                          offset: Offset(0, 3.h),
+                    ),
+                    SizedBox(height: 3.h),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Text(
+                              bundleOffer.price % 1 == 0
+                                  ? bundleOffer.price.toStringAsFixed(0)
+                                  : bundleOffer.price.toStringAsFixed(2),
+                              style: StyleManager.font23Weight700.copyWith(
+                                color: AppColor.mainColor,
+                                fontSize: 23.sp,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 4.w),
+                        Text(
+                          'ج.م',
+                          style: StyleManager.font12Weight500.copyWith(
+                            color: AppColor.secondaryColor,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ],
                     ),
-                    child: Icon(
-                      Icons.info_outline_rounded,
-                      color: AppColor.secondaryColor,
-                      size: 18.sp,
-                    ),
-                  ),
+                  ],
                 ),
               ),
 
-            // ===== ختم السعر =====
-            Positioned(
-              top: 2.h,
-              left: 0,
-              child: Transform.rotate(
-                angle: -0.18,
-                child: BundleOfferPriceBadge(price: bundleOffer.price),
+              SizedBox(width: 10.w),
+
+              Expanded(
+                flex: 2,
+                child: _AddToCartButton(
+                  onTap: () {
+                    context.read<CartCubit>().addBundleOffer(
+                      bundleOffer,
+                      getUser().uId,
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
 
-/// صورة الطبق: بتتعامل مع الرابط الفاضي/null من غير ما CachedNetworkImage يرمي error،
-/// وبتصغّر الصورة في الميموري على قد حجم العرض.
-class _PlateImage extends StatelessWidget {
+/// صورة القوس: بتتعامل مع الرابط الفاضي/null، وبتصغّر الصورة في الميموري.
+class _ArchImage extends StatelessWidget {
   final String? imageUrl;
-  final double size;
+  final double width;
 
-  const _PlateImage({required this.imageUrl, required this.size});
+  const _ArchImage({required this.imageUrl, required this.width});
 
   @override
   Widget build(BuildContext context) {
     final String? url = imageUrl?.trim();
-    if (url == null || url.isEmpty) return const _PlateFallback();
+    if (url == null || url.isEmpty) return const _ArchFallback();
 
-    final int cacheSize =
-    (size * MediaQuery.devicePixelRatioOf(context)).round();
+    final int cacheWidth =
+    (width * MediaQuery.devicePixelRatioOf(context)).round();
 
     return CachedNetworkImage(
       imageUrl: url,
       fit: BoxFit.cover,
-      memCacheWidth: cacheSize,
+      memCacheWidth: cacheWidth,
       placeholder: (_, __) => Center(
         child: SizedBox(
           width: 22.r,
@@ -333,13 +265,13 @@ class _PlateImage extends StatelessWidget {
           ),
         ),
       ),
-      errorWidget: (_, __, ___) => const _PlateFallback(),
+      errorWidget: (_, __, ___) => const _ArchFallback(),
     );
   }
 }
 
-class _PlateFallback extends StatelessWidget {
-  const _PlateFallback();
+class _ArchFallback extends StatelessWidget {
+  const _ArchFallback();
 
   @override
   Widget build(BuildContext context) {
@@ -355,7 +287,7 @@ class _PlateFallback extends StatelessWidget {
   }
 }
 
-/// زرار "أضف إلى السلة" الذهبي
+
 class _AddToCartButton extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -365,24 +297,35 @@ class _AddToCartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 42.h,
+      height: 44.h,
       child: Material(
         color: AppColor.transparent,
-        borderRadius: BorderRadius.circular(22.r),
+        borderRadius: BorderRadius.circular(16.r),
         child: InkWell(
-          borderRadius: BorderRadius.circular(22.r),
           onTap: onTap,
+          borderRadius: BorderRadius.circular(16.r),
           child: Ink(
-            // Directional عشان يتقلب صح مع RTL/LTR
-            padding: EdgeInsetsDirectional.only(start: 16.w, end: 5.w),
+            padding: EdgeInsetsDirectional.only(
+              start: 14.w,
+              end: 6.w,
+            ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22.r),
+              borderRadius: BorderRadius.circular(16.r),
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [AppColor.goldLight, AppColor.accentColor],
+                colors: [
+                  AppColor.goldLight,
+                  AppColor.accentColor,
+                ],
               ),
-              border: Border.all(color: AppColor.white, width: 1.6),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColor.accentColor.withValues(alpha: 0.22),
+                  blurRadius: 8.r,
+                  offset: Offset(0, 3.h),
+                ),
+              ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -395,15 +338,15 @@ class _AddToCartButton extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 30.r,
-                  height: 30.r,
+                  width: 32.r,
+                  height: 32.r,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColor.white.withValues(alpha: .92),
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(12.r),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColor.mainColor.withValues(alpha: .15),
-                        blurRadius: 6.r,
+                        color: AppColor.mainColor.withValues(alpha: 0.10),
+                        blurRadius: 5.r,
                         offset: Offset(0, 2.h),
                       ),
                     ],
@@ -411,7 +354,7 @@ class _AddToCartButton extends StatelessWidget {
                   child: Icon(
                     Icons.add_shopping_cart_rounded,
                     color: AppColor.mainColor,
-                    size: 17.sp,
+                    size: 18.sp,
                   ),
                 ),
               ],
@@ -423,35 +366,7 @@ class _AddToCartButton extends StatelessWidget {
   }
 }
 
-/// فاصل زخرفي: خط ◆ خط
-class _OrnamentDivider extends StatelessWidget {
-  const _OrnamentDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    final Color lineColor = AppColor.accentColor.withValues(alpha: .55);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(width: 34.w, height: 1, color: lineColor),
-        SizedBox(width: 6.w),
-        Transform.rotate(
-          angle: math.pi / 4,
-          child: Container(
-            width: 6.r,
-            height: 6.r,
-            color: AppColor.accentColor,
-          ),
-        ),
-        SizedBox(width: 6.w),
-        Container(width: 34.w, height: 1, color: lineColor),
-      ],
-    );
-  }
-}
-
-/// ختم ذهبي بحافة مموّجة (مرسوم بالكود، من غير أي صورة).
+/// سعر خاص: كبسولة ذهبية بتقعد على حرف الصورة.
 class BundleOfferPriceBadge extends StatelessWidget {
   final double price;
 
@@ -463,120 +378,58 @@ class BundleOfferPriceBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 74.r,
-      height: 74.r,
-      child: Stack(
-        alignment: Alignment.center,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 5.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22.r),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColor.goldLight, AppColor.accentColor],
+        ),
+        border: Border.all(color: AppColor.white, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.accentColor.withValues(alpha: .55),
+            blurRadius: 12.r,
+            offset: Offset(0, 5.h),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
         children: [
-          // RepaintBoundary: الرسم ثابت، فمايتعاد مع كل scroll
-          const Positioned.fill(
-            child: RepaintBoundary(
-              child: CustomPaint(painter: _ScallopSealPainter()),
+          Text(
+            'سعر خاص',
+            style: StyleManager.font12Weight500.copyWith(
+              color: AppColor.mainColor,
+              fontSize: 9.sp,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.r),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'سعر خاص',
-                  style: StyleManager.font12Weight500.copyWith(
-                    color: AppColor.mainColor,
-                    fontSize: 9.sp,
-                    fontWeight: FontWeight.w700,
-                    height: 1,
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                // FittedBox عشان الأسعار الكبيرة/العشرية ماتطلعش بره الختم
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    _priceText,
-                    style: StyleManager.font23Weight700.copyWith(
-                      color: AppColor.mainColor,
-                      fontSize: 21.sp,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                Text(
-                  'ج.م',
-                  style: StyleManager.font12Weight500.copyWith(
-                    color: AppColor.mainColor,
-                    fontSize: 9.sp,
-                    fontWeight: FontWeight.w700,
-                    height: 1,
-                  ),
-                ),
-              ],
+          SizedBox(width: 6.w),
+          Text(
+            _priceText,
+            style: StyleManager.font23Weight700.copyWith(
+              color: AppColor.mainColor,
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w900,
+              height: 1,
+            ),
+          ),
+          SizedBox(width: 3.w),
+          Text(
+            'ج.م',
+            style: StyleManager.font12Weight500.copyWith(
+              color: AppColor.mainColor,
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w800,
             ),
           ),
         ],
       ),
     );
   }
-}
-
-class _ScallopSealPainter extends CustomPainter {
-  const _ScallopSealPainter();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Offset center = size.center(Offset.zero);
-    final double radius = size.width / 2 - 3;
-    const int bumps = 16;
-
-    final Path path = Path();
-    // 360 نقطة بس: نقطة 360 هي نفسها نقطة 0، و close() بيقفل الشكل
-    for (int i = 0; i < 360; i++) {
-      final double theta = i * math.pi / 180;
-      final double r = radius * (0.94 + 0.06 * math.cos(bumps * theta));
-      final double x = center.dx + r * math.cos(theta);
-      final double y = center.dy + r * math.sin(theta);
-      if (i == 0) {
-        path.moveTo(x, y);
-      } else {
-        path.lineTo(x, y);
-      }
-    }
-    path.close();
-
-    canvas.drawShadow(path, AppColor.accentColor, 6, true);
-
-    canvas.drawPath(
-      path,
-      Paint()
-        ..style = PaintingStyle.fill
-        ..shader = const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColor.goldLight, AppColor.accentColor],
-        ).createShader(Offset.zero & size),
-    );
-
-    canvas.drawPath(
-      path,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.2
-        ..color = AppColor.white,
-    );
-
-    canvas.drawCircle(
-      center,
-      radius * 0.78,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1
-        ..color = AppColor.mainColor.withValues(alpha: .28),
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

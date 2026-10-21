@@ -23,10 +23,10 @@ class ThemeManager {
         minimumSize: const Size(double.infinity, 65),
       ),
     ),
-    textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppColor.mainColor,
-      selectionColor: AppColor.mainColor,
-      selectionHandleColor: AppColor.mainColor,
+    textSelectionTheme: TextSelectionThemeData(
+      selectionColor: AppColor.accentColor.withOpacity(.25),
+      cursorColor: AppColor.accentColor,
+      selectionHandleColor: AppColor.accentColor,
     ),
     ///text theme
     textTheme: TextTheme(

@@ -1,3 +1,4 @@
+import 'package:am_adel_market/core/widgets/app_skeleton_effect.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/best_selling_cubit.dart';
 
 import '../../../../core/utils/app_imports.dart';
@@ -33,11 +34,7 @@ class _BestSellingMoreViewBodyState extends State<BestSellingMoreViewBody> {
           builder: (context, state) {
             if (state is GetSellingProductsLoadingState) {
               return Skeletonizer.sliver(
-                effect: ShimmerEffect(
-                  baseColor: AppColor.backgroundDark,
-                  highlightColor: AppColor.cardLight,
-                  duration: const Duration(milliseconds: 1200),
-                ),
+                effect: AppSkeletonEffect.shimmer,
                 enabled: true,
                 child: ProductsGridView(products: getDummyProducts()),
               );
@@ -75,6 +72,7 @@ class _BestSellingMoreViewBodyState extends State<BestSellingMoreViewBody> {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           },
         ),
+        SliverToBoxAdapter(child: SizedBox(height: 20,),)
       ],
     );
   }

@@ -19,53 +19,41 @@ class ProfileOptionsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColor.transparent,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16.w,
-            vertical: 14.h,
-          ),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: AppColor.border.withOpacity(.6),
-                width: 1.w,
-              ),
-            ),
-          ),
+      child: InkWell(
+        onTap: isButton ? null : onTap,
+        splashColor: AppColor.accentColor.withValues(alpha: .12),
+        highlightColor: AppColor.accentColor.withValues(alpha: .05),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 13.h),
           child: Row(
             children: [
               Container(
-                width: 42.w,
-                height: 42.w,
+                width: 40.r,
+                height: 40.r,
                 decoration: BoxDecoration(
-                  color: AppColor.mainColor.withOpacity(.15),
+                  color: AppColor.accentColor.withValues(alpha: .16),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: Center(
-                  child: Icon(icon, size: 20.sp, color: AppColor.mainColor),
-                ),
+                child: Icon(icon, size: 20.sp, color: AppColor.secondaryColor),
               ),
-
               SizedBox(width: 14.w),
-
               Expanded(
                 child: Text(
                   text,
-                  style: StyleManager.font13Weight600.copyWith(
-                    color: AppColor.textPrimary
-                  )
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleManager.font15Weight700.copyWith(
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
-
               if (isButton)
                 const ToggleButton()
               else
                 Icon(
                   Icons.arrow_forward_ios_rounded,
-                  size: 17.sp,
-                  color: AppColor.textSecondary,
+                  size: 14.sp,
+                  color: AppColor.border,
                 ),
             ],
           ),

@@ -1,5 +1,5 @@
-
 import '../../../../core/utils/app_imports.dart';
+import '../../../../core/widgets/resto_kit.dart';
 
 class CustomSearchButton extends StatelessWidget {
   const CustomSearchButton({
@@ -8,38 +8,24 @@ class CustomSearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonColor = AppColor.cardLight;
-
-    return SizedBox(
-      width: 60.w,
-      height: 60.w,
+    return Container(
+      width: 52.w,
+      height: 52.w,
+      padding: EdgeInsets.all(1.6.w),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: Resto.gold,
+        boxShadow: Resto.shadow(alpha: .10, blur: 9, dy: 3),
+      ),
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
-
-          // Background
-          color: buttonColor,
-
-          // Border
-          border: Border.all(
-            color: AppColor.border.withOpacity(0.45),
-            width: 1.w,
-          ),
-
-          // Shadow
-          boxShadow: [
-            BoxShadow(
-              color: AppColor.mainColor.withOpacity(0.08),
-              blurRadius: 8.r,
-              offset: Offset(0, 3.h),
-            ),
-          ],
+          color: AppColor.cardLight,
         ),
-
         child: Material(
           color: Colors.transparent,
           shape: const CircleBorder(),
-
+          clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: () {
               Navigator.pushNamed(
@@ -47,17 +33,14 @@ class CustomSearchButton extends StatelessWidget {
                 RouteManager.search,
               );
             },
-
             customBorder: const CircleBorder(),
-
-            splashColor: AppColor.accentColor.withOpacity(0.18),
-            highlightColor: AppColor.accentColor.withOpacity(0.08),
-
+            splashColor: AppColor.accentColor.withValues(alpha: .18),
+            highlightColor: AppColor.accentColor.withValues(alpha: .08),
             child: Center(
               child: SvgPicture.asset(
                 Assets.assets.images.search.path,
-                width: 24.w,
-                height: 24.w,
+                width: 22.w,
+                height: 22.w,
                 colorFilter: const ColorFilter.mode(
                   AppColor.mainColor,
                   BlendMode.srcIn,
@@ -70,3 +53,4 @@ class CustomSearchButton extends StatelessWidget {
     );
   }
 }
+

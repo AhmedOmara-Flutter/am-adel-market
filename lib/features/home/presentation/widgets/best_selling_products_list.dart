@@ -18,16 +18,15 @@ class BestSellingProductsList extends StatelessWidget {
           );
         }
           if (state is GetSellingProductsLoadingState) {
-        return Skeletonizer.sliver(
-          effect: ShimmerEffect(
-            baseColor: AppColor.backgroundDark,
-            highlightColor: AppColor.cardLight,
-            duration: const Duration(milliseconds: 1200),
-          ),
-          enabled: true,
-          child: ProductsGridView(products: getDummyProducts()),
-        );
-
+            return Skeletonizer.sliver(
+              effect: ShimmerEffect(
+                baseColor: AppColor.backgroundDark,
+                highlightColor: AppColor.cardLight,
+                duration: const Duration(milliseconds: 1200),
+              ),
+              enabled: true,
+              child: ProductsGridView(products: getDummyProducts()),
+            );
           }
         if (state is GetSellingProductsEmptyState) {
           return SliverToBoxAdapter(

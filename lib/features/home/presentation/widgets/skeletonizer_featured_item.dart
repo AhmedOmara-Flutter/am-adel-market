@@ -1,3 +1,6 @@
+import 'package:am_adel_market/core/widgets/app_skeleton_effect.dart';
+import 'package:am_adel_market/core/widgets/resto_kit.dart';
+
 import '../../../../core/utils/app_imports.dart';
 
 class SkeletonizerFeaturedItem extends StatelessWidget {
@@ -5,78 +8,86 @@ class SkeletonizerFeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double plateSize = 82.r;
+
     return Skeletonizer(
-      effect: ShimmerEffect(
-        baseColor: AppColor.backgroundDark,
-        highlightColor: AppColor.cardLight,
-        duration: const Duration(milliseconds: 1200),
-      ),
-      child: GestureDetector(
-        child: SizedBox(
-          width: 112.w,
-          height: 158.h,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.topCenter,
-            children: [
-              Positioned(
-                top: 43.h,
-                child: Container(
-                  width: 110.w,
-                  height: 90.h,
-                  decoration: BoxDecoration(
-                    color: AppColor.card,
-                    borderRadius: BorderRadius.circular(22.r),
-                    border: Border.all(
-                      color: AppColor.border.withOpacity(.18),
-                      width: 1,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.black.withOpacity(.18),
-                        blurRadius: 22.r,
-                        offset: Offset(0, 10.h),
+      effect: AppSkeletonEffect.shimmer,
+      child: SizedBox(
+        width: 112.w,
+        height: 158.h,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.topCenter,
+          children: [
+            Positioned(
+              top: 48.h,
+              child: SizedBox(
+                width: 110.w,
+                height: 102.h,
+                child: RestoFrame(
+                  radius: 26,
+                  padding: EdgeInsets.only(
+                    top: 38.h,
+                    left: 8.w,
+                    right: 8.w,
+                    bottom: 14.h,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'productEntity',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: StyleManager.font14Weight600.copyWith(
+                        color: AppColor.textPrimary,
+                        height: 1.2,
                       ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 42.h,
-                      left: 10.w,
-                      right: 10.w,
-                      bottom: 15.h,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'productEntity',
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: StyleManager.font14Weight600.copyWith(
-                            color: AppColor.textOnDark,
-                            height: 1.2,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ),
               ),
-              Positioned(
-                top: 0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(60.r),
-                  child: SizedBox(
-                    width: 90.w,
-                    height: 90.w,
-                    child: Image.asset(Assets.assets.images.amAdelLogo.path),
+            ),
+
+            Positioned(
+              top: 6.h,
+              child: Container(
+                width: plateSize,
+                height: plateSize,
+                padding: EdgeInsets.all(2.5.r),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: Resto.gold,
+                  boxShadow: Resto.shadow(alpha: .12, blur: 12, dy: 5),
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.backgroundDark,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+
+            // ===== زرار "اطلب الآن" =====
+            Positioned(
+              bottom: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  gradient: Resto.gold,
+                  border: Border.all(color: AppColor.white, width: 2),
+                ),
+                child: Text(
+                  'اطلب الآن',
+                  style: StyleManager.font11Weight400.copyWith(
+                    color: AppColor.mainColor,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

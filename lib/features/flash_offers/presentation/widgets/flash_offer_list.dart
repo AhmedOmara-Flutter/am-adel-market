@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+
 import '../../../../core/utils/app_imports.dart';
 import '../view_model/get_flash_offer_cubit/get_flash_offer_cubit.dart';
 import 'flash_offer_card.dart';
@@ -12,11 +13,25 @@ class FlashOfferList extends StatelessWidget {
     return BlocBuilder<GetFlashOfferCubit, GetFlashOfferState>(
       builder: (context, state) {
         if (state is GetFlashOfferLoading) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: const SkeletonizerFlashOfferCard(),
+          return CarouselSlider.builder(
+            itemCount: 4,
+            itemBuilder: (context, index, realIndex) {
+              return const SkeletonizerFlashOfferCard();
+            },
+            options: CarouselOptions(
+              height: 115.h,
+              viewportFraction: 0.90,
+              enlargeCenterPage: false,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 2),
+              autoPlayAnimationDuration: const Duration(milliseconds: 700),
+              autoPlayCurve: Curves.easeInOut,
+              enableInfiniteScroll: true,
+              scrollPhysics: const BouncingScrollPhysics(),
+            ),
           );
         }
+
         if (state is GetFlashOfferFailure) {
           return SizedBox(
             height: 180.h,

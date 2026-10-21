@@ -1,3 +1,5 @@
+import 'package:am_adel_market/core/widgets/app_skeleton_effect.dart';
+
 import '../../../core/utils/app_imports.dart';
 
 class SkeletonizerBundleOfferCard extends StatelessWidget {
@@ -6,139 +8,227 @@ class SkeletonizerBundleOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      effect: ShimmerEffect(
-        baseColor: AppColor.backgroundDark,
-        highlightColor: AppColor.cardLight,
-        duration: const Duration(milliseconds: 1200),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(top: 35.h, left: 6.w, right: 6.w, bottom: 8.h),
-        child: SizedBox(
-          width: 220.w,
-          height: 245.h,
-          child: Container(
-            width: 220.w,
-            height: 245.h,
-            padding: EdgeInsets.all(1.w),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
+      effect: AppSkeletonEffect.shimmer,
+      child: Container(
+        width: 310.w,
+        padding: EdgeInsets.all(12.r),
+        decoration: BoxDecoration(
+          color: AppColor.cardLight,
+          borderRadius: BorderRadius.circular(24.r),
+          border: Border.all(
+            color: AppColor.divider.withValues(alpha: .25),
+            width: 1.2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.mainColor.withValues(alpha: 0.10),
+              blurRadius: 14.r,
+              offset: Offset(0, 5.h),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColor.card,
-                borderRadius: BorderRadius.circular(19.r),
-                border: Border.all(
-                  color: AppColor.border.withOpacity(.18),
-                  width: 1.w,
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // صورة العرض
+                Container(
+                  width: 112.w,
+                  height: 122.h,
+                  padding: EdgeInsets.all(3.r),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(19.r),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        AppColor.goldLight,
+                        AppColor.accentColor,
+                        AppColor.border,
+                      ],
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: const SizedBox.expand(
+                      child: ColoredBox(color: AppColor.backgroundDark),
+                    ),
+                  ),
                 ),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                SizedBox(width: 12.w),
+
+                // تفاصيل العرض
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 40.w,
-                        height: 50.h,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 9.w,
+                          vertical: 5.h,
+                        ),
                         decoration: BoxDecoration(
-                          color: AppColor.mainColor,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(15.r),
-                            bottomLeft: Radius.circular(15.r),
+                          color: AppColor.accentColor.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(9.r),
+                        ),
+                        child: Text(
+                          'عرض كومبو',
+                          style: StyleManager.font12Weight500.copyWith(
+                            color: AppColor.secondaryColor,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 10.sp,
                           ),
                         ),
-                        child: Icon(
-                          Icons.info_outline,
-                          color: AppColor.textOnDark,
-                          size: 21.sp,
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        'اسم الكومبو يظهر هنا',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: StyleManager.font14Weight600.copyWith(
+                          color: AppColor.textPrimary,
+                          fontWeight: FontWeight.w800,
+                          height: 1.35,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+                      Text(
+                        'وصف الكومبو يظهر هنا وفيه تفاصيل المحتويات',
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: StyleManager.font12Weight500.copyWith(
+                          color: AppColor.textSecondary,
+                          fontSize: 11.sp,
+                          height: 1.5,
                         ),
                       ),
                     ],
                   ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 12.h),
+
+            // فاصل ذهبي
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 1,
+                    color: AppColor.divider.withValues(alpha: 0.7),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Icon(
+                    Icons.auto_awesome_rounded,
+                    size: 15.sp,
+                    color: AppColor.accentColor,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 1,
+                    color: AppColor.divider.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
+            ),
 
             SizedBox(height: 10.h),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
+            // السعر والزرار
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'سعر العرض',
+                        style: StyleManager.font12Weight500.copyWith(
+                          color: AppColor.textSecondary,
+                          fontSize: 11.sp,
+                        ),
+                      ),
+                      SizedBox(height: 3.h),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '199',
+                            style: StyleManager.font23Weight700.copyWith(
+                              color: AppColor.mainColor,
+                              fontSize: 23.sp,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            'ج.م',
+                            style: StyleManager.font12Weight500.copyWith(
+                              color: AppColor.secondaryColor,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(width: 10.w),
+
+                Expanded(
+                  flex: 2,
                   child: Container(
-                    width: double.infinity,
-                    height: 125.h,
+                    height: 44.h,
+                    padding: EdgeInsetsDirectional.only(start: 14.w, end: 6.w),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(16.r),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [AppColor.goldLight, AppColor.accentColor],
+                      ),
                     ),
-                    child: Image.asset(
-                      Assets.assets.images.customer.path,
-                      fit: BoxFit.cover,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'أضف إلى السلة',
+                          style: StyleManager.font14Weight600.copyWith(
+                            color: AppColor.mainColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Container(
+                          width: 32.r,
+                          height: 32.r,
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Icon(
+                            Icons.add_shopping_cart_rounded,
+                            color: AppColor.mainColor,
+                            size: 18.sp,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15.h),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.w),
-                    width: double.infinity,
-                    height: 46.h,
-                    child: Material(
-                      color: AppColor.transparent,
-                      borderRadius: BorderRadius.circular(23.r),
-                      child: Ink(
-                        padding: EdgeInsets.only(
-                          right: 18.w,
-                          left: 8.w,
-                          top: 3.h,
-                          bottom: 3.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColor.card,
-                          borderRadius: BorderRadius.circular(30.r),
-                          border: Border.all(
-                            color: AppColor.border.withOpacity(.35),
-                            width: 1.w,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Title placeholder
-                            Container(
-                              width: 90.w,
-                              height: 14.h,
-                              decoration: BoxDecoration(
-                                color: AppColor.backgroundDark,
-                                borderRadius: BorderRadius.circular(6.r),
-                              ),
-                            ),
-
-                            // Cart button
-                            Container(
-                              width: 35.w,
-                              height: 35.w,
-                              decoration: BoxDecoration(
-                                color: AppColor.backgroundDark,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColor.black.withOpacity(
-                                      .18,
-                                    ),
-                                    blurRadius: 6.r,
-                                    offset: Offset(0, 2.h),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              ],
             ),
-          ),
+          ],
         ),
       ),
     );

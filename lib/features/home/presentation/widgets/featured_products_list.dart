@@ -35,7 +35,7 @@ class FeaturedProductsList extends StatelessWidget {
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: Constants.screenHorizontal),
               itemBuilder: (context, index) => FeaturedItem(
                 productEntity: state.featuredProducts[index],
               ),
@@ -59,7 +59,7 @@ class FeaturedProductsList extends StatelessWidget {
           child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: Constants.screenHorizontal),
             itemBuilder: (context, index) =>
             const SkeletonizerFeaturedItem(),
             separatorBuilder: (context, index) => SizedBox(width: 10.w),

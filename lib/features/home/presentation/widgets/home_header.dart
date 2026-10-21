@@ -1,6 +1,7 @@
 import 'package:am_adel_market/core/helper_function/get_user.dart';
 import 'package:am_adel_market/core/helper_function/make_full_name.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
+import 'package:am_adel_market/core/widgets/resto_kit.dart';
 import 'package:am_adel_market/features/offers/presentation/view_model/offer_cubit.dart';
 
 import '../../../../core/helper_function/get_greeting.dart';
@@ -21,38 +22,43 @@ class HomeHeader extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20.w, 50.h, 20.w, 0),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: (){
-              context.read<MainCubit>().changeBottomNav(3);
-            },
+          // الصورة الشخصية: حلقة ذهبية مزدوجة
+          RestoPressScale(
+            pressedScale: .94,
+            onTap: () => context.read<MainCubit>().changeBottomNav(3),
             child: Container(
+              width: 74.w,
+              height: 74.w,
+              padding: EdgeInsets.all(2.5.w),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColor.border, width: 2.w),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(.35),
-                    blurRadius: 15.r,
-                    offset: Offset(0, 6.h),
-                  ),
-                ],
+                gradient: Resto.gold,
+                boxShadow: Resto.shadow(alpha: .20, blur: 14, dy: 6),
               ),
-              child: ClipOval(
-                child: Image.asset(
-                  Assets.assets.images.customer.path,
-                  width: 68.w,
-                  height: 68.w,
-                  fit: BoxFit.cover,
+              child: Container(
+                padding: EdgeInsets.all(2.5.w),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.cardLight,
+                ),
+                child: ClipOval(
+                  child: Image.asset(
+                    Assets.assets.images.customer.path,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ),
 
-          SizedBox(width: 15.w),
+          SizedBox(width: 14.w),
 
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 RichText(
                   text: TextSpan(
@@ -60,7 +66,7 @@ class HomeHeader extends StatelessWidget {
                       TextSpan(
                         text: "${getGreeting()}  ",
                         style: StyleManager.font13Weight600.copyWith(
-                          color: AppColor.textSecondary,
+                          color: AppColor.secondaryColor,
                         ),
                       ),
                       TextSpan(
@@ -70,18 +76,24 @@ class HomeHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 5.h),
+                SizedBox(height: 4.h),
                 Text(
                   makeFullName(getUser().userName),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: StyleManager.font16Weight700.copyWith(
                     color: AppColor.textPrimary,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
+                SizedBox(height: 6.h),
+                SizedBox(width: 76.w, child: const RestoDivider(compact: true)),
               ],
             ),
           ),
-          if (offers.isNotEmpty)
-            CustomSearchButton()        ],
+
+          if (offers.isNotEmpty) CustomSearchButton(),
+        ],
       ),
     );
   }

@@ -1,5 +1,5 @@
-
-import '../../../../core/utils/app_imports.dart';
+import 'package:am_adel_market/core/utils/app_imports.dart';
+import 'package:am_adel_market/core/widgets/app_skeleton_effect.dart';
 
 class SkeletonizerFlashOfferCard extends StatelessWidget {
   const SkeletonizerFlashOfferCard({super.key});
@@ -7,18 +7,24 @@ class SkeletonizerFlashOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      effect: ShimmerEffect(
-        baseColor: AppColor.backgroundDark,
-        highlightColor: AppColor.cardLight,
-        duration: const Duration(milliseconds: 1200),
-      ),
+      effect: AppSkeletonEffect.shimmer,
       child: Container(
         width: double.infinity,
-        height: 190.h,
-        margin: EdgeInsets.symmetric(horizontal: 4.w),
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
         decoration: BoxDecoration(
-          color: AppColor.card,
           borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(
+            color: AppColor.accentColor.withOpacity(0.3)
+          )
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.r),
+          child: Image.asset(
+            Assets.assets.images.me.path,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );

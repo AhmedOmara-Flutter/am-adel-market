@@ -7,12 +7,8 @@ import 'package:am_adel_market/features/cart/presentation/widgets/quality_contro
 import '../../domain/entities/bundle_offer_cart_item_entity.dart';
 import '../view_model/cart_cubit.dart';
 
-/// السعر من غير أصفار زيادة: 50 تفضل 50، و 49.5 تبقى 49.50
 String _fmt(num v) => v % 1 == 0 ? v.toStringAsFixed(0) : v.toStringAsFixed(2);
 
-/// كارت عنصر السلة بطابع "فاتورة المطعم الفاخرة":
-/// طبق بختم كمية + عنوان + وسم كومبو + فاصل مخرّم ذهبي (زي تذكرة)
-/// + كنترول الكمية + إجمالي في كبسولة داكنة بسعر ذهبي.
 class CartItem extends StatelessWidget {
   final CartItemEntity cartItemEntity;
 
@@ -41,7 +37,7 @@ class CartItem extends StatelessWidget {
     }
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      margin: EdgeInsets.only(left:Constants.screenHorizontal,right: Constants.screenHorizontal, bottom: 10.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26.r),
         boxShadow: [
@@ -109,22 +105,6 @@ class CartItem extends StatelessWidget {
                           AppColor.white.withValues(alpha: .9),
                           AppColor.white.withValues(alpha: 0),
                         ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              // خط ذهبي داخلي رفيع (شكل المنيو)
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: Container(
-                    margin: EdgeInsets.all(4.r),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(22.r),
-                      border: Border.all(
-                        color: AppColor.accentColor.withValues(alpha: .22),
-                        width: 1,
                       ),
                     ),
                   ),

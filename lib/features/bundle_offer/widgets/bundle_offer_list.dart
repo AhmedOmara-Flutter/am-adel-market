@@ -11,44 +11,34 @@ class BundleOfferList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetBundleOfferCubit, GetBundleOfferState>(
       builder: (context, state) {
-        // =============================================================
-        // LOADING
-        // =============================================================
-        if (state is GetBundleOfferLoading) {
-          return Skeletonizer(
-            effect: const ShimmerEffect(
-              baseColor: Color(0xff2B2B2B),
-              highlightColor: Color(0xff404040),
-              duration: Duration(milliseconds: 1200),
-            ),
-            enabled: true,
-            child: SizedBox(
-              height: 310.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                ),
-                physics: const BouncingScrollPhysics(),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return const SkeletonizerBundleOfferCard();
-                },
+        if (state is GetBundleOfferLoading)
+          return SizedBox(
+            height: 270.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(
+                horizontal: Constants.screenHorizontal,
               ),
+              physics: const BouncingScrollPhysics(),
+              itemCount: 4,
+              separatorBuilder: (context, index) => SizedBox(width: 10.w),
+              itemBuilder: (context, index) {
+                return const Column(
+                  children: [
+                    SkeletonizerBundleOfferCard(),
+                  ],
+                );
+              },
             ),
           );
-        }
 
-        // =============================================================
-        // FAILURE
-        // =============================================================
         if (state is GetBundleOfferFailure) {
           return SizedBox(
-            height: 310.h,
+            height: 270.h,
             child: Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
+                  horizontal: Constants.screenHorizontal
                 ),
                 child: Text(
                   state.errMessage,
@@ -62,26 +52,23 @@ class BundleOfferList extends StatelessWidget {
           );
         }
 
-        // =============================================================
-        // SUCCESS
-        // =============================================================
         if (state is GetBundleOfferSuccess) {
           final bundleOffers = state.bundleOffers;
 
-          // No offers
           if (bundleOffers.isEmpty) {
             return const SizedBox.shrink();
           }
 
           return SizedBox(
-            height: 310.h,
-            child: ListView.builder(
+            height: 270.h,
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
+                horizontal: Constants.screenHorizontal,
               ),
               physics: const BouncingScrollPhysics(),
               itemCount: bundleOffers.length,
+              separatorBuilder: (context, index) => SizedBox(width: 10.w),
               itemBuilder: (context, index) {
                 final bundleOffer = bundleOffers[index];
 
@@ -97,9 +84,6 @@ class BundleOfferList extends StatelessWidget {
           );
         }
 
-        // =============================================================
-        // INITIAL
-        // =============================================================
         return const SizedBox.shrink();
       },
     );

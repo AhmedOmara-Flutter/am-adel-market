@@ -103,12 +103,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       SizedBox(height: 20,)
                     ],
                   ),
-
                 BestSellingSection(),
               ],
             ),
           ),
           BestSellingProductsList(),
+          SliverToBoxAdapter(child: SizedBox(height: 20.h))
         ],
       ),
     );

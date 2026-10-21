@@ -19,9 +19,9 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
   Widget build(BuildContext context) {
     return BlocBuilder<OfferCubit, OfferState>(
       builder: (context, state) {
-        if (state is GetOffersLoading) {
+        if (state is GetOffersLoading)
           return _buildLoading();
-        }
+
 
         if (state is GetOffersFailure) {
           return Center(
@@ -38,12 +38,12 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
 
           return Column(
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 5.h),
               CarouselSlider.builder(
                 itemCount: offers.length,
                 itemBuilder: (context, index, realIndex) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    padding: EdgeInsets.symmetric(horizontal:Constants.screenHorizontal-10.w),
                     child: OfferCarouselItem(offer: offers[index]),
                   );
                 },
@@ -53,14 +53,16 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
               AnimatedSmoothIndicator(
                 activeIndex: currentIndex,
                 count: offers.length,
-                effect: SwapEffect(
+                effect: ExpandingDotsEffect(
                   activeDotColor: AppColor.mainColor,
-                  dotColor: Colors.grey.shade300,
-                  dotHeight: 8.r,
-                  dotWidth: 8.r,
+                  dotColor: AppColor.accentColor.withValues(alpha: 0.35),
+                  dotHeight: 7.h,
+                  dotWidth: 7.w,
+                  spacing: 6.w,
+                  expansionFactor: 3,
+                  radius: 10.r,
                 ),
-              ),
-              SizedBox(height: 12.h),
+              ),              SizedBox(height: 12.h),
             ],
           );
         }
@@ -73,13 +75,12 @@ class _OfferCarouselListState extends State<OfferCarouselList> {
   Widget _buildLoading() {
     return Column(
       children: [
-        SizedBox(height: 20.h),
-
+        SizedBox(height: 5.h),
         CarouselSlider.builder(
           itemCount: 3,
           itemBuilder: (context, index, realIndex) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              padding: EdgeInsets.symmetric(horizontal:Constants.screenHorizontal-10.w),
               child: SkeletonizerOfferItem(),
             );
           },

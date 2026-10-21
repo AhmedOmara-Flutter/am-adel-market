@@ -14,10 +14,8 @@ class ProductsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.only(
-        left: 20.w,
-        right: 20.w,
-        bottom: 20.h,
+      padding: EdgeInsets.symmetric(
+        horizontal: Constants.screenHorizontal,
       ),
       sliver: SliverGrid.builder(
         itemCount: products.length,
