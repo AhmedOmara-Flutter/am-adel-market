@@ -3,6 +3,7 @@ import 'package:am_adel_market/core/helper_function/make_full_name.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:am_adel_market/core/widgets/resto_kit.dart';
 import 'package:am_adel_market/features/offers/presentation/view_model/offer_cubit.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart' as crashlytics;
 
 import '../../../../core/helper_function/get_greeting.dart';
 import 'custom_search_button.dart';
@@ -52,9 +53,7 @@ class HomeHeader extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(width: 14.w),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

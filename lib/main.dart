@@ -21,6 +21,9 @@ Future<void> main() async {
           defaultTargetPlatform == TargetPlatform.iOS);
 
   if (isCrashlyticsSupported) {
+    await crashlytics.FirebaseCrashlytics.instance
+        .setCrashlyticsCollectionEnabled(true);
+
     FlutterError.onError = (FlutterErrorDetails details) {
       unawaited(
         crashlytics.FirebaseCrashlytics.instance
