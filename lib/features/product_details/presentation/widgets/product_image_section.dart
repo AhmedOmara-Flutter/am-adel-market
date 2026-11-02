@@ -65,8 +65,8 @@ class ProductImageSection extends StatelessWidget {
 
             if (hasOffer)
               Positioned(
-                top: 50.h,
-                left: -8.w,
+                top: 30.h,
+                left: 5.w,
                 child: DiscountBadge(
                   percent: localOffer!.discountPercentage,
                 ),
