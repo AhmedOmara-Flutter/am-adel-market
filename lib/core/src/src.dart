@@ -4,8 +4,7 @@ import 'package:am_adel_market/core/widgets/no_internet_view.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/best_selling_cubit.dart';
 import 'package:am_adel_market/features/home/presentation/view_model/featured_cubit.dart';
 import 'package:am_adel_market/features/profile/presentation/view_model/profile_cubit.dart';
-
-import '../../features/bundle_offer/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
+import '../../features/bundle_offer/presentation/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
 import '../../features/cart/presentation/view_model/cart_cubit.dart';
 import '../../features/category/presentation/view_model/category_cubit.dart';
 import '../../features/coupon/presentation/view_model/coupons_cubit.dart';

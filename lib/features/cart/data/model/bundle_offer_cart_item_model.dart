@@ -1,5 +1,5 @@
 
-import '../../../../core/entities/bundle_offer_entity.dart';
+import '../../../bundle_offer/domain/entities/bundle_offer_entity.dart';
 import '../../domain/entities/bundle_offer_cart_item_entity.dart';
 
 class BundleOfferCartItemModel

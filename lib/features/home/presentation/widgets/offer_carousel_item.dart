@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../../core/entities/offer_entity.dart';
+import '../../../offers/domain/entities/offer_entity.dart';
 
 String _fmt(num v) => v % 1 == 0 ? v.toStringAsFixed(0) : v.toStringAsFixed(2);
 class OfferCarouselItem extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:am_adel_market/core/entities/selected_location_entity.dart';
+import 'package:am_adel_market/features/checkout/domain/entities/selected_location_entity.dart';
 
 import '../../features/auth/domain/entities/user_entity.dart';
 import '../../features/cart/domain/entities/cart_entity.dart';
 import '../enums/order_enum.dart';
-import 'address_entity.dart';
+import '../../features/checkout/domain/entities/address_entity.dart';
 
 class OrderEntity {
   String? id;

@@ -2,7 +2,7 @@ import 'package:am_adel_market/features/cart/presentation/view_model/cart_cubit.
 import 'package:am_adel_market/core/entities/product_entity.dart';
 import '../../../../core/helper_function/get_user.dart';
 import '../../../../core/utils/app_imports.dart';
-import '../../../../core/entities/offer_entity.dart';
+import '../../../offers/domain/entities/offer_entity.dart';
 
 
 class ProductButtonSection extends StatelessWidget {

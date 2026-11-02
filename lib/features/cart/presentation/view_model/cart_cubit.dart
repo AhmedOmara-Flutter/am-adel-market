@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../../../core/entities/bundle_offer_entity.dart';
-import '../../../../core/entities/offer_entity.dart';
+import '../../../bundle_offer/domain/entities/bundle_offer_entity.dart';
+import '../../../offers/domain/entities/offer_entity.dart';
 import '../../../../core/entities/product_entity.dart';
 import '../../../../core/helper_function/price_helper.dart';
-import '../../../../core/repos/cart_repo/cart_repo.dart';
+import '../../domain/repos/cart_repo.dart';
 import '../../../offers/presentation/view_model/offer_cubit.dart';
 import '../../domain/entities/bundle_offer_cart_item_entity.dart';
 import '../../domain/entities/cart_entity.dart';

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:am_adel_market/features/product_details/presentation/widgets/discount_bedge.dart';
-import '../../../../core/entities/offer_entity.dart';
+import '../../../offers/domain/entities/offer_entity.dart';
 import '../../../../core/entities/product_entity.dart';
 import '../../../../core/utils/app_imports.dart';
 import '../../../../core/widgets/custom_back_button.dart';

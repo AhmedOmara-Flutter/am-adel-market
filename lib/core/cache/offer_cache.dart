@@ -1,4 +1,4 @@
-import '../entities/offer_entity.dart';
+import '../../features/offers/domain/entities/offer_entity.dart';
 
 class OfferCache {
   List<OfferEntity>? offers;

@@ -1,4 +1,4 @@
-import 'package:am_adel_market/core/entities/address_entity.dart';
+import 'package:am_adel_market/features/checkout/domain/entities/address_entity.dart';
 
 import '../../../../../core/utils/app_imports.dart';
 import '../../view_model/checkout_cubit.dart';

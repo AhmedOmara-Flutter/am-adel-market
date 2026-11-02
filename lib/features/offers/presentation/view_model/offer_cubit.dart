@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/entities/offer_entity.dart';
-import '../../../../core/repos/offer_repo/offer_repo.dart';
+import '../../domain/entities/offer_entity.dart';
+import '../../domain/repos/offer_repo.dart';
 import '../../../../core/repos/product_repo/product_repo.dart';
 
 part 'offer_state.dart';

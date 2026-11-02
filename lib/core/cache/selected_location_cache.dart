@@ -1,4 +1,4 @@
-import '../entities/selected_location_entity.dart';
+import '../../features/checkout/domain/entities/selected_location_entity.dart';
 
 class SelectedLocationCache {
   List<SelectedLocationEntity>? locations;

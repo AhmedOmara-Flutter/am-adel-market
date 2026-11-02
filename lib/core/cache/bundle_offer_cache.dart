@@ -1,4 +1,4 @@
-import '../entities/bundle_offer_entity.dart';
+import '../../features/bundle_offer/domain/entities/bundle_offer_entity.dart';
 
 class BundleOfferCache {
   List<BundleOfferEntity>? bundleOffers;

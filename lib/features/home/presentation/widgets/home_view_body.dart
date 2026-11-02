@@ -11,9 +11,9 @@ import 'package:am_adel_market/features/home/presentation/widgets/featured_produ
 import 'package:am_adel_market/features/search/presentation/widgets/custom_search_field.dart';
 import '../../../../../../../core/utils/app_imports.dart';
 import '../../../../core/widgets/custom_refresh_indicator.dart';
-import '../../../bundle_offer/view/bundle_offer_section.dart';
-import '../../../bundle_offer/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
-import '../../../bundle_offer/widgets/bundle_offer_list.dart';
+import '../../../bundle_offer/presentation/view/bundle_offer_section.dart';
+import '../../../bundle_offer/presentation/view_model/get_bundle_offer_cubit/get_bundle_offer_cubit.dart';
+import '../../../bundle_offer/presentation/widgets/bundle_offer_list.dart';
 import '../../../offers/presentation/view_model/offer_cubit.dart';
 import 'restaurant_closed_banner.dart';
 import 'best_selling_products_list.dart';

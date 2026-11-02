@@ -1,9 +1,9 @@
-import 'package:am_adel_market/core/models/selected_location_model.dart';
+import 'package:am_adel_market/features/checkout/data/models/selected_location_model.dart';
 import 'package:am_adel_market/core/utils/app_imports.dart';
 import '../../features/cart/domain/entities/cart_entity.dart';
 import '../entities/order_entity.dart';
 import '../enums/order_enum.dart';
-import 'address_model.dart';
+import '../../features/checkout/data/models/address_model.dart';
 import 'order_item_model.dart';
 
 class OrderModel {

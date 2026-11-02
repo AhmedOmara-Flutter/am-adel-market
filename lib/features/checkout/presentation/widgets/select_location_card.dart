@@ -1,4 +1,4 @@
-import '../../../../core/entities/selected_location_entity.dart';
+import '../../domain/entities/selected_location_entity.dart';
 import '../../../../core/utils/app_imports.dart';
 
 class SelectLocationCard extends StatelessWidget {

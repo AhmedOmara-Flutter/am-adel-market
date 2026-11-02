@@ -1,4 +1,4 @@
-import '../../../../core/entities/offer_entity.dart';
+import '../../../offers/domain/entities/offer_entity.dart';
 import '../../../../core/entities/product_entity.dart';
 import '../../../../core/utils/app_imports.dart';
 import 'rating_and_reviews.dart';

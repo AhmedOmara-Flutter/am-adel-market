@@ -1,5 +1,5 @@
 import '../../../../core/entities/order_entity.dart';
-import '../../../../core/repos/location_repo/selected_location_repo.dart';
+import '../../domain/repos/selected_location_repo.dart';
 import '../../../../core/repos/order_repo/order_repo.dart';
 import '../../../../core/repos/upload_image_repo/upload_image_repo.dart';
 import '../../../../core/utils/app_imports.dart';
